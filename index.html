@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emily Wernick - Portfolio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Press Start 2P', cursive;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            cursor: none;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .cursor {
+            width: 32px;
+            height: 32px;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            image-rendering: pixelated;
+            background-image: url('data:image/svg+xml;utf8,<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="2" height="2" fill="black"/><rect x="0" y="2" width="2" height="2" fill="black"/><rect x="0" y="4" width="2" height="2" fill="black"/><rect x="0" y="6" width="2" height="2" fill="black"/><rect x="0" y="8" width="2" height="2" fill="black"/><rect x="0" y="10" width="2" height="2" fill="black"/><rect x="0" y="12" width="2" height="2" fill="black"/><rect x="0" y="14" width="2" height="2" fill="black"/><rect x="0" y="16" width="2" height="2" fill="black"/><rect x="0" y="18" width="2" height="2" fill="black"/><rect x="0" y="20" width="2" height="2" fill="black"/><rect x="2" y="2" width="2" height="2" fill="white"/><rect x="2" y="4" width="2" height="2" fill="white"/><rect x="2" y="6" width="2" height="2" fill="white"/><rect x="2" y="8" width="2" height="2" fill="white"/><rect x="2" y="10" width="2" height="2" fill="white"/><rect x="2" y="12" width="2" height="2" fill="white"/><rect x="2" y="14" width="2" height="2" fill="white"/><rect x="2" y="16" width="2" height="2" fill="white"/><rect x="2" y="18" width="2" height="2" fill="white"/><rect x="2" y="20" width="2" height="2" fill="black"/><rect x="4" y="4" width="2" height="2" fill="white"/><rect x="4" y="6" width="2" height="2" fill="white"/><rect x="4" y="8" width="2" height="2" fill="white"/><rect x="4" y="10" width="2" height="2" fill="white"/><rect x="4" y="12" width="2" height="2" fill="white"/><rect x="4" y="14" width="2" height="2" fill="white"/><rect x="4" y="16" width="2" height="2" fill="white"/><rect x="4" y="18" width="2" height="2" fill="black"/><rect x="4" y="20" width="2" height="2" fill="black"/><rect x="6" y="6" width="2" height="2" fill="white"/><rect x="6" y="8" width="2" height="2" fill="white"/><rect x="6" y="10" width="2" height="2" fill="white"/><rect x="6" y="12" width="2" height="2" fill="white"/><rect x="6" y="14" width="2" height="2" fill="white"/><rect x="6" y="16" width="2" height="2" fill="black"/><rect x="6" y="18" width="2" height="2" fill="black"/><rect x="8" y="8" width="2" height="2" fill="white"/><rect x="8" y="10" width="2" height="2" fill="white"/><rect x="8" y="12" width="2" height="2" fill="white"/><rect x="8" y="14" width="2" height="2" fill="black"/><rect x="8" y="16" width="2" height="2" fill="black"/><rect x="10" y="10" width="2" height="2" fill="white"/><rect x="10" y="12" width="2" height="2" fill="black"/><rect x="10" y="14" width="2" height="2" fill="black"/><rect x="12" y="12" width="2" height="2" fill="black"/><rect x="12" y="14" width="2" height="2" fill="black"/><rect x="14" y="14" width="2" height="2" fill="black"/><rect x="4" y="22" width="2" height="2" fill="black"/><rect x="6" y="20" width="2" height="2" fill="black"/><rect x="6" y="22" width="2" height="2" fill="black"/><rect x="8" y="18" width="2" height="2" fill="black"/><rect x="8" y="20" width="2" height="2" fill="black"/><rect x="8" y="22" width="2" height="2" fill="black"/><rect x="10" y="20" width="2" height="2" fill="black"/><rect x="10" y="22" width="2" height="2" fill="black"/><rect x="12" y="22" width="2" height="2" fill="black"/><rect x="12" y="24" width="2" height="2" fill="black"/><rect x="14" y="16" width="2" height="2" fill="black"/><rect x="14" y="18" width="2" height="2" fill="black"/><rect x="14" y="20" width="2" height="2" fill="black"/><rect x="14" y="22" width="2" height="2" fill="black"/><rect x="16" y="16" width="2" height="2" fill="black"/><rect x="16" y="18" width="2" height="2" fill="black"/><rect x="18" y="18" width="2" height="2" fill="black"/><rect x="20" y="18" width="2" height="2" fill="black"/><rect x="22" y="18" width="2" height="2" fill="black"/><rect x="24" y="18" width="2" height="2" fill="black"/><rect x="26" y="18" width="2" height="2" fill="black"/></svg>');
+            background-size: contain;
+        }
+
+        .page-transition {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #333;
+            z-index: 10000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+
+        .page-transition.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem 4rem;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .logo {
+            display: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #333;
+            text-decoration: none;
+            font-size: 0.6rem;
+            line-height: 1.6;
+        }
+
+        .home-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeIn 1s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero h1 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .hero p {
+            font-size: 0.7rem;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .slides-container {
+            position: relative;
+            width: 600px;
+            height: 400px;
+        }
+
+        .film-slide {
+            position: absolute;
+            width: 500px;
+            height: 340px;
+            background: linear-gradient(135deg, #f5ead6 0%, #e8dcc4 100%);
+            border: 2px solid #333;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            cursor: pointer;
+            padding: 25px;
+        }
+
+        .film-frame {
+            width: 100%;
+            height: 100%;
+            border: 3px solid #333;
+            background: #000;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .film-slide-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .film-slide-number {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            font-size: 0.5rem;
+            color: #666;
+            font-family: 'Courier New', monospace;
+        }
+
+        .film-slide-label {
+            position: absolute;
+            bottom: -25px;
+            left: 25px;
+            right: 25px;
+            font-size: 0.6rem;
+            color: #333;
+            line-height: 1.4;
+            text-align: center;
+        }
+
+        .slides-container:not(.fanned) .film-slide {
+            left: 50px;
+            top: 30px;
+        }
+
+        .slides-container:not(.fanned) .film-slide:nth-child(1) {
+            transform: rotate(-3deg);
+            z-index: 6;
+        }
+        .slides-container:not(.fanned) .film-slide:nth-child(2) {
+            transform: rotate(2deg) translate(10px, 5px);
+            z-index: 5;
+        }
+        .slides-container:not(.fanned) .film-slide:nth-child(3) {
+            transform: rotate(-1deg) translate(20px, 10px);
+            z-index: 4;
+        }
+        .slides-container:not(.fanned) .film-slide:nth-child(4) {
+            transform: rotate(1deg) translate(30px, 15px);
+            z-index: 3;
+        }
+        .slides-container:not(.fanned) .film-slide:nth-child(5) {
+            transform: rotate(-2deg) translate(40px, 20px);
+            z-index: 2;
+        }
+        .slides-container:not(.fanned) .film-slide:nth-child(6) {
+            transform: rotate(3deg) translate(50px, 25px);
+            z-index: 1;
+        }
+
+        .slides-container.fanned .film-slide {
+            z-index: 10;
+        }
+
+        .slides-container.fanned {
+            width: 100%;
+            max-width: 1200px;
+            height: auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            padding: 2rem;
+        }
+
+        .slides-container.fanned .film-slide {
+            position: relative;
+            left: auto;
+            top: auto;
+            transform: rotate(0deg) !important;
+        }
+
+        .slides-container.fanned .film-slide:nth-child(1) {
+            transform: rotate(-2deg) !important;
+        }
+        .slides-container.fanned .film-slide:nth-child(2) {
+            transform: rotate(1deg) !important;
+        }
+        .slides-container.fanned .film-slide:nth-child(3) {
+            transform: rotate(-1deg) !important;
+        }
+        .slides-container.fanned .film-slide:nth-child(4) {
+            transform: rotate(2deg) !important;
+        }
+        .slides-container.fanned .film-slide:nth-child(5) {
+            transform: rotate(-1deg) !important;
+        }
+        .slides-container.fanned .film-slide:nth-child(6) {
+            transform: rotate(1deg) !important;
+        }
+
+        .slides-container.fanned .film-slide:hover {
+            transform: translateY(-20px) scale(1.05) !important;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+            z-index: 100 !important;
+        }
+
+        .category-page {
+            display: none;
+            min-height: 100vh;
+            padding: 8rem 4rem 4rem;
+        }
+
+        .category-page.active {
+            display: block;
+        }
+
+        .category-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: fadeIn 0.8s ease 0.2s both;
+        }
+
+        .category-header h1 {
+            font-size: 1.5rem;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.3);
+            border: 2px solid #333;
+            border-radius: 50px;
+            text-decoration: none;
+            color: #333;
+            margin-bottom: 2rem;
+            font-size: 0.6rem;
+            line-height: 1.6;
+            transition: all 0.3s;
+        }
+
+        .back-button:hover {
+            background: #333;
+            color: white;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            height: 350px;
+            border-radius: 15px;
+            overflow: hidden;
+            animation: fadeIn 0.6s ease both;
+        }
+
+        .gallery-item:nth-child(1) { animation-delay: 0.1s; }
+        .gallery-item:nth-child(2) { animation-delay: 0.2s; }
+        .gallery-item:nth-child(3) { animation-delay: 0.3s; }
+        .gallery-item:nth-child(4) { animation-delay: 0.4s; }
+        .gallery-item:nth-child(5) { animation-delay: 0.5s; }
+        .gallery-item:nth-child(6) { animation-delay: 0.6s; }
+        .gallery-item:nth-child(7) { animation-delay: 0.7s; }
+        .gallery-item:nth-child(8) { animation-delay: 0.8s; }
+        .gallery-item:nth-child(9) { animation-delay: 0.9s; }
+        .gallery-item:nth-child(10) { animation-delay: 1s; }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .parallax-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 182, 193, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(173, 216, 230, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 90%, rgba(221, 160, 221, 0.3) 0%, transparent 50%),
+                linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        @media (max-width: 768px) {
+            .slides-container {
+                width: 100%;
+                height: 300px;
+            }
+
+            .slides-container.fanned {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+            
+            .film-slide {
+                width: 280px;
+                height: 200px;
+                padding: 15px;
+            }
+
+            .hero h1 { font-size: 1.2rem; }
+            .hero p { font-size: 0.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor"></div>
+    <div class="page-transition"></div>
+    <div class="parallax-bg"></div>
+
+    <nav>
+        <div class="logo">E.Wernick</div>
+        <ul class="nav-links">
+            <li><a href="#" class="nav-home">Portfolio</a></li>
+            <li><a href="#">About</a></li>
+        </ul>
+    </nav>
+
+    <div class="home-container" id="home">
+        <div class="hero">
+            <h1>Emily Wernick</h1>
+            <p>Writer, Photographer, 2D & 3D Animator</p>
+        </div>
+
+        <div class="slides-container" id="slidesContainer">
+            <div class="film-slide" data-category="analog">
+                <div class="film-slide-number">35mm</div>
+                <div class="film-frame">
+                    <img src="media/Analog Photography/Suffocated-2.jpg" class="film-slide-image">
+                </div>
+                <div class="film-slide-label">Analog Photography</div>
+            </div>
+
+            <div class="film-slide" data-category="digital">
+                <div class="film-slide-number">Digital</div>
+                <div class="film-frame">
+                    <img src="media/Digital Photography/IMG_3356.jpg" class="film-slide-image">
+                </div>
+                <div class="film-slide-label">Digital Photography</div>
+            </div>
+
+            <div class="film-slide" data-category="3d">
+                <div class="film-slide-number">3D</div>
+                <div class="film-frame">
+                    <img src="media/3D:2D Animation/0009.png" class="film-slide-image">
+                </div>
+                <div class="film-slide-label">3D Renders</div>
+            </div>
+
+            <div class="film-slide" data-category="writing">
+                <div class="film-slide-number">Text</div>
+                <div class="film-frame">
+                    <img src="media/Analog Photography/0138848_0138848-R2-042-19A.jpg" class="film-slide-image">
+                </div>
+                <div class="film-slide-label">Writing</div>
+            </div>
+
+            <div class="film-slide" data-category="painting">
+                <div class="film-slide-number">Paint</div>
+                <div class="film-frame">
+                    <img src="media/hasan-almasi-nKNm_75lH4g-unsplash Copy_edited_edited.jpg" class="film-slide-image">
+                </div>
+                <div class="film-slide-label">Painting</div>
+            </div>
+
+            <div class="film-slide" data-category="commissions">
+                <div class="film-slide-number">Comm</div>
+                <div class="film-frame">
+                    <img src="media/Zine Samples/Screen Shot 2025-04-23 at 7.56.45 PM.png" class="film-slide-image">
+                </div>
+                <div class="film-slide-label">Commissions</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="category-page" id="analog-page">
+        <a href="#" class="back-button nav-home">← Back</a>
+        <div class="category-header"><h1>Analog Photography</h1></div>
+        <div class="gallery">
+            <div class="gallery-item"><img src="media/Analog Photography/000006630022.jpg"></div>
+            <div class="gallery-item"><img src="media/Analog Photography/000007390009.jpg"></div>
+            <div class="gallery-item"><img src="media/Analog Photography/000012750006.jpg"></div>
+            <div class="gallery-item"><img src="media/Analog Photography/000012750035.jpg"></div>
+        </div>
+    </div>
+
+    <div class="category-page" id="digital-page">
+        <a href="#" class="back-button nav-home">← Back</a>
+        <div class="category-header"><h1>Digital Photography</h1></div>
+        <div class="gallery">
+            <div class="gallery-item"><img src="media/Digital Photography/springflowers_edited.jpg"></div>
+            <div class="gallery-item"><img src="media/Digital Photography/IMG_3783.JPG"></div>
+            <div class="gallery-item"><img src="media/Digital Photography/IMG_3777.JPG"></div>
+            <div class="gallery-item"><img src="media/Digital Photography/IMG_3741.JPG"></div>
+            <div class="gallery-item"><img src="media/Digital Photography/IMG_3723.JPG"></div>
+            <div class="gallery-item"><img src="media/Digital Photography/IMG_3691.JPG"></div>
+            <div class="gallery-item"><img src="media/Digital Photography/IMG_3587 copy.jpg"></div>
+            <div class="gallery-item"><img src="media/Digital Photography/IMG_3356.jpg"></div>
+            <div class="gallery-item"><img src="media/Digital Photography/IMG_3348.jpg"></div>
+            <div class="gallery-item"><img src="media/Digital Photography/100_0425.jpg"></div>
+            <div class="gallery-item"><img src="media/Digital Photography/100_0424.jpg"></div>
+            <div class="gallery-item"><img src="media/Digital Photography/100_0386.jpg"></div>
+            <div class="gallery-item"><img src="media/Digital Photography/100_0353.jpg"></div>
+            <div class="gallery-item"><img src="media/Digital Photography/100_0343.jpg"></div>
+        </div>
+    </div>
+
+    <div class="category-page" id="3d-page">
+        <a href="#" class="back-button nav-home">← Back</a>
+        <div class="category-header"><h1>3D Renders</h1></div>
+        <div class="gallery">
+            <div class="gallery-item"><img src="media/3D:2D Animation/41 - render01fast.MOV"></div>
+            <div class="gallery-item"><img src="media/3D:2D Animation/0061-0122.mov"></div>
+            <div class="gallery-item"><img src="media/3D:2D Animation/0001-0240.mov"></div>
+            <div class="gallery-item"><img src="media/3D:2D Animation/0001-0040.mov"></div>
+            <div class="gallery-item"><img src="media/3D:2D Animation/isoroom1.jpg"></div>
+            <div class="gallery-item"><img src="media/3D:2D Animation/cattreereinder.png"></div>
+        </div>
+    </div>
+
+    <div class="category-page" id="writing-page">
+        <a href="#" class="back-button nav-home">← Back</a>
+        <div class="category-header"><h1>Writing</h1></div>
+        <div class="gallery">
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=600"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1471107340929-a87cd0f5b5f3?w=600"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1503095396549-807759245b35?w=600"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1432821596592-e2c18b78144f?w=600"></div>
+        </div>
+    </div>
+
+    <div class="category-page" id="painting-page">
+        <a href="#" class="back-button nav-home">← Back</a>
+        <div class="category-header"><h1>Painting</h1></div>
+        <div class="gallery">
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=600"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1547826039-bfc35e0f1ea8?w=600"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1579762593131-93f3e7c0bdfe?w=600"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1578301978162-7aae4d755744?w=600"></div>
+        </div>
+    </div>
+
+    <div class="category-page" id="commissions-page">
+        <a href="#" class="back-button nav-home">← Back</a>
+        <div class="category-header"><h1>Commissions</h1></div>
+        <div class="gallery">
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=600"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=600"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?w=600"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1561214115-f2f134cc4912?w=600"></div>
+        </div>
+    </div>
+
+    <script>
+        const cursor = document.querySelector('.cursor');
+        document.addEventListener('mousemove', e => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        document.addEventListener('mousemove', e => {
+            const moveX = (e.clientX - window.innerWidth / 2) * 0.01;
+            const moveY = (e.clientY - window.innerHeight / 2) * 0.01;
+            document.querySelector('.parallax-bg').style.transform = 
+                `translate(${moveX}px, ${moveY}px)`;
+        });
+
+        const slidesContainer = document.getElementById('slidesContainer');
+        const filmSlides = document.querySelectorAll('.film-slide');
+        const pageTransition = document.querySelector('.page-transition');
+        const homeContainer = document.getElementById('home');
+        const categoryPages = document.querySelectorAll('.category-page');
+        const navHomeLinks = document.querySelectorAll('.nav-home');
+
+        slidesContainer.addEventListener('click', (e) => {
+            if (!slidesContainer.classList.contains('fanned') && !e.target.closest('.film-slide')) {
+                slidesContainer.classList.add('fanned');
+            }
+        });
+
+        filmSlides.forEach(slide => {
+            slide.addEventListener('click', (e) => {
+                if (slidesContainer.classList.contains('fanned')) {
+                    e.stopPropagation();
+                    const category = slide.getAttribute('data-category');
+                    pageTransition.classList.add('active');
+                    
+                    setTimeout(() => {
+                        homeContainer.style.display = 'none';
+                        categoryPages.forEach(page => page.classList.remove('active'));
+                        document.getElementById(`${category}-page`).classList.add('active');
+                        window.scrollTo(0, 0);
+                        pageTransition.classList.remove('active');
+                    }, 500);
+                } else {
+                    slidesContainer.classList.add('fanned');
+                }
+            });
+        });
+
+        navHomeLinks.forEach(link => {
+            link.addEventListener('click', e => {
+                e.preventDefault();
+                pageTransition.classList.add('active');
+                
+                setTimeout(() => {
+                    categoryPages.forEach(page => page.classList.remove('active'));
+                    homeContainer.style.display = 'flex';
+                    slidesContainer.classList.remove('fanned');
+                    window.scrollTo(0, 0);
+                    pageTransition.classList.remove('active');
+                }, 500);
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            document.querySelector('.parallax-bg').style.transform = 
+                `translateY(${scrolled * 0.5}px)`;
+        });
+    </script>
+</body>
+</html>

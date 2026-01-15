@@ -464,22 +464,63 @@
             line-height: 1.6;
         }
 
+        .commission-gallery-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+
         .commission-gallery {
             display: flex;
-            flex-wrap: wrap;
             gap: 1rem;
-            margin-bottom: 3rem;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE/Edge */
+            padding-bottom: 1rem;
+        }
+
+        .commission-gallery::-webkit-scrollbar {
+            display: none; /* Chrome/Safari */
         }
 
         .commission-gallery img {
-            flex: 1 1 auto;
-            min-width: 200px;
-            max-width: 350px;
+            flex: 0 0 auto;
+            width: 350px;
             height: 250px;
             object-fit: cover;
             border: 2px solid #333;
         }
 
+        .gallery-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid #333;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            font-size: 1.5rem;
+            transition: background 0.3s;
+        }
+
+        .gallery-arrow:hover {
+            background: #333;
+            color: white;
+        }
+
+        .gallery-arrow.left {
+            left: 10px;
+        }
+
+        .gallery-arrow.right {
+            right: 10px;
+        }
         /* About Page */
         .about-container {
             display: grid;
@@ -790,11 +831,14 @@
     <div class="category-page" id="commissions-page">
         <a href="#" class="back-button nav-home">← Back</a>
         <div class="category-header"><h1>Commissions</h1></div>
-        
-        <div class="commission-section">
-            <h2>Seaport Pups NYC</h2>
-            <p class="subtitle">Promotional Photos; Digital</p>
-            <div class="commission-gallery">
+    
+    <div class="commission-section">
+        <h2>Seaport Pups NYC</h2>
+        <p class="subtitle">Promotional Photos; Digital</p>
+        <div class="commission-gallery-container">
+            <div class="gallery-arrow left" onclick="scrollGallery('seaport', -1)">‹</div>
+            <div class="gallery-arrow right" onclick="scrollGallery('seaport', 1)">›</div>
+            <div class="commission-gallery" id="seaport-gallery">
                 <img src="media/Commissions, Seaport Pups NYC/noahwdog2.jpg" alt="Seaport Pups 1">
                 <img src="media/Commissions, Seaport Pups NYC/camy1.jpg" alt="Seaport Pups 2">
                 <img src="media/Commissions, Seaport Pups NYC/cooper1.jpg" alt="Seaport Pups 3">
@@ -802,14 +846,18 @@
                 <img src="media/Commissions, Seaport Pups NYC/harper1.jpg" alt="Seaport Pups 5">
                 <img src="media/Commissions, Seaport Pups NYC/noahwalking2.jpg" alt="Seaport Pups 6">
                 <img src="media/Commissions, Seaport Pups NYC/noahwdogs1.jpg" alt="Seaport Pups 7">
-                <img src="media/Commissions, Seaport Pups NYC/tucker1.jpg" alt="Seaport Pups 7">
+                <img src="media/Commissions, Seaport Pups NYC/tucker1.jpg" alt="Seaport Pups 8">
             </div>
         </div>
+    </div>
 
-        <div class="commission-section">
-            <h2>Life Event Shoots</h2>
-            <p class="subtitle">Birthday's, Graduation's; 35mm Film & Digital</p>
-            <div class="commission-gallery">
+    <div class="commission-section">
+        <h2>Life Event Shoots</h2>
+        <p class="subtitle">Birthday's, Graduation's; 35mm Film & Digital</p>
+        <div class="commission-gallery-container">
+            <div class="gallery-arrow left" onclick="scrollGallery('events', -1)">‹</div>
+            <div class="gallery-arrow right" onclick="scrollGallery('events', 1)">›</div>
+            <div class="commission-gallery" id="events-gallery">
                 <img src="media/Commissions, Life Event Shoots/S906433-R1-075-36.jpg" alt="Event 1">
                 <img src="media/Commissions, Life Event Shoots/IMG_3698.JPG" alt="Event 2">
                 <img src="media/Commissions, Life Event Shoots/S906733-R1-E019.JPG" alt="Event 3">
@@ -819,14 +867,17 @@
                 <img src="media/Commissions, Life Event Shoots/IMG_3741 copy.JPG" alt="Event 7">
                 <img src="media/Commissions, Life Event Shoots/S906733-R1-E018 3.JPG" alt="Event 8">
                 <img src="media/Commissions, Life Event Shoots/S906433-R1-007-2.jpg" alt="Event 9">
-                <img src="media/Commissions, Life Event Shoots/S906433-R1-007-2.jpg" alt="Event 10">
             </div>
         </div>
+    </div>
 
-        <div class="commission-section">
-            <h2>Zine Samples</h2>
-            <p class="subtitle">Transcending (2022), Maladaptive (2024); 35mm Film</p>
-            <div class="commission-gallery">
+    <div class="commission-section">
+        <h2>Zine Samples</h2>
+        <p class="subtitle">Transcending (2022), Maladaptive (2024); 35mm Film</p>
+        <div class="commission-gallery-container">
+            <div class="gallery-arrow left" onclick="scrollGallery('zine', -1)">‹</div>
+            <div class="gallery-arrow right" onclick="scrollGallery('zine', 1)">›</div>
+            <div class="commission-gallery" id="zine-gallery">
                 <img src="media/Zine Samples/Screen Shot 2025-04-23 at 7.56.45 PM.png" alt="Zine 1">
                 <img src="media/Zine Samples/Screen Shot 2023-11-17 at 3.15.59 PM.png" alt="Zine 2">
                 <img src="media/Zine Samples/Screen Shot 2023-11-17 at 3.15.50 PM.png" alt="Zine 3">
@@ -838,6 +889,7 @@
             </div>
         </div>
     </div>
+</div>
 
          <!-- About Page -->
     <div class="category-page" id="about-page">

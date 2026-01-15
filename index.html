@@ -478,6 +478,51 @@
             border: 2px solid #333;
         }
 
+        /* About Page */
+        .about-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            align-items: start;
+        }
+
+        .about-text h2 {
+            font-size: 2rem;
+            color: #2d5016;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            text-decoration: underline;
+        }
+
+        .about-text h3 {
+            font-size: 1.5rem;
+            color: #2d5016;
+            margin: 2rem 0 1rem 0;
+            line-height: 1.6;
+            text-decoration: underline;
+        }
+
+        .about-text p {
+            font-size: 0.7rem;
+            color: #2d5016;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            font-family: 'Georgia', serif;
+        }
+
+        .about-text a {
+            color: #2d5016;
+            text-decoration: underline;
+        }
+
+        .about-image {
+            width: 100%;
+            height: auto;
+            border: 3px solid #333;
+        }
+
         .parallax-bg {
             position: fixed;
             top: 0;
@@ -493,6 +538,10 @@
         }
 
         @media (max-width: 768px) {
+             .about-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
             .slides-container {
                 width: 100%;
                 height: 300px;
@@ -532,7 +581,7 @@
                     <a href="#" class="dropdown-link" data-category="painting">Painting</a>
                 </div>
             </li>
-            <li><a href="#">About</a></li>
+            <li><a href="#" class="nav-about">About</a></li>
         </ul>
     </nav>
 
@@ -743,9 +792,28 @@
                 <img src="media/Zine Samples/Screen Shot 2025-04-23 at 7.56.26 PM.png" alt="Zine 8">
             </div>
         </div>
+    
+         <!-- About Page -->
+    <div class="category-page" id="about-page">
+        <a href="#" class="back-button nav-home">← Back</a>
+        <div class="about-container">
+            <div class="about-text">
+                <h2>About:</h2>
+                <p>Emily Wernick is an interdisciplinary artist and writer working within academia, culture, and art. They are interested in pushing the boundaries of sociology by theorizing and deconstructing topics and mediums usually dismissed by the academic and cultural canon. They remain fascinated by topics of intimacy and connection in a late stage capitalist society, which is steadily reflected through their art.</p>
+                
+                <h3>Contact:</h3>
+                <p>email: emily.wernick@gmail.com</p>
+                <p>instagram: @emilywernick , @novaphora</p>
+                <p>For all work examples (data, marketing, admin) please go to: <a href="https://t.ly/KEB-9" target="_blank">https://t.ly/KEB-9</a></p>
+            </div>
+            <div class="about-photo">
+                <img src="media/about-photo.jpg" alt="Emily Wernick" class="about-image">
+            </div>
+        </div>
     </div>
 
     <script>
+
         const cursor = document.querySelector('.cursor');
         document.addEventListener('mousemove', e => {
             cursor.style.left = e.clientX + 'px';
@@ -830,6 +898,22 @@
             document.querySelector('.parallax-bg').style.transform = 
                 `translateY(${scrolled * 0.5}px)`;
         });
+// About page navigation
+        const navAboutLink = document.querySelector('.nav-about');
+        if (navAboutLink) {
+            navAboutLink.addEventListener('click', e => {
+                e.preventDefault();
+                pageTransition.classList.add('active');
+                
+                setTimeout(() => {
+                    homeContainer.style.display = 'none';
+                    categoryPages.forEach(page => page.classList.remove('active'));
+                    document.getElementById('about-page').classList.add('active');
+                    window.scrollTo(0, 0);
+                    pageTransition.classList.remove('active');
+                }, 500);
+            });
+        }
     </script>
 </body>
 </html>

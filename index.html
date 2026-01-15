@@ -857,109 +857,113 @@
             </div>
         </div>
     </div>
+    
+<script>
+    const cursor = document.querySelector('.cursor');
+    document.addEventListener('mousemove', e => {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+    });
 
-    <script>
+    document.addEventListener('mousemove', e => {
+        const moveX = (e.clientX - window.innerWidth / 2) * 0.01;
+        const moveY = (e.clientY - window.innerHeight / 2) * 0.01;
+        document.querySelector('.parallax-bg').style.transform = 
+            `translate(${moveX}px, ${moveY}px)`;
+    });
 
-        const cursor = document.querySelector('.cursor');
-        document.addEventListener('mousemove', e => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-        });
+    const slidesContainer = document.getElementById('slidesContainer');
+    const filmSlides = document.querySelectorAll('.film-slide');
+    const pageTransition = document.querySelector('.page-transition');
+    const homeContainer = document.getElementById('home');
+    const categoryPages = document.querySelectorAll('.category-page');
+    const navHomeLinks = document.querySelectorAll('.nav-home');
 
-        document.addEventListener('mousemove', e => {
-            const moveX = (e.clientX - window.innerWidth / 2) * 0.01;
-            const moveY = (e.clientY - window.innerHeight / 2) * 0.01;
-            document.querySelector('.parallax-bg').style.transform = 
-                `translate(${moveX}px, ${moveY}px)`;
-        });
+    // Function to show a page
+    function showPage(pageName) {
+        pageTransition.classList.add('active');
+        
+        setTimeout(() => {
+            if (pageName === 'home') {
+                homeContainer.style.display = 'flex';
+                categoryPages.forEach(page => page.classList.remove('active'));
+                slidesContainer.classList.remove('fanned');
+            } else {
+                homeContainer.style.display = 'none';
+                categoryPages.forEach(page => page.classList.remove('active'));
+                const targetPage = document.getElementById(`${pageName}-page`);
+                if (targetPage) {
+                    targetPage.classList.add('active');
+                }
+            }
+            window.scrollTo(0, 0);
+            pageTransition.classList.remove('active');
+        }, 500);
+    }
 
-        const slidesContainer = document.getElementById('slidesContainer');
-        const filmSlides = document.querySelectorAll('.film-slide');
-        const pageTransition = document.querySelector('.page-transition');
-        const homeContainer = document.getElementById('home');
-        const categoryPages = document.querySelectorAll('.category-page');
-        const navHomeLinks = document.querySelectorAll('.nav-home');
+    // Handle URL hash changes (back/forward buttons)
+    window.addEventListener('hashchange', () => {
+        const hash = window.location.hash.slice(1); // Remove the #
+        showPage(hash || 'home');
+    });
 
-        slidesContainer.addEventListener('click', (e) => {
-            if (!slidesContainer.classList.contains('fanned') && !e.target.closest('.film-slide')) {
+    // Load the correct page on initial load
+    window.addEventListener('load', () => {
+        const hash = window.location.hash.slice(1);
+        if (hash) {
+            showPage(hash);
+        }
+    });
+
+    slidesContainer.addEventListener('click', (e) => {
+        if (!slidesContainer.classList.contains('fanned') && !e.target.closest('.film-slide')) {
+            slidesContainer.classList.add('fanned');
+        }
+    });
+
+    filmSlides.forEach(slide => {
+        slide.addEventListener('click', (e) => {
+            if (slidesContainer.classList.contains('fanned')) {
+                e.stopPropagation();
+                const category = slide.getAttribute('data-category');
+                window.location.hash = category;
+            } else {
                 slidesContainer.classList.add('fanned');
             }
         });
+    });
 
-        filmSlides.forEach(slide => {
-            slide.addEventListener('click', (e) => {
-                if (slidesContainer.classList.contains('fanned')) {
-                    e.stopPropagation();
-                    const category = slide.getAttribute('data-category');
-                    pageTransition.classList.add('active');
-                    
-                    setTimeout(() => {
-                        homeContainer.style.display = 'none';
-                        categoryPages.forEach(page => page.classList.remove('active'));
-                        document.getElementById(`${category}-page`).classList.add('active');
-                        window.scrollTo(0, 0);
-                        pageTransition.classList.remove('active');
-                    }, 500);
-                } else {
-                    slidesContainer.classList.add('fanned');
-                }
-            });
+    navHomeLinks.forEach(link => {
+        link.addEventListener('click', e => {
+            e.preventDefault();
+            window.location.hash = '';
         });
+    });
 
-        navHomeLinks.forEach(link => {
-            link.addEventListener('click', e => {
-                e.preventDefault();
-                pageTransition.classList.add('active');
-                
-                setTimeout(() => {
-                    categoryPages.forEach(page => page.classList.remove('active'));
-                    homeContainer.style.display = 'flex';
-                    slidesContainer.classList.remove('fanned');
-                    window.scrollTo(0, 0);
-                    pageTransition.classList.remove('active');
-                }, 500);
-            });
+    // Dropdown navigation
+    const dropdownLinks = document.querySelectorAll('.dropdown-link');
+    dropdownLinks.forEach(link => {
+        link.addEventListener('click', e => {
+            e.preventDefault();
+            const category = link.getAttribute('data-category');
+            window.location.hash = category;
         });
+    });
 
-        // Dropdown navigation
-        const dropdownLinks = document.querySelectorAll('.dropdown-link');
-        dropdownLinks.forEach(link => {
-            link.addEventListener('click', e => {
-                e.preventDefault();
-                const category = link.getAttribute('data-category');
-                pageTransition.classList.add('active');
-                
-                setTimeout(() => {
-                    homeContainer.style.display = 'none';
-                    categoryPages.forEach(page => page.classList.remove('active'));
-                    document.getElementById(`${category}-page`).classList.add('active');
-                    window.scrollTo(0, 0);
-                    pageTransition.classList.remove('active');
-                }, 500);
-            });
+    // About page navigation
+    const navAboutLink = document.querySelector('.nav-about');
+    if (navAboutLink) {
+        navAboutLink.addEventListener('click', e => {
+            e.preventDefault();
+            window.location.hash = 'about';
         });
+    }
 
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            document.querySelector('.parallax-bg').style.transform = 
-                `translateY(${scrolled * 0.5}px)`;
-        });
-// About page navigation
-        const navAboutLink = document.querySelector('.nav-about');
-        if (navAboutLink) {
-            navAboutLink.addEventListener('click', e => {
-                e.preventDefault();
-                pageTransition.classList.add('active');
-                
-                setTimeout(() => {
-                    homeContainer.style.display = 'none';
-                    categoryPages.forEach(page => page.classList.remove('active'));
-                    document.getElementById('about-page').classList.add('active');
-                    window.scrollTo(0, 0);
-                    pageTransition.classList.remove('active');
-                }, 500);
-            });
-        }
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        document.querySelector('.parallax-bg').style.transform = 
+            `translateY(${scrolled * 0.5}px)`;
+    });
     </script>
 </body>
 </html>

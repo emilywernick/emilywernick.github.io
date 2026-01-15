@@ -1016,6 +1016,15 @@
         document.querySelector('.parallax-bg').style.transform = 
             `translateY(${scrolled * 0.5}px)`;
     });
-    </script>
+     // Gallery scroll function
+    function scrollGallery(galleryId, direction) {
+        const gallery = document.getElementById(galleryId + '-gallery');
+        const scrollAmount = 370; // width of image + gap
+        gallery.scrollBy({
+            left: direction * scrollAmount,
+            behavior: 'smooth'
+        });
+    }
+</script>
 </body>
 </html>

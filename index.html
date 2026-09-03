@@ -7,7 +7,9 @@
     <script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.90/build/spline-viewer.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-
+        @import url(
+            "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&display=swap"
+            );
         * {
             margin: 0;
             padding: 0;
@@ -664,6 +666,323 @@
             width: 100%;
         }
     }
+            /* =====================================
+        WIX-INSPIRED ABOUT PAGE
+        ===================================== */
+
+        .wix-about-page {
+            display: none;
+            min-height: 100vh;
+            padding: 0;
+            overflow: hidden;
+            color: #000000;
+            background: #edf8f8;
+        }
+
+        .wix-about-page.active {
+        display: block;
+        }
+
+        /* Keep the site navigation usable above the banner */
+        .wix-about-page ~ * {
+        position: relative;
+        }
+
+        /* -------------------------------------
+        Top scrolling artist-statement banner
+        ------------------------------------- */
+
+        .wix-about-banner {
+            position: fixed;
+            z-index: 950;
+            top: 0;
+            right: 0;
+            left: 0;
+            overflow: hidden;
+            width: 100%;
+            padding: 0.55rem 0;
+            color: #ff8f1d;
+            background: #edf8f8;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.14);
+            font-family: "Fraunces", Georgia, serif;
+            font-size: clamp(1.35rem, 2.55vw, 2.7rem);
+            font-style: italic;
+            font-weight: 300;
+            line-height: 1.05;
+            letter-spacing: -0.045em;
+            white-space: nowrap;
+        }
+
+        .wix-about-banner-track {
+            display: flex;
+            width: max-content;
+            animation: wix-banner-to-right 34s linear infinite;
+            will-change: transform;
+        }
+
+        .wix-about-banner-group {
+            display: flex;
+            flex: none;
+            align-items: center;
+            gap: 1rem;
+            padding-right: 1rem;
+        }
+
+        .wix-banner-star {
+            display: inline-block;
+            color: #a3d693;
+            font-size: 1.15em;
+            font-style: normal;
+            line-height: 1;
+        }
+
+        /*
+        This moves from left to right.
+        The repeated groups keep the banner visually continuous.
+        */
+        @keyframes wix-banner-to-right {
+        from {
+            transform: translateX(-25%);
+        }
+
+        to {
+            transform: translateX(0);
+        }
+        }
+
+        .wix-about-banner:hover .wix-about-banner-track {
+        animation-play-state: paused;
+        }
+
+        /* -------------------------
+        Main three-column layout
+        ------------------------- */
+
+        .wix-about-layout {
+            display: grid;
+            grid-template-columns: minmax(13rem, 0.9fr) minmax(15rem, 0.82fr) minmax(14rem, 0.9fr);
+            align-items: start;
+            gap: clamp(1.5rem, 5vw, 6rem);
+            width: min(100% - 3rem, 1480px);
+            min-height: 100vh;
+            margin: 0 auto;
+            padding: clamp(8rem, 14vw, 12rem) 0 5rem;
+        }
+
+        .wix-about-intro,
+        .wix-about-details {
+            font-family: "Cormorant Garamond", "Times New Roman", serif;
+            font-size: clamp(1.3rem, 1.78vw, 2.15rem);
+            font-weight: 400;
+            line-height: 1.11;
+            letter-spacing: -0.028em;
+        }
+
+        .wix-about-intro p,
+        .wix-about-details p {
+        margin: 0;
+        }
+
+        /*
+        "box-decoration-break" makes the green highlight
+        continue behind every wrapped line, like Wix text highlighting.
+        */
+        .wix-highlight {
+            padding: 0.02em 0.14em 0.06em;
+            background: #c3ed97;
+            box-decoration-break: clone;
+            -webkit-box-decoration-break: clone;
+        }
+
+        /* ---------------------------
+        Center spinning View-Master
+        --------------------------- */
+
+        .wix-reel-column {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: flex-start;
+            gap: 1.1rem;
+            padding-top: clamp(1rem, 5vw, 5rem);
+        }
+
+        .wix-reel-link {
+            display: block;
+            width: min(100%, 22rem);
+            border-radius: 50%;
+            outline: none;
+        }
+
+        .wix-viewmaster-reel {
+            display: block;
+            width: 100%;
+            height: auto;
+            animation: wix-reel-spin 32s linear infinite;
+            transform-origin: center;
+            will-change: transform;
+        }
+
+        @keyframes wix-reel-spin {
+        from {
+            transform: rotate(0deg);
+        }
+
+        to {
+            transform: rotate(360deg);
+        }
+        }
+
+        .wix-reel-link:hover .wix-viewmaster-reel,
+        .wix-reel-link:focus-visible .wix-viewmaster-reel {
+        animation-play-state: paused;
+        }
+
+        .wix-reel-link:focus-visible {
+        outline: 2px solid #ff8f1d;
+        outline-offset: 0.45rem;
+        }
+
+        .wix-instagram-label {
+            color: #000000;
+            font-family: "Cormorant Garamond", "Times New Roman", serif;
+            font-size: clamp(1.1rem, 1.45vw, 1.55rem);
+            font-style: italic;
+            line-height: 1;
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 0.2em;
+        }
+
+        .wix-instagram-label:hover,
+        .wix-instagram-label:focus-visible {
+        color: #ff8f1d;
+        }
+
+        /* -------------------------
+        Right-side descriptive text
+        ------------------------- */
+
+        .wix-about-details {
+            padding-top: clamp(5rem, 19vw, 18rem);
+            text-align: right;
+        }
+
+        .wix-about-details p + p {
+        margin-top: 1.55rem;
+        }
+
+        .wix-inspiration-link {
+            padding: 0.02em 0.14em 0.06em;
+            color: #000000;
+            background: #c3ed97;
+            text-decoration: none;
+            box-decoration-break: clone;
+            -webkit-box-decoration-break: clone;
+        }
+
+        .wix-inspiration-link:hover,
+        .wix-inspiration-link:focus-visible {
+        color: #edf8f8;
+        background: #000000;
+        }
+
+        .wix-email-link {
+            display: inline-block;
+            margin-top: 2.5rem;
+            padding-bottom: 0.12em;
+            color: #000000;
+            border-bottom: 1px solid currentColor;
+            font-family: "Cormorant Garamond", "Times New Roman", serif;
+            font-size: clamp(1.1rem, 1.45vw, 1.55rem);
+            font-style: italic;
+            text-decoration: none;
+        }
+
+        .wix-email-link:hover,
+        .wix-email-link:focus-visible {
+        color: #ff8f1d;
+        }
+
+        /* -------------------------
+        Tablet layout
+        ------------------------- */
+
+        @media (max-width: 900px) {
+        .wix-about-layout {
+            grid-template-columns: 1fr 1fr;
+            gap: 2.25rem;
+            width: min(100% - 2.5rem, 760px);
+            padding-top: 8.5rem;
+        }
+
+        .wix-about-intro {
+            grid-column: 1 / -1;
+            max-width: 37rem;
+        }
+
+        .wix-reel-column {
+            grid-column: 1;
+            padding-top: 0;
+        }
+
+        .wix-about-details {
+            grid-column: 2;
+            padding-top: 0;
+        }
+        }
+
+        /* -------------------------
+        Mobile layout
+        ------------------------- */
+
+        @media (max-width: 600px) {
+        .wix-about-banner {
+            padding: 0.45rem 0;
+            font-size: 1.3rem;
+        }
+
+        .wix-about-banner-track {
+            animation-duration: 23s;
+        }
+
+        .wix-about-layout {
+            display: flex;
+            flex-direction: column;
+            gap: 2.4rem;
+            width: min(100% - 2rem, 32rem);
+            padding: 6.7rem 0 3.5rem;
+        }
+
+        .wix-about-intro,
+        .wix-about-details {
+            font-size: 1.45rem;
+            line-height: 1.12;
+        }
+
+        .wix-reel-column {
+            align-self: center;
+            width: min(75vw, 17rem);
+            padding: 0;
+        }
+
+        .wix-about-details {
+            padding: 0;
+            text-align: left;
+        }
+
+        .wix-email-link {
+            margin-top: 1.6rem;
+        }
+        }
+
+        /* Do not auto-animate for visitors who request reduced motion. */
+        @media (prefers-reduced-motion: reduce) {
+        .wix-about-banner-track,
+        .wix-viewmaster-reel {
+            animation: none;
+        }
+        }
     </style>
 </head>
 <body>
@@ -968,28 +1287,98 @@
 </div>
 
          <!-- About Page -->
-    <div class="category-page" id="about-page">
-        <a href="#" class="back-button nav-home">← Back</a>
-         <!-- Spline 3D Model Header -->
-        <div class="spline-container">
-            <spline-viewer url="https://prod.spline.design/zwSN2But1JSbJSSI/scene.splinecode"></spline-viewer>
-        </div>
+        <div class="category-page wix-about-page" id="about-page">
+        <div class="wix-about-banner" aria-label="Artist statement">
+            <div class="wix-about-banner-track">
+                <div class="wix-about-banner-group">
+                    <span>I do art &amp; design &amp; a bunch of things, based in Brooklyn</span>
+                    <span class="wix-banner-star" aria-hidden="true">✹</span>
+                </div>
 
-        <div class="about-container">
-            <div class="about-text">
-                <h2>About:</h2>
-                <p>Emily Wernick is an interdisciplinary artist and writer working within academia, culture, and art. They are interested in pushing the boundaries of sociology by theorizing and deconstructing topics and mediums usually dismissed by the academic and cultural canon. They remain fascinated by topics of intimacy and connection in a late stage capitalist society, which is steadily reflected through their art.</p>
-                
-                <h3>Contact:</h3>
-                <p>email: emily.wernick@gmail.com</p>
-                <p>instagram: @emilywernick , @novaphora</p>
-                <p>For all work examples (data, marketing, admin) please go to: <a href="https://t.ly/KEB-9" target="_blank">https://t.ly/KEB-9</a></p>
-            </div>
-            <div class="about-photo">
-                <img src="media/About/101_4161.jpg" alt="Emily Wernick" class="about-image">
-            </div>
-        </div>
+      <div class="wix-about-banner-group" aria-hidden="true">
+        <span>I do art &amp; design &amp; a bunch of things, based in Brooklyn</span>
+        <span class="wix-banner-star">✹</span>
+      </div>
+
+      <div class="wix-about-banner-group" aria-hidden="true">
+        <span>I do art &amp; design &amp; a bunch of things, based in Brooklyn</span>
+        <span class="wix-banner-star">✹</span>
+      </div>
+
+      <div class="wix-about-banner-group" aria-hidden="true">
+        <span>I do art &amp; design &amp; a bunch of things, based in Brooklyn</span>
+        <span class="wix-banner-star">✹</span>
+      </div>
     </div>
+  </div>
+
+  <section class="wix-about-layout">
+    <div class="wix-about-intro">
+      <p>
+        <span class="wix-highlight">
+          Emily is a digital artist and sociologist from Cupertino and a
+          master's student at the CUNY Graduate Center. Finding joy in technical
+          challenges and stylistic experimentation, their work reflects a dreamy
+          blend of childhood wonder and the obscure. They spend their time
+          between animation, designing, dreaming, and freaking out over
+          technofeudalism.
+        </span>
+      </p>
+    </div>
+
+    <div class="wix-reel-column">
+      <a
+        class="wix-reel-link"
+        href="https://www.instagram.com/emilywernick"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Visit Emily Wernick on Instagram"
+      >
+        <img
+          class="wix-viewmaster-reel"
+          src="media/About/viewmaster-reel.png"
+          alt="Decorative spinning View-Master reel"
+        />
+      </a>
+
+      <a
+        class="wix-instagram-label"
+        href="https://www.instagram.com/emilywernick"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        instagram ↗
+      </a>
+    </div>
+
+    <div class="wix-about-details">
+      <p>
+        Informed by a background in sociology and anthropology, they draw
+        inspiration from View-Master reels, video games, 1970s computer art,
+        early web aesthetics, and 1990s CGI. Their work is an ongoing attempt
+        to blend the dreamy, the nostalgic, and the uncanny.
+      </p>
+
+      <p>
+        <a
+          class="wix-inspiration-link"
+          href="https://www.pinterest.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          You can browse their ever-growing inspiration board here.
+        </a>
+      </p>
+
+      <a
+        class="wix-email-link"
+        href="mailto:emily.wernick@gmail.com"
+      >
+        email me ↗
+      </a>
+    </div>
+  </section>
+</div>
     
 <script>
     const cursor = document.querySelector('.cursor');

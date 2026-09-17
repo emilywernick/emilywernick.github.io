@@ -31,7 +31,6 @@
             pointer-events: none;
             z-index: 9999;
             image-rendering: pixelated;
-            background-image: url('data:image/svg+xml;utf8,<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="2" height="2" fill="black"/><rect x="0" y="2" width="2" height="2" fill="black"/><rect x="0" y="4" width="2" height="2" fill="black"/><rect x="0" y="6" width="2" height="2" fill="black"/><rect x="0" y="8" width="2" height="2" fill="black"/><rect x="0" y="10" width="2" height="2" fill="black"/><rect x="0" y="12" width="2" height="2" fill="black"/><rect x="0" y="14" width="2" height="2" fill="black"/><rect x="0" y="16" width="2" height="2" fill="black"/><rect x="0" y="18" width="2" height="2" fill="black"/><rect x="0" y="20" width="2" height="2" fill="black"/><rect x="2" y="2" width="2" height="2" fill="white"/><rect x="2" y="4" width="2" height="2" fill="white"/><rect x="2" y="6" width="2" height="2" fill="white"/><rect x="2" y="8" width="2" height="2" fill="white"/><rect x="2" y="10" width="2" height="2" fill="white"/><rect x="2" y="12" width="2" height="2" fill="white"/><rect x="2" y="14" width="2" height="2" fill="white"/><rect x="2" y="16" width="2" height="2" fill="white"/><rect x="2" y="18" width="2" height="2" fill="white"/><rect x="2" y="20" width="2" height="2" fill="black"/><rect x="4" y="4" width="2" height="2" fill="white"/><rect x="4" y="6" width="2" height="2" fill="white"/><rect x="4" y="8" width="2" height="2" fill="white"/><rect x="4" y="10" width="2" height="2" fill="white"/><rect x="4" y="12" width="2" height="2" fill="white"/><rect x="4" y="14" width="2" height="2" fill="white"/><rect x="4" y="16" width="2" height="2" fill="white"/><rect x="4" y="18" width="2" height="2" fill="black"/><rect x="4" y="20" width="2" height="2" fill="black"/><rect x="6" y="6" width="2" height="2" fill="white"/><rect x="6" y="8" width="2" height="2" fill="white"/><rect x="6" y="10" width="2" height="2" fill="white"/><rect x="6" y="12" width="2" height="2" fill="white"/><rect x="6" y="14" width="2" height="2" fill="white"/><rect x="6" y="16" width="2" height="2" fill="black"/><rect x="6" y="18" width="2" height="2" fill="black"/><rect x="8" y="8" width="2" height="2" fill="white"/><rect x="8" y="10" width="2" height="2" fill="white"/><rect x="8" y="12" width="2" height="2" fill="white"/><rect x="8" y="14" width="2" height="2" fill="black"/><rect x="8" y="16" width="2" height="2" fill="black"/><rect x="10" y="10" width="2" height="2" fill="white"/><rect x="10" y="12" width="2" height="2" fill="black"/><rect x="10" y="14" width="2" height="2" fill="black"/><rect x="12" y="12" width="2" height="2" fill="black"/><rect x="12" y="14" width="2" height="2" fill="black"/><rect x="14" y="14" width="2" height="2" fill="black"/><rect x="4" y="22" width="2" height="2" fill="black"/><rect x="6" y="20" width="2" height="2" fill="black"/><rect x="6" y="22" width="2" height="2" fill="black"/><rect x="8" y="18" width="2" height="2" fill="black"/><rect x="8" y="20" width="2" height="2" fill="black"/><rect x="8" y="22" width="2" height="2" fill="black"/><rect x="10" y="20" width="2" height="2" fill="black"/><rect x="10" y="22" width="2" height="2" fill="black"/><rect x="12" y="22" width="2" height="2" fill="black"/><rect x="12" y="24" width="2" height="2" fill="black"/><rect x="14" y="16" width="2" height="2" fill="black"/><rect x="14" y="18" width="2" height="2" fill="black"/><rect x="14" y="20" width="2" height="2" fill="black"/><rect x="14" y="22" width="2" height="2" fill="black"/><rect x="16" y="16" width="2" height="2" fill="black"/><rect x="16" y="18" width="2" height="2" fill="black"/><rect x="18" y="18" width="2" height="2" fill="black"/><rect x="20" y="18" width="2" height="2" fill="black"/><rect x="22" y="18" width="2" height="2" fill="black"/><rect x="24" y="18" width="2" height="2" fill="black"/><rect x="26" y="18" width="2" height="2" fill="black"/></svg>');
             background-size: contain;
         }
 
@@ -65,9 +64,7 @@
             z-index: 1000;
         }
 
-        .logo {
-            display: none;
-        }
+        .logo { display: none; }
 
         .nav-links {
             display: flex;
@@ -83,9 +80,7 @@
             line-height: 1.6;
         }
 
-        .nav-links li {
-            position: relative;
-        }
+        .nav-links li { position: relative; }
 
         .dropdown {
             display: none;
@@ -108,18 +103,12 @@
             font-size: 0.6rem;
         }
 
-        .dropdown a:hover {
-            color: #666;
-        }
+        .dropdown a:hover { color: #666; }
 
         .nav-links li:hover .dropdown,
-        .dropdown:hover {
-            display: block;
-        }
+        .dropdown:hover { display: block; }
 
-        .nav-links li:hover > a {
-            color: #666;
-        }
+        .nav-links li:hover > a { color: #666; }
 
         .home-container {
             min-height: 100vh;
@@ -212,34 +201,14 @@
             top: 30px;
         }
 
-        .slides-container:not(.fanned) .film-slide:nth-child(1) {
-            transform: rotate(-3deg);
-            z-index: 6;
-        }
-        .slides-container:not(.fanned) .film-slide:nth-child(2) {
-            transform: rotate(2deg) translate(10px, 5px);
-            z-index: 5;
-        }
-        .slides-container:not(.fanned) .film-slide:nth-child(3) {
-            transform: rotate(-1deg) translate(20px, 10px);
-            z-index: 4;
-        }
-        .slides-container:not(.fanned) .film-slide:nth-child(4) {
-            transform: rotate(1deg) translate(30px, 15px);
-            z-index: 3;
-        }
-        .slides-container:not(.fanned) .film-slide:nth-child(5) {
-            transform: rotate(-2deg) translate(40px, 20px);
-            z-index: 2;
-        }
-        .slides-container:not(.fanned) .film-slide:nth-child(6) {
-            transform: rotate(3deg) translate(50px, 25px);
-            z-index: 1;
-        }
+        .slides-container:not(.fanned) .film-slide:nth-child(1) { transform: rotate(-3deg); z-index: 6; }
+        .slides-container:not(.fanned) .film-slide:nth-child(2) { transform: rotate(2deg) translate(10px, 5px); z-index: 5; }
+        .slides-container:not(.fanned) .film-slide:nth-child(3) { transform: rotate(-1deg) translate(20px, 10px); z-index: 4; }
+        .slides-container:not(.fanned) .film-slide:nth-child(4) { transform: rotate(1deg) translate(30px, 15px); z-index: 3; }
+        .slides-container:not(.fanned) .film-slide:nth-child(5) { transform: rotate(-2deg) translate(40px, 20px); z-index: 2; }
+        .slides-container:not(.fanned) .film-slide:nth-child(6) { transform: rotate(3deg) translate(50px, 25px); z-index: 1; }
 
-        .slides-container.fanned .film-slide {
-            z-index: 10;
-        }
+        .slides-container.fanned .film-slide { z-index: 10; }
 
         .slides-container.fanned {
             width: 100%;
@@ -258,24 +227,12 @@
             transform: rotate(0deg) !important;
         }
 
-        .slides-container.fanned .film-slide:nth-child(1) {
-            transform: rotate(-2deg) !important;
-        }
-        .slides-container.fanned .film-slide:nth-child(2) {
-            transform: rotate(1deg) !important;
-        }
-        .slides-container.fanned .film-slide:nth-child(3) {
-            transform: rotate(-1deg) !important;
-        }
-        .slides-container.fanned .film-slide:nth-child(4) {
-            transform: rotate(2deg) !important;
-        }
-        .slides-container.fanned .film-slide:nth-child(5) {
-            transform: rotate(-1deg) !important;
-        }
-        .slides-container.fanned .film-slide:nth-child(6) {
-            transform: rotate(1deg) !important;
-        }
+        .slides-container.fanned .film-slide:nth-child(1) { transform: rotate(-2deg) !important; }
+        .slides-container.fanned .film-slide:nth-child(2) { transform: rotate(1deg) !important; }
+        .slides-container.fanned .film-slide:nth-child(3) { transform: rotate(-1deg) !important; }
+        .slides-container.fanned .film-slide:nth-child(4) { transform: rotate(2deg) !important; }
+        .slides-container.fanned .film-slide:nth-child(5) { transform: rotate(-1deg) !important; }
+        .slides-container.fanned .film-slide:nth-child(6) { transform: rotate(1deg) !important; }
 
         .slides-container.fanned .film-slide:hover {
             transform: translateY(-20px) scale(1.05) !important;
@@ -289,9 +246,7 @@
             padding: 8rem 4rem 4rem;
         }
 
-        .category-page.active {
-            display: block;
-        }
+        .category-page.active { display: block; }
 
         .category-header {
             text-align: center;
@@ -319,29 +274,20 @@
             transition: all 0.3s;
         }
 
-        .back-button:hover {
-            background: #333;
-            color: white;
-        }
+        .back-button:hover { background: #333; color: white; }
 
         .gallery {
-    column-count: 4;
-    column-gap: 0.3rem;
-    width: 100%;
-    margin: 0;
-    }
+            column-count: 4;
+            column-gap: 0.3rem;
+            width: 100%;
+            margin: 0;
+        }
 
         .gallery-item {
-    break-inside: avoid;
-    margin-bottom: 0.3rem;
-    animation: fadeIn 0.6s ease both;
-    }
-
-        .gallery-item img {
-    width: 100%;
-    height: auto;
-    display: block;
-    }
+            break-inside: avoid;
+            margin-bottom: 0.3rem;
+            animation: fadeIn 0.6s ease both;
+        }
 
         .gallery-item:nth-child(1) { animation-delay: 0.1s; }
         .gallery-item:nth-child(2) { animation-delay: 0.2s; }
@@ -359,6 +305,7 @@
             height: 100%;
             object-fit: cover;
             transition: transform 0.5s;
+            display: block;
         }
 
         .gallery-item video {
@@ -368,11 +315,8 @@
         }
 
         .gallery-item:hover img,
-        .gallery-item:hover video {
-            transform: scale(1.1);
-        }
+        .gallery-item:hover video { transform: scale(1.1); }
 
-        /* 3D Gallery Specific */
         .gallery-3d {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -381,9 +325,7 @@
             margin: 0 auto;
         }
 
-        .gallery-3d-item {
-            animation: fadeIn 0.6s ease both;
-        }
+        .gallery-3d-item { animation: fadeIn 0.6s ease both; }
 
         .gallery-3d-item video,
         .gallery-3d-item img {
@@ -400,7 +342,6 @@
             line-height: 1.6;
         }
 
-        /* Writing Page */
         .writing-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
@@ -418,9 +359,7 @@
             animation: fadeIn 0.6s ease both;
         }
 
-        .writing-block:hover {
-            transform: translateY(-10px);
-        }
+        .writing-block:hover { transform: translateY(-10px); }
 
         .writing-block h3 {
             font-size: 1.2rem;
@@ -447,7 +386,6 @@
             transition: all 0.3s;
         }
 
-        /* Commissions Page */
         .commission-section {
             margin-bottom: 5rem;
             animation: fadeIn 0.8s ease both;
@@ -478,14 +416,12 @@
             gap: 1rem;
             overflow-x: auto;
             scroll-behavior: smooth;
-            scrollbar-width: none; /* Firefox */
-            -ms-overflow-style: none; /* IE/Edge */
+            scrollbar-width: none;
+            -ms-overflow-style: none;
             padding-bottom: 1rem;
         }
 
-        .commission-gallery::-webkit-scrollbar {
-            display: none; /* Chrome/Safari */
-        }
+        .commission-gallery::-webkit-scrollbar { display: none; }
 
         .commission-gallery img {
             flex: 0 0 auto;
@@ -512,19 +448,10 @@
             transition: background 0.3s;
         }
 
-        .gallery-arrow:hover {
-            background: #333;
-            color: white;
-        }
+        .gallery-arrow:hover { background: #333; color: white; }
+        .gallery-arrow.left { left: 10px; }
+        .gallery-arrow.right { right: 10px; }
 
-        .gallery-arrow.left {
-            left: 10px;
-        }
-
-        .gallery-arrow.right {
-            right: 10px;
-        }
-        /* Spline 3D Model */
         .spline-container {
             width: 100%;
             height: 400px;
@@ -534,53 +461,29 @@
             overflow: hidden;
         }
 
-        .spline-container spline-viewer {
-            width: 100%;
-            height: 100%;
-        }
-        /* About Page */
-        .about-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            max-width: 1200px;
-            margin: 0 auto;
-            align-items: start;
+        .spline-container spline-viewer { width: 100%; height: 100%; }
+
+        /* Series: Paramnesia page */
+        .paramnesia-video-wrapper {
+            max-width: 800px;
+            margin: 0 auto 2.5rem;
         }
 
-        .about-text h2 {
-            font-size: 2rem;
-            color: #2d5016;
-            margin-bottom: 2rem;
-            line-height: 1.6;
-            text-decoration: underline;
-        }
-
-        .about-text h3 {
-            font-size: 1.5rem;
-            color: #2d5016;
-            margin: 2rem 0 1rem 0;
-            line-height: 1.6;
-            text-decoration: underline;
-        }
-
-        .about-text p {
-            font-size: 1rem;
-            color: #2d5016;
-            line-height: 1.8;
-            margin-bottom: 1.5rem;
-            font-family: 'Georgia', serif;
-        }
-
-        .about-text a {
-            color: #2d5016;
-            text-decoration: underline;
-        }
-
-        .about-image {
+        .paramnesia-video {
             width: 100%;
             height: auto;
-            border: 3px solid #333;
+            display: block;
+            border: 2px solid #333;
+            border-radius: 6px;
+        }
+
+        .paramnesia-statement {
+            max-width: 680px;
+            margin: 0 auto 3.5rem;
+            text-align: center;
+            font-size: 0.75rem;
+            line-height: 2;
+            color: #333;
         }
 
         .parallax-bg {
@@ -590,7 +493,7 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            background: 
+            background:
                 radial-gradient(circle at 20% 50%, rgba(255, 182, 193, 0.3) 0%, transparent 50%),
                 radial-gradient(circle at 80% 80%, rgba(173, 216, 230, 0.3) 0%, transparent 50%),
                 radial-gradient(circle at 40% 90%, rgba(221, 160, 221, 0.3) 0%, transparent 50%),
@@ -598,29 +501,22 @@
         }
 
         @media (max-width: 968px) {
-            .about-container {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
+            .gallery { column-count: 2; }
 
-            .gallery {
-                column-count: 2;
-            }
-            
             .slides-container {
                 width: 100%;
                 height: auto;
                 max-width: 100%;
             }
 
-           .slides-container.fanned {
+            .slides-container.fanned {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 3rem;
                 padding: 1.5rem;
                 max-width: 100%;
                 row-gap: 2.5rem;
             }
-            
+
             .film-slide {
                 width: 100% !important;
                 max-width: 180px !important;
@@ -628,65 +524,52 @@
                 padding: 12px !important;
             }
 
-            .film-frame {
-                height: 120px;
-            }
+            .film-frame { height: 120px; }
 
             .hero h1 { font-size: 1.2rem; }
             .hero p { font-size: 0.5rem; }
-        .hero {
-            margin-bottom: 6rem;
-            padding-top: 2rem;
+            .hero { margin-bottom: 6rem; padding-top: 2rem; }
+            .slides-container { margin-top: 3rem; }
+
+            .gallery-3d {
+                grid-template-columns: 1fr;
+                padding: 0 2rem;
+                max-width: 500px;
+                margin: 0 auto;
+            }
+
+            .gallery-3d-item { max-width: 100%; width: 100%; }
+
+            .writing-grid {
+                grid-template-columns: 1fr;
+                padding: 0 2rem;
+                max-width: 500px;
+                margin: 0 auto;
+            }
+
+            .writing-block { max-width: 100%; width: 100%; }
+
+            .paramnesia-statement { font-size: 0.65rem; padding: 0 1rem; }
         }
 
-        .slides-container {
-            margin-top: 3rem;
-        }
-        .gallery-3d {
-            grid-template-columns: 1fr;
-            padding: 0 2rem;
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        .gallery-3d-item {
-            max-width: 100%;
-            width: 100%;
-        }
-
-        .writing-grid {
-            grid-template-columns: 1fr;
-            padding: 0 2rem;
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        .writing-block {
-            max-width: 100%;
-            width: 100%;
-        }
-    }
-            /* =====================================
+        /* =====================================
         WIX-INSPIRED ABOUT PAGE
         ===================================== */
+
+        /* Height of the fixed nav, used to push the banner (and everything else) below it */
+        :root {
+            --nav-height: 5.5rem;
+        }
 
         .wix-about-page {
             display: none;
             min-height: 100vh;
             padding: 0;
-            overflow: hidden;
             color: #000000;
             background: #edf8f8;
         }
 
-        .wix-about-page.active {
-        display: block;
-        }
-
-        /* Keep the site navigation usable above the banner */
-        .wix-about-page ~ * {
-        position: relative;
-        }
+        .wix-about-page.active { display: block; }
 
         /* -------------------------------------
         Top scrolling artist-statement banner
@@ -694,8 +577,8 @@
 
         .wix-about-banner {
             position: fixed;
-            z-index: 950;
-            top: 0;
+            z-index: 900;
+            top: var(--nav-height);
             right: 0;
             left: 0;
             overflow: hidden;
@@ -736,22 +619,13 @@
             line-height: 1;
         }
 
-        /*
-        This moves from left to right.
-        The repeated groups keep the banner visually continuous.
-        */
         @keyframes wix-banner-to-right {
-        from {
-            transform: translateX(-25%);
-        }
-
-        to {
-            transform: translateX(0);
-        }
+            from { transform: translateX(-25%); }
+            to { transform: translateX(0); }
         }
 
         .wix-about-banner:hover .wix-about-banner-track {
-        animation-play-state: paused;
+            animation-play-state: paused;
         }
 
         /* -------------------------
@@ -766,7 +640,8 @@
             width: min(100% - 3rem, 1480px);
             min-height: 100vh;
             margin: 0 auto;
-            padding: clamp(8rem, 14vw, 12rem) 0 5rem;
+            /* Room for the fixed nav + banner, then a small buffer */
+            padding: calc(var(--nav-height) + 5.5rem) 0 5rem;
         }
 
         .wix-about-intro,
@@ -776,17 +651,13 @@
             font-weight: 400;
             line-height: 1.11;
             letter-spacing: -0.028em;
+            /* Both paragraphs sit at the same height */
+            padding-top: clamp(1rem, 3vw, 2.5rem);
         }
 
         .wix-about-intro p,
-        .wix-about-details p {
-        margin: 0;
-        }
+        .wix-about-details p { margin: 0; }
 
-        /*
-        "box-decoration-break" makes the green highlight
-        continue behind every wrapped line, like Wix text highlighting.
-        */
         .wix-highlight {
             padding: 0.02em 0.14em 0.06em;
             background: #c3ed97;
@@ -824,13 +695,8 @@
         }
 
         @keyframes wix-reel-spin {
-        from {
-            transform: rotate(0deg);
-        }
-
-        to {
-            transform: rotate(360deg);
-        }
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         .wix-reel-link:hover .wix-viewmaster-reel,
@@ -843,7 +709,15 @@
             outline-offset: 0.45rem;
         }
 
-        .wix-instagram-label {
+        /* Instagram + email side by side under the reel */
+        .wix-reel-links-row {
+            display: flex;
+            align-items: center;
+            gap: 1.75rem;
+        }
+
+        .wix-instagram-label,
+        .wix-email-link {
             color: #000000;
             font-family: "Cormorant Garamond", "Times New Roman", serif;
             font-size: clamp(1.1rem, 1.45vw, 1.55rem);
@@ -855,7 +729,9 @@
         }
 
         .wix-instagram-label:hover,
-        .wix-instagram-label:focus-visible {
+        .wix-instagram-label:focus-visible,
+        .wix-email-link:hover,
+        .wix-email-link:focus-visible {
             color: #ff8f1d;
         }
 
@@ -863,14 +739,9 @@
         Right-side descriptive text
         ------------------------- */
 
-        .wix-about-details {
-            padding-top: clamp(5rem, 19vw, 18rem);
-            text-align: right;
-        }
+        .wix-about-details { text-align: right; }
 
-        .wix-about-details p + p {
-            margin-top: 1.55rem;
-        }
+        .wix-about-details p + p { margin-top: 1.55rem; }
 
         .wix-inspiration-link {
             padding: 0.02em 0.14em 0.06em;
@@ -887,49 +758,26 @@
             background: #000000;
         }
 
-        .wix-email-link {
-            display: inline-block;
-            margin-top: 2.5rem;
-            padding-bottom: 0.12em;
-            color: #000000;
-            border-bottom: 1px solid currentColor;
-            font-family: "Cormorant Garamond", "Times New Roman", serif;
-            font-size: clamp(1.1rem, 1.45vw, 1.55rem);
-            font-style: italic;
-            text-decoration: none;
-        }
-
-        .wix-email-link:hover,
-        .wix-email-link:focus-visible {
-            color: #ff8f1d;
-        }
-
         /* -------------------------
         Tablet layout
         ------------------------- */
 
         @media (max-width: 900px) {
-        .wix-about-layout {
-            grid-template-columns: 1fr 1fr;
-            gap: 2.25rem;
-            width: min(100% - 2.5rem, 760px);
-            padding-top: 8.5rem;
-        }
+            .wix-about-layout {
+                grid-template-columns: 1fr 1fr;
+                gap: 2.25rem;
+                width: min(100% - 2.5rem, 760px);
+                padding-top: calc(var(--nav-height) + 4rem);
+            }
 
-        .wix-about-intro {
-            grid-column: 1 / -1;
-            max-width: 37rem;
-        }
+            .wix-about-intro {
+                grid-column: 1 / -1;
+                max-width: 37rem;
+                padding-top: 0;
+            }
 
-        .wix-reel-column {
-            grid-column: 1;
-            padding-top: 0;
-        }
-
-        .wix-about-details {
-            grid-column: 2;
-            padding-top: 0;
-        }
+            .wix-reel-column { grid-column: 1; padding-top: 0; }
+            .wix-about-details { grid-column: 2; padding-top: 0; }
         }
 
         /* -------------------------
@@ -937,54 +785,38 @@
         ------------------------- */
 
         @media (max-width: 600px) {
-        .wix-about-banner {
-            padding: 0.45rem 0;
-            font-size: 1.3rem;
+            .wix-about-banner { padding: 0.45rem 0; font-size: 1.3rem; }
+            .wix-about-banner-track { animation-duration: 23s; }
+
+            .wix-about-layout {
+                display: flex;
+                flex-direction: column;
+                gap: 2.4rem;
+                width: min(100% - 2rem, 32rem);
+                padding: calc(var(--nav-height) + 3rem) 0 3.5rem;
+            }
+
+            .wix-about-intro,
+            .wix-about-details {
+                font-size: 1.45rem;
+                line-height: 1.12;
+                padding-top: 0;
+            }
+
+            .wix-reel-column {
+                align-self: center;
+                width: min(75vw, 17rem);
+                padding: 0;
+            }
+
+            .wix-about-details { padding: 0; text-align: left; }
         }
 
-        .wix-about-banner-track {
-            animation-duration: 23s;
-        }
-
-        .wix-about-layout {
-            display: flex;
-            flex-direction: column;
-            gap: 2.4rem;
-            width: min(100% - 2rem, 32rem);
-            padding: 6.7rem 0 3.5rem;
-        }
-
-        .wix-about-intro,
-        .wix-about-details {
-            font-size: 1.45rem;
-            line-height: 1.12;
-        }
-
-        .wix-reel-column {
-            align-self: center;
-            width: min(75vw, 17rem);
-            padding: 0;
-        }
-
-        .wix-about-details {
-            padding: 0;
-            text-align: left;
-        }
-
-        .wix-email-link {
-            margin-top: 1.6rem;
-        }
-        }
-
-        /* Do not auto-animate for visitors who request reduced motion. */
         @media (prefers-reduced-motion: reduce) {
-        .wix-about-banner-track,
-        .wix-viewmaster-reel {
-            animation: none;
-        }
+            .wix-about-banner-track,
+            .wix-viewmaster-reel { animation: none; }
         }
     </style>
-
 </head>
 <body>
     <div class="cursor"></div>
@@ -1001,7 +833,7 @@
                     <a href="#" class="dropdown-link" data-category="3d">2D & 3D</a>
                     <a href="#" class="dropdown-link" data-category="writing">Writing</a>
                     <a href="#" class="dropdown-link" data-category="commissions">Commissions</a>
-                    <a href="#" class="dropdown-link" data-category="painting">Painting</a>
+                    <a href="#" class="dropdown-link" data-category="paramnesia">Series: Paramnesia</a>
                 </div>
             </li>
             <li><a href="#" class="nav-about">About</a></li>
@@ -1023,14 +855,14 @@
                 <div class="film-slide-label">Analog Photography</div>
             </div>
 
-             <div class="film-slide" data-category="3d">
+            <div class="film-slide" data-category="3d">
                 <div class="film-slide-number">2D & 3D</div>
                 <div class="film-frame">
                     <img src="media/3D:2D Animation/0009.png" class="film-slide-image">
                 </div>
                 <div class="film-slide-label">2D & 3D Renders</div>
             </div>
-            
+
             <div class="film-slide" data-category="digital">
                 <div class="film-slide-number">Digital</div>
                 <div class="film-frame">
@@ -1038,7 +870,6 @@
                 </div>
                 <div class="film-slide-label">Digital Photography</div>
             </div>
-
 
             <div class="film-slide" data-category="writing">
                 <div class="film-slide-number">Academic & Creative</div>
@@ -1048,12 +879,12 @@
                 <div class="film-slide-label">Writing</div>
             </div>
 
-            <div class="film-slide" data-category="painting">
+            <div class="film-slide" data-category="paramnesia">
                 <div class="film-slide-number">Paint</div>
                 <div class="film-frame">
                     <img src="media/hasan-almasi-nKNm_75lH4g-unsplash Copy_edited_edited.jpg" class="film-slide-image">
                 </div>
-                <div class="film-slide-label">Painting</div>
+                <div class="film-slide-label">Series: Paramnesia</div>
             </div>
 
             <div class="film-slide" data-category="commissions">
@@ -1217,9 +1048,19 @@
         </div>
     </div>
 
-    <div class="category-page" id="painting-page">
+    <div class="category-page" id="paramnesia-page">
         <a href="#" class="back-button nav-home">← Back</a>
-        <div class="category-header"><h1>Painting</h1></div>
+        <div class="category-header"><h1>Series: Paramnesia</h1></div>
+
+        <div class="paramnesia-video-wrapper">
+            <video class="paramnesia-video" autoplay muted loop playsinline>
+                <source src="media/Series Paramnesia/paramnesia-loop.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
+        <p class="paramnesia-statement">Paramnesia: a series exploring memory and nostalgia through 2D and 3D reconstructions. An experiment in the distance between experience and recollection.</p>
+
         <div class="gallery">
             <div class="gallery-item"><img src="media/hasan-almasi-nKNm_75lH4g-unsplash Copy_edited_edited.jpg"></div>
         </div>
@@ -1228,275 +1069,268 @@
     <div class="category-page" id="commissions-page">
         <a href="#" class="back-button nav-home">← Back</a>
         <div class="category-header"><h1>Commissions</h1></div>
-    
-    <div class="commission-section">
-        <h2>Seaport Pups NYC</h2>
-        <p class="subtitle">Promotional Photos; Digital</p>
-        <div class="commission-gallery-container">
-            <div class="gallery-arrow left" onclick="scrollGallery('seaport', -1)">‹</div>
-            <div class="gallery-arrow right" onclick="scrollGallery('seaport', 1)">›</div>
-            <div class="commission-gallery" id="seaport-gallery">
-                <img src="media/Commissions, Seaport Pups NYC/noahwdog2.jpg" alt="Seaport Pups 1">
-                <img src="media/Commissions, Seaport Pups NYC/camy1.jpg" alt="Seaport Pups 2">
-                <img src="media/Commissions, Seaport Pups NYC/cooper1.jpg" alt="Seaport Pups 3">
-                <img src="media/Commissions, Seaport Pups NYC/noahwalking1.jpg" alt="Seaport Pups 4">
-                <img src="media/Commissions, Seaport Pups NYC/harper1.jpg" alt="Seaport Pups 5">
-                <img src="media/Commissions, Seaport Pups NYC/noahwalking2.jpg" alt="Seaport Pups 6">
-                <img src="media/Commissions, Seaport Pups NYC/noahwdogs1.jpg" alt="Seaport Pups 7">
-                <img src="media/Commissions, Seaport Pups NYC/tucker1.jpg" alt="Seaport Pups 8">
+
+        <div class="commission-section">
+            <h2>Seaport Pups NYC</h2>
+            <p class="subtitle">Promotional Photos; Digital</p>
+            <div class="commission-gallery-container">
+                <div class="gallery-arrow left" onclick="scrollGallery('seaport', -1)">‹</div>
+                <div class="gallery-arrow right" onclick="scrollGallery('seaport', 1)">›</div>
+                <div class="commission-gallery" id="seaport-gallery">
+                    <img src="media/Commissions, Seaport Pups NYC/noahwdog2.jpg" alt="Seaport Pups 1">
+                    <img src="media/Commissions, Seaport Pups NYC/camy1.jpg" alt="Seaport Pups 2">
+                    <img src="media/Commissions, Seaport Pups NYC/cooper1.jpg" alt="Seaport Pups 3">
+                    <img src="media/Commissions, Seaport Pups NYC/noahwalking1.jpg" alt="Seaport Pups 4">
+                    <img src="media/Commissions, Seaport Pups NYC/harper1.jpg" alt="Seaport Pups 5">
+                    <img src="media/Commissions, Seaport Pups NYC/noahwalking2.jpg" alt="Seaport Pups 6">
+                    <img src="media/Commissions, Seaport Pups NYC/noahwdogs1.jpg" alt="Seaport Pups 7">
+                    <img src="media/Commissions, Seaport Pups NYC/tucker1.jpg" alt="Seaport Pups 8">
+                </div>
+            </div>
+        </div>
+
+        <div class="commission-section">
+            <h2>Life Event Shoots</h2>
+            <p class="subtitle">Birthday's, Graduation's; 35mm Film & Digital</p>
+            <div class="commission-gallery-container">
+                <div class="gallery-arrow left" onclick="scrollGallery('events', -1)">‹</div>
+                <div class="gallery-arrow right" onclick="scrollGallery('events', 1)">›</div>
+                <div class="commission-gallery" id="events-gallery">
+                    <img src="media/Commissions, Life Event Shoots/S906433-R1-075-36.jpg" alt="Event 1">
+                    <img src="media/Commissions, Life Event Shoots/IMG_3698.JPG" alt="Event 2">
+                    <img src="media/Commissions, Life Event Shoots/S906733-R1-E019.JPG" alt="Event 3">
+                    <img src="media/Commissions, Life Event Shoots/S906733-R1-E008 2.JPG" alt="Event 4">
+                    <img src="media/Commissions, Life Event Shoots/S906733-R1-E002.JPG" alt="Event 5">
+                    <img src="media/Commissions, Life Event Shoots/Screen Shot 2025-04-23 at 7.56_edited.jpg" alt="Event 6">
+                    <img src="media/Commissions, Life Event Shoots/IMG_3741 copy.JPG" alt="Event 7">
+                    <img src="media/Commissions, Life Event Shoots/S906733-R1-E018 3.JPG" alt="Event 8">
+                    <img src="media/Commissions, Life Event Shoots/S906433-R1-007-2.jpg" alt="Event 9">
+                </div>
+            </div>
+        </div>
+
+        <div class="commission-section">
+            <h2>Zine Samples</h2>
+            <p class="subtitle">Transcending (2022), Maladaptive (2024); 35mm Film</p>
+            <div class="commission-gallery-container">
+                <div class="gallery-arrow left" onclick="scrollGallery('zine', -1)">‹</div>
+                <div class="gallery-arrow right" onclick="scrollGallery('zine', 1)">›</div>
+                <div class="commission-gallery" id="zine-gallery">
+                    <img src="media/Zine Samples/Screen Shot 2025-04-23 at 7.56.45 PM.png" alt="Zine 1">
+                    <img src="media/Zine Samples/Screen Shot 2023-11-17 at 3.15.59 PM.png" alt="Zine 2">
+                    <img src="media/Zine Samples/Screen Shot 2023-11-17 at 3.15.50 PM.png" alt="Zine 3">
+                    <img src="media/Zine Samples/Screen Shot 2023-11-17 at 3.16.17 PM.png" alt="Zine 4">
+                    <img src="media/Zine Samples/Screen Shot 2023-11-17 at 3.16.07 PM.png" alt="Zine 5">
+                    <img src="media/Zine Samples/Screen Shot 2025-04-23 at 7.56.00 PM.png" alt="Zine 6">
+                    <img src="media/Zine Samples/Screen Shot 2025-04-23 at 7.56.11 PM.png" alt="Zine 7">
+                    <img src="media/Zine Samples/Screen Shot 2025-04-23 at 7.56.26 PM.png" alt="Zine 8">
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="commission-section">
-        <h2>Life Event Shoots</h2>
-        <p class="subtitle">Birthday's, Graduation's; 35mm Film & Digital</p>
-        <div class="commission-gallery-container">
-            <div class="gallery-arrow left" onclick="scrollGallery('events', -1)">‹</div>
-            <div class="gallery-arrow right" onclick="scrollGallery('events', 1)">›</div>
-            <div class="commission-gallery" id="events-gallery">
-                <img src="media/Commissions, Life Event Shoots/S906433-R1-075-36.jpg" alt="Event 1">
-                <img src="media/Commissions, Life Event Shoots/IMG_3698.JPG" alt="Event 2">
-                <img src="media/Commissions, Life Event Shoots/S906733-R1-E019.JPG" alt="Event 3">
-                <img src="media/Commissions, Life Event Shoots/S906733-R1-E008 2.JPG" alt="Event 4">
-                <img src="media/Commissions, Life Event Shoots/S906733-R1-E002.JPG" alt="Event 5">
-                <img src="media/Commissions, Life Event Shoots/Screen Shot 2025-04-23 at 7.56_edited.jpg" alt="Event 6">
-                <img src="media/Commissions, Life Event Shoots/IMG_3741 copy.JPG" alt="Event 7">
-                <img src="media/Commissions, Life Event Shoots/S906733-R1-E018 3.JPG" alt="Event 8">
-                <img src="media/Commissions, Life Event Shoots/S906433-R1-007-2.jpg" alt="Event 9">
-            </div>
-        </div>
-    </div>
-
-    <div class="commission-section">
-        <h2>Zine Samples</h2>
-        <p class="subtitle">Transcending (2022), Maladaptive (2024); 35mm Film</p>
-        <div class="commission-gallery-container">
-            <div class="gallery-arrow left" onclick="scrollGallery('zine', -1)">‹</div>
-            <div class="gallery-arrow right" onclick="scrollGallery('zine', 1)">›</div>
-            <div class="commission-gallery" id="zine-gallery">
-                <img src="media/Zine Samples/Screen Shot 2025-04-23 at 7.56.45 PM.png" alt="Zine 1">
-                <img src="media/Zine Samples/Screen Shot 2023-11-17 at 3.15.59 PM.png" alt="Zine 2">
-                <img src="media/Zine Samples/Screen Shot 2023-11-17 at 3.15.50 PM.png" alt="Zine 3">
-                <img src="media/Zine Samples/Screen Shot 2023-11-17 at 3.16.17 PM.png" alt="Zine 4">
-                <img src="media/Zine Samples/Screen Shot 2023-11-17 at 3.16.07 PM.png" alt="Zine 5">
-                <img src="media/Zine Samples/Screen Shot 2025-04-23 at 7.56.00 PM.png" alt="Zine 6">
-                <img src="media/Zine Samples/Screen Shot 2025-04-23 at 7.56.11 PM.png" alt="Zine 7">
-                <img src="media/Zine Samples/Screen Shot 2025-04-23 at 7.56.26 PM.png" alt="Zine 8">
-            </div>
-        </div>
-    </div>
-</div>
-
-         <!-- About Page -->
-        <div class="category-page wix-about-page" id="about-page">
+    <!-- About Page -->
+    <div class="category-page wix-about-page" id="about-page">
         <div class="wix-about-banner" aria-label="Artist statement">
             <div class="wix-about-banner-track">
                 <div class="wix-about-banner-group">
                     <span>I do art &amp; design &amp; a bunch of things, based in Brooklyn</span>
                     <span class="wix-banner-star" aria-hidden="true">✹</span>
                 </div>
+                <div class="wix-about-banner-group" aria-hidden="true">
+                    <span>I do art &amp; design &amp; a bunch of things, based in Brooklyn</span>
+                    <span class="wix-banner-star">✹</span>
+                </div>
+                <div class="wix-about-banner-group" aria-hidden="true">
+                    <span>I do art &amp; design &amp; a bunch of things, based in Brooklyn</span>
+                    <span class="wix-banner-star">✹</span>
+                </div>
+                <div class="wix-about-banner-group" aria-hidden="true">
+                    <span>I do art &amp; design &amp; a bunch of things, based in Brooklyn</span>
+                    <span class="wix-banner-star">✹</span>
+                </div>
+            </div>
+        </div>
 
-      <div class="wix-about-banner-group" aria-hidden="true">
-        <span>I do art &amp; design &amp; a bunch of things, based in Brooklyn</span>
-        <span class="wix-banner-star">✹</span>
-      </div>
+        <section class="wix-about-layout">
+            <div class="wix-about-intro">
+                <p>
+                    <span class="wix-highlight">
+                        Emily is a digital artist and sociologist from Cupertino and a
+                        master's student at the CUNY Graduate Center. Finding joy in technical
+                        challenges and stylistic experimentation, their work reflects a dreamy
+                        blend of childhood wonder and the obscure. They spend their time
+                        between animation, designing, dreaming, and freaking out over
+                        technofeudalism.
+                    </span>
+                </p>
+            </div>
 
-      <div class="wix-about-banner-group" aria-hidden="true">
-        <span>I do art &amp; design &amp; a bunch of things, based in Brooklyn</span>
-        <span class="wix-banner-star">✹</span>
-      </div>
+            <div class="wix-reel-column">
+                <a
+                    class="wix-reel-link"
+                    href="https://www.instagram.com/emilywernick"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Visit Emily Wernick on Instagram"
+                >
+                    <img
+                        class="wix-viewmaster-reel"
+                        src="https://static.wixstatic.com/media/d4b85a_d599841a91124c6ba84d177b3879aab9~mv2.png/v1/fill/w_1620,h_2160,al_c,q_95,enc_auto/d4b85a_d599841a91124c6ba84d177b3879aab9~mv2.png"
+                        alt="Decorative spinning View-Master reel"
+                    />
+                </a>
 
-      <div class="wix-about-banner-group" aria-hidden="true">
-        <span>I do art &amp; design &amp; a bunch of things, based in Brooklyn</span>
-        <span class="wix-banner-star">✹</span>
-      </div>
+                <div class="wix-reel-links-row">
+                    <a
+                        class="wix-instagram-label"
+                        href="https://www.instagram.com/emilywernick"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        instagram ↗
+                    </a>
+                    <a
+                        class="wix-email-link"
+                        href="mailto:emily.wernick@gmail.com"
+                    >
+                        email me ↗
+                    </a>
+                </div>
+            </div>
+
+            <div class="wix-about-details">
+                <p>
+                    Informed by a background in sociology and anthropology, they draw
+                    inspiration from View-Master reels, video games, 1970s computer art,
+                    early web aesthetics, and 1990s CGI. Their work is an ongoing attempt
+                    to blend the dreamy, the nostalgic, and the uncanny.
+                </p>
+
+                <p>
+                    <a
+                        class="wix-inspiration-link"
+                        href="https://www.pinterest.com/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        You can browse their ever-growing inspiration board here.
+                    </a>
+                </p>
+            </div>
+        </section>
     </div>
-  </div>
 
-  <section class="wix-about-layout">
-    <div class="wix-about-intro">
-      <p>
-        <span class="wix-highlight">
-          Emily is a digital artist and sociologist from Cupertino and a
-          master's student at the CUNY Graduate Center. Finding joy in technical
-          challenges and stylistic experimentation, their work reflects a dreamy
-          blend of childhood wonder and the obscure. They spend their time
-          between animation, designing, dreaming, and freaking out over
-          technofeudalism.
-        </span>
-      </p>
-    </div>
+    <script>
+        const cursor = document.querySelector('.cursor');
+        document.addEventListener('mousemove', e => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
 
-    <div class="wix-reel-column">
-      <a
-        class="wix-reel-link"
-        href="https://www.instagram.com/emilywernick"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Visit Emily Wernick on Instagram"
-      >
-        <img
-          class="wix-viewmaster-reel"
-          src="media/About/viewmaster-reel.png"
-          alt="Decorative spinning View-Master reel"
-        />
-      </a>
+        document.addEventListener('mousemove', e => {
+            const moveX = (e.clientX - window.innerWidth / 2) * 0.01;
+            const moveY = (e.clientY - window.innerHeight / 2) * 0.01;
+            document.querySelector('.parallax-bg').style.transform =
+                `translate(${moveX}px, ${moveY}px)`;
+        });
 
-      <a
-        class="wix-instagram-label"
-        href="https://www.instagram.com/emilywernick"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        instagram ↗
-      </a>
-    </div>
+        const slidesContainer = document.getElementById('slidesContainer');
+        const filmSlides = document.querySelectorAll('.film-slide');
+        const pageTransition = document.querySelector('.page-transition');
+        const homeContainer = document.getElementById('home');
+        const categoryPages = document.querySelectorAll('.category-page');
+        const navHomeLinks = document.querySelectorAll('.nav-home');
 
-    <div class="wix-about-details">
-      <p>
-        Informed by a background in sociology and anthropology, they draw
-        inspiration from View-Master reels, video games, 1970s computer art,
-        early web aesthetics, and 1990s CGI. Their work is an ongoing attempt
-        to blend the dreamy, the nostalgic, and the uncanny.
-      </p>
+        function showPage(pageName) {
+            pageTransition.classList.add('active');
 
-      <p>
-        <a
-          class="wix-inspiration-link"
-          href="https://www.pinterest.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          You can browse their ever-growing inspiration board here.
-        </a>
-      </p>
-
-      <a
-        class="wix-email-link"
-        href="mailto:emily.wernick@gmail.com"
-      >
-        email me ↗
-      </a>
-    </div>
-  </section>
-</div>
-    
-<script>
-    const cursor = document.querySelector('.cursor');
-    document.addEventListener('mousemove', e => {
-        cursor.style.left = e.clientX + 'px';
-        cursor.style.top = e.clientY + 'px';
-    });
-
-    document.addEventListener('mousemove', e => {
-        const moveX = (e.clientX - window.innerWidth / 2) * 0.01;
-        const moveY = (e.clientY - window.innerHeight / 2) * 0.01;
-        document.querySelector('.parallax-bg').style.transform = 
-            `translate(${moveX}px, ${moveY}px)`;
-    });
-
-    const slidesContainer = document.getElementById('slidesContainer');
-    const filmSlides = document.querySelectorAll('.film-slide');
-    const pageTransition = document.querySelector('.page-transition');
-    const homeContainer = document.getElementById('home');
-    const categoryPages = document.querySelectorAll('.category-page');
-    const navHomeLinks = document.querySelectorAll('.nav-home');
-
-    // Function to show a page
-    function showPage(pageName) {
-        pageTransition.classList.add('active');
-        
-        setTimeout(() => {
-            if (pageName === 'home') {
-                homeContainer.style.display = 'flex';
-                categoryPages.forEach(page => page.classList.remove('active'));
-                slidesContainer.classList.remove('fanned');
-            } else {
-                homeContainer.style.display = 'none';
-                categoryPages.forEach(page => page.classList.remove('active'));
-                const targetPage = document.getElementById(`${pageName}-page`);
-                if (targetPage) {
-                    targetPage.classList.add('active');
+            setTimeout(() => {
+                if (pageName === 'home') {
+                    homeContainer.style.display = 'flex';
+                    categoryPages.forEach(page => page.classList.remove('active'));
+                    slidesContainer.classList.remove('fanned');
+                } else {
+                    homeContainer.style.display = 'none';
+                    categoryPages.forEach(page => page.classList.remove('active'));
+                    const targetPage = document.getElementById(`${pageName}-page`);
+                    if (targetPage) {
+                        targetPage.classList.add('active');
+                    }
                 }
+                window.scrollTo(0, 0);
+                pageTransition.classList.remove('active');
+            }, 500);
+        }
+
+        window.addEventListener('hashchange', () => {
+            const hash = decodeURIComponent(window.location.hash.slice(1));
+            showPage(hash || 'home');
+        });
+
+        window.addEventListener('load', () => {
+            const hash = decodeURIComponent(window.location.hash.slice(1));
+            if (hash) {
+                showPage(hash);
             }
-            window.scrollTo(0, 0);
-            pageTransition.classList.remove('active');
-        }, 500);
-    }
+        });
 
-    // Handle URL hash changes (back/forward buttons)
-    window.addEventListener('hashchange', () => {
-        const hash = window.location.hash.slice(1); // Remove the #
-        showPage(hash || 'home');
-    });
-
-    // Load the correct page on initial load
-    window.addEventListener('load', () => {
-        const hash = window.location.hash.slice(1);
-        if (hash) {
-            showPage(hash);
-        }
-    });
-
-    slidesContainer.addEventListener('click', (e) => {
-        if (!slidesContainer.classList.contains('fanned') && !e.target.closest('.film-slide')) {
-            slidesContainer.classList.add('fanned');
-        }
-    });
-
-    filmSlides.forEach(slide => {
-        slide.addEventListener('click', (e) => {
-            if (slidesContainer.classList.contains('fanned')) {
-                e.stopPropagation();
-                const category = slide.getAttribute('data-category');
-                window.location.hash = category;
-            } else {
+        slidesContainer.addEventListener('click', (e) => {
+            if (!slidesContainer.classList.contains('fanned') && !e.target.closest('.film-slide')) {
                 slidesContainer.classList.add('fanned');
             }
         });
-    });
 
-    navHomeLinks.forEach(link => {
-        link.addEventListener('click', e => {
-            e.preventDefault();
-            window.location.hash = '';
+        filmSlides.forEach(slide => {
+            slide.addEventListener('click', (e) => {
+                if (slidesContainer.classList.contains('fanned')) {
+                    e.stopPropagation();
+                    const category = slide.getAttribute('data-category');
+                    window.location.hash = category;
+                } else {
+                    slidesContainer.classList.add('fanned');
+                }
+            });
         });
-    });
 
-    // Dropdown navigation
-    const dropdownLinks = document.querySelectorAll('.dropdown-link');
-    dropdownLinks.forEach(link => {
-        link.addEventListener('click', e => {
-            e.preventDefault();
-            const category = link.getAttribute('data-category');
-            window.location.hash = category;
+        navHomeLinks.forEach(link => {
+            link.addEventListener('click', e => {
+                e.preventDefault();
+                window.location.hash = '';
+            });
         });
-    });
 
-    // About page navigation
-    const navAboutLink = document.querySelector('.nav-about');
-    if (navAboutLink) {
-        navAboutLink.addEventListener('click', e => {
-            e.preventDefault();
-            window.location.hash = 'about';
+        const dropdownLinks = document.querySelectorAll('.dropdown-link');
+        dropdownLinks.forEach(link => {
+            link.addEventListener('click', e => {
+                e.preventDefault();
+                const category = link.getAttribute('data-category');
+                window.location.hash = category;
+            });
         });
-    }
 
-    window.addEventListener('scroll', () => {
-        const scrolled = window.pageYOffset;
-        document.querySelector('.parallax-bg').style.transform = 
-            `translateY(${scrolled * 0.5}px)`;
-    });
-     // Gallery scroll function
-    function scrollGallery(galleryId, direction) {
-        const gallery = document.getElementById(galleryId + '-gallery');
-        const scrollAmount = 370; // width of image + gap
-        gallery.scrollBy({
-            left: direction * scrollAmount,
-            behavior: 'smooth'
+        const navAboutLink = document.querySelector('.nav-about');
+        if (navAboutLink) {
+            navAboutLink.addEventListener('click', e => {
+                e.preventDefault();
+                window.location.hash = 'about';
+            });
+        }
+
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            document.querySelector('.parallax-bg').style.transform =
+                `translateY(${scrolled * 0.5}px)`;
         });
-    }
+
+        function scrollGallery(galleryId, direction) {
+            const gallery = document.getElementById(galleryId + '-gallery');
+            const scrollAmount = 370;
+            gallery.scrollBy({
+                left: direction * scrollAmount,
+                behavior: 'smooth'
+            });
+        }
     </script>
 </body>
 </html>

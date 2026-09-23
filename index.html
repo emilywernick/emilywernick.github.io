@@ -104,6 +104,22 @@
 
         .dropdown a:hover { color: #666; }
 
+        /* Video has no page yet: not clickable */
+        .dropdown-soon {
+            display: block;
+            padding: 0.5rem 0;
+            color: #999;
+            font-size: 0.6rem;
+            line-height: 1.6;
+            cursor: var(--cursor);
+        }
+
+        .dropdown-soon-tag {
+            display: block;
+            margin-top: 0.3rem;
+            font-size: 0.45rem;
+        }
+
         .nav-links li:hover .dropdown,
         .dropdown:hover { display: block; }
 
@@ -118,7 +134,32 @@
             padding: 2rem;
         }
 
+        /* -------------------------
+        Home background video
+        ------------------------- */
+
+        .home-bg-video {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        
+        .home-bg-scrim {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            background: rgba(245, 247, 250, 0.25);
+            pointer-events: none;
+        }
+
         .hero {
+            position: relative;
+            z-index: 1;
             text-align: center;
             margin-bottom: 3rem;
             animation: fadeIn 1s ease;
@@ -144,6 +185,7 @@
 
         .slides-container {
             position: relative;
+            z-index: 1;
             width: 400px;
             height: 200px;
         }
@@ -280,6 +322,16 @@
             z-index: 100 !important;
         }
 
+        
+        body.on-home .hero h1,
+        body.on-home .hero p,
+        body.on-home .nav-links > li > a,
+        body.on-home .film-slide-label {
+            text-shadow: 2px 2px 0 rgba(245, 247, 250, 0.9);
+        }
+
+        body.on-home .hero p { color: #333; }
+
         .category-page {
             display: none;
             min-height: 100vh;
@@ -318,7 +370,7 @@
 
         /* -------------------------
         Tab toggle (Photography: Analog / Digital, 2D & 3D: 2D / 3D / Mixed)
-        ------------- */
+        ------------------------- */
 
         .category-header--tabs { margin-bottom: 2rem; }
 
@@ -336,7 +388,7 @@
             box-shadow: 4px 4px 0 #333;
         }
 
-        /* Sliding block behind the active tab */
+        
         .tab-toggle-thumb {
             position: absolute;
             top: 4px;
@@ -370,7 +422,7 @@
 
         .tab-panel[hidden] { display: none; }
 
-        /* Shown in a tab that has no work in it yet */
+        
         .tab-empty {
             grid-column: 1 / -1;
             padding: 3rem 1rem;
@@ -665,7 +717,7 @@
         }
 
         /* =====================================
-        WIX-INSPIRED ABOUT PAGE
+        ABOUT PAGE
         ===================================== */
 
         
@@ -928,11 +980,12 @@
         @media (prefers-reduced-motion: reduce) {
             .wix-about-banner-track,
             .wix-viewmaster-reel { animation: none; }
+            .home-bg-video { display: none; }
             .tab-toggle-thumb { transition: none; }
         }
     </style>
 </head>
-<body>
+<body class="on-home">
     <div class="page-transition"></div>
     <div class="parallax-bg"></div>
 
@@ -944,8 +997,8 @@
                     <a href="#" class="dropdown-link" data-category="photography">Photography</a>
                     <a href="#" class="dropdown-link" data-category="3d">2D & 3D</a>
                     <a href="#" class="dropdown-link" data-category="paramnesia">Series: Paramnesia</a>
-                    <a href="#" class="dropdown-link" data-category="writing">Writing</a>
-                    <a href="#" class="dropdown-link" data-category="commissions">Commissions</a>
+                    <span class="dropdown-soon" aria-disabled="true">Video <span class="dropdown-soon-tag">coming soon</span></span>
+                    <a href="#" class="dropdown-link" data-category="about">Me</a>
                 </div>
             </li>
             <li><a href="#" class="nav-about">About</a></li>
@@ -953,6 +1006,12 @@
     </nav>
 
     <div class="home-container" id="home">
+        <!-- Looping background video (home page only) -->
+        <video class="home-bg-video" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+            <source src="media/home/flowers_grate_3d.mp4" type="video/mp4">
+        </video>
+        <div class="home-bg-scrim" aria-hidden="true"></div>
+
         <div class="hero">
             <h1>Emily Wernick</h1>
             <p>Animation, Design, Research, etc...</p>
@@ -1079,7 +1138,7 @@
         <a href="#" class="back-button nav-home">← Back</a>
         <div class="category-header category-header--tabs"><h1>2D & 3D Animation</h1></div>
 
-  
+        
         <div class="tab-toggle" role="tablist" aria-label="Animation style" style="--tabs: 3">
             <span class="tab-toggle-thumb" aria-hidden="true"></span>
             <button type="button" role="tab" id="tab-3d" data-tab="3d"
@@ -1137,7 +1196,7 @@
                 </video>
                 <h3>Pixel Cat</h3>
             </div>
-             <div class="gallery-3d-item">
+            <div class="gallery-3d-item">
                 <video controls playsinline preload="metadata">
                     <source src="media/3D:2D Animation/store3d.MP4" type="video/mp4">
                     Your browser does not support the video tag.
@@ -1454,6 +1513,23 @@
         const categoryPages = document.querySelectorAll('.category-page');
         const navHomeLinks = document.querySelectorAll('.nav-home');
 
+        /* ---------- Home background video ---------- */
+        const homeVideo = document.querySelector('.home-bg-video');
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+       
+        function setHomeActive(isHome) {
+            document.body.classList.toggle('on-home', isHome);
+            if (!homeVideo) return;
+            if (isHome && !reduceMotion.matches) {
+                homeVideo.play().catch(() => {});
+            } else {
+                homeVideo.pause();
+            }
+        }
+
+        if (reduceMotion.matches && homeVideo) homeVideo.pause();
+
         /* ---------- Tab toggles (Photography, 2D & 3D) ---------- */
         function setTab(toggle, name) {
             const tabs = [...toggle.querySelectorAll('[role="tab"]')];
@@ -1484,7 +1560,6 @@
             });
         });
 
-        
         const photoToggle = document.getElementById('photography-page').querySelector('.tab-toggle');
         const animToggle = document.getElementById('3d-page').querySelector('.tab-toggle');
 
@@ -1500,6 +1575,8 @@
             pageTransition.classList.add('active');
 
             setTimeout(() => {
+                setHomeActive(pageName === 'home');
+
                 if (pageName === 'home') {
                     homeContainer.style.display = 'flex';
                     categoryPages.forEach(page => page.classList.remove('active'));

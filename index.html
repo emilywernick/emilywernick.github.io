@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Emily Wernick - Portfolio</title>
+    <!-- Asks AI tools not to train on this site's text and images (see also robots.txt) -->
+    <meta name="robots" content="noai, noimageai">
     <script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.90/build/spline-viewer.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
@@ -125,14 +127,18 @@
 
         .nav-links li:hover > a { color: #666; }
 
+        /* Name sits near the top so the flowers in the background video stay visible;
+           the slides center themselves in the space underneath */
         .home-container {
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            padding: 2rem;
+            justify-content: flex-start;
+            padding: clamp(5rem, 11vh, 9rem) 2rem 2rem;
         }
+
+        .home-container .slides-container { margin: auto 0; }
 
         /* -------------------------
         Home background video
@@ -152,7 +158,7 @@
             position: relative;
             z-index: 1;
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
             animation: fadeIn 1s ease;
         }
 
@@ -276,6 +282,11 @@
         .slides-container:not(.fanned) .film-slide:nth-child(3) { transform: rotate(-1deg) translate(24px, 12px); z-index: 3; }
         .slides-container:not(.fanned) .film-slide:nth-child(4) { transform: rotate(1deg) translate(36px, 18px); z-index: 2; }
         .slides-container:not(.fanned) .film-slide:nth-child(5) { transform: rotate(-2deg) translate(48px, 24px); z-index: 1; }
+
+        /* While stacked, hide the labels of the slides underneath so they don't pile up */
+        .slides-container:not(.fanned) .film-slide:not(:first-child) .film-slide-label {
+            opacity: 0;
+        }
 
         .slides-container.fanned .film-slide { z-index: 10; }
 
@@ -1462,7 +1473,9 @@
                     </a>
                     <a
                         class="wix-email-link"
-                        href="mailto:emily.wernick@gmail.com"
+                        href="#"
+                        data-user="emily.wernick"
+                        data-domain="gmail.com"
                     >
                         email me ↗
                     </a>
@@ -1639,6 +1652,18 @@
                 const category = link.getAttribute('data-category');
                 window.location.hash = category;
             });
+        });
+
+        /* ---------- Email link, assembled only when a person uses it ----------
+           The address never appears whole in the HTML, so bots that scrape
+           pages for "mailto:" addresses don't find it. */
+        document.querySelectorAll('[data-user][data-domain]').forEach(link => {
+            const fill = () => {
+                link.href = 'mailto:' + link.dataset.user + '@' + link.dataset.domain;
+            };
+            ['pointerenter', 'focus', 'touchstart'].forEach(evt =>
+                link.addEventListener(evt, fill, { once: true, passive: true }));
+            link.addEventListener('click', fill);
         });
 
         const navAboutLink = document.querySelector('.nav-about');

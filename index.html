@@ -664,57 +664,103 @@
                 linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
         }
 
+        /* =====================================
+        PHONES & SMALL TABLETS
+        ===================================== */
         @media (max-width: 968px) {
-            .gallery { column-count: 2; }
+            nav { padding: 1.25rem; }
 
+            /* Less side padding so the work can use the full screen width */
+            .category-page { padding: 5.5rem 0.75rem 3rem; }
+            .home-container { padding-left: 0.75rem; padding-right: 0.75rem; }
+
+            /* ---------- Home: title ---------- */
+            .hero h1 { font-size: 1.2rem; margin-bottom: 1rem; }
+            .hero p { font-size: 0.5rem; }
+            .hero { margin-bottom: 1.5rem; }
+
+            /* ---------- Home: stacked deck, centered ---------- */
             .slides-container {
                 width: 100%;
-                height: auto;
                 max-width: 100%;
+                height: 230px;
             }
 
+            .slides-container:not(.fanned) .film-slide {
+                left: calc(50% - 114px);
+                top: 0;
+            }
+
+            /* ---------- Home: slides spread out, 2 + 2 + 1 ---------- */
             .slides-container.fanned {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 3rem;
-                padding: 1.5rem;
+                height: auto;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 1.5rem 1.25rem;
+                padding: 0.5rem 0.25rem 1rem;
                 max-width: 100%;
-                row-gap: 2.5rem;
             }
 
-            /* 2 + 2 + 1 centered */
             .slides-container.fanned .film-slide,
             .slides-container.fanned .film-slide:nth-child(4) { grid-column: auto; }
             .slides-container.fanned .film-slide:nth-child(5) {
                 grid-column: 1 / -1;
-                width: calc(50% - 1.5rem) !important;
+                width: calc(50% - 0.625rem) !important;
             }
 
+            /* Extra cream border top and bottom, like a real slide mount,
+               so the small corner text and the label sit on the card
+               instead of on top of the picture or the next slide */
             .film-slide {
                 width: 100% !important;
                 max-width: 180px !important;
                 height: auto !important;
-                padding: 12px !important;
+                padding: 20px 10px 32px !important;
             }
 
-            .film-frame { height: 120px; }
+            .film-frame { height: 110px; }
 
-            .hero h1 { font-size: 1.2rem; }
-            .hero p { font-size: 0.5rem; }
-            .hero { margin-bottom: 6rem; padding-top: 2rem; }
-            .slides-container { margin-top: 3rem; }
+            .film-slide-number {
+                top: 5px;
+                right: 8px;
+                font-size: 0.45rem;
+            }
 
+            .film-slide-label,
+            body.on-home .film-slide-label {
+                bottom: 9px;
+                left: 6px;
+                right: 6px;
+                font-size: 0.45rem;
+                line-height: 1.3;
+                color: #333;
+                text-shadow: none;
+            }
+
+            /* ---------- Photography: photos nearly edge to edge ---------- */
+            #photography-page { padding-left: 4px; padding-right: 4px; }
+            #photography-page .back-button { margin-left: 0.75rem; }
+            .gallery { column-count: 2; column-gap: 4px; }
+            .gallery-item { margin-bottom: 4px; }
+
+            /* ---------- Animation: two columns ---------- */
             .gallery-3d {
-                grid-template-columns: 1fr;
-                padding: 0 2rem;
-                max-width: 500px;
-                margin: 0 auto;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 1.5rem 0.6rem;
+                padding: 0;
+                max-width: none;
+                margin: 0;
             }
 
             .gallery-3d-item { max-width: 100%; width: 100%; }
 
+            .gallery-3d-item h3 {
+                margin-top: 0.5rem;
+                font-size: 0.45rem;
+            }
+
             .writing-grid {
                 grid-template-columns: 1fr;
-                padding: 0 2rem;
+                padding: 0 1rem;
                 max-width: 500px;
                 margin: 0 auto;
             }
@@ -988,7 +1034,6 @@
         @media (prefers-reduced-motion: reduce) {
             .wix-about-banner-track,
             .wix-viewmaster-reel { animation: none; }
-            .home-bg-video { display: none; }
             .tab-toggle-thumb { transition: none; }
         }
     </style>
@@ -1015,7 +1060,8 @@
 
     <div class="home-container" id="home">
         <!-- Looping background video (home page only) -->
-        <video class="home-bg-video" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+        <video class="home-bg-video" autoplay muted loop playsinline preload="auto" aria-hidden="true"
+               poster="media/home/flowers_grate_poster.jpg">
             <source src="media/home/flowers_grate_3d.mp4" type="video/mp4">
         </video>
 
@@ -1538,7 +1584,28 @@
             }
         }
 
-        if (reduceMotion.matches && homeVideo) homeVideo.pause();
+        if (homeVideo) {
+            // iPhones only autoplay video that is definitely muted
+            homeVideo.muted = true;
+            homeVideo.defaultMuted = true;
+
+            if (reduceMotion.matches) {
+                // "Reduce motion" is on: show a still frame instead of playing
+                homeVideo.pause();
+            } else {
+                homeVideo.play().catch(() => {
+                    // Autoplay was blocked (e.g. iPhone Low Power Mode):
+                    // start the video on the visitor's first tap instead
+                    const startOnTap = () => {
+                        if (document.body.classList.contains('on-home')) {
+                            homeVideo.play().catch(() => {});
+                        }
+                    };
+                    document.addEventListener('touchstart', startOnTap, { once: true, passive: true });
+                    document.addEventListener('click', startOnTap, { once: true });
+                });
+            }
+        }
 
         /* ---------- Tab toggles (Photography, 2D & 3D) ---------- */
         function setTab(toggle, name) {

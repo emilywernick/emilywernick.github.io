@@ -106,7 +106,7 @@
 
         .dropdown a:hover { color: #666; }
 
-        /* Video has no page yet: greyed out, not clickable */
+        /* Video has no page yet: not clickable */
         .dropdown-soon {
             display: block;
             padding: 0.5rem 0;
@@ -127,8 +127,7 @@
 
         .nav-links li:hover > a { color: #666; }
 
-        /* Name sits near the top so the flowers in the background video stay visible;
-           the slides center themselves in the space underneath */
+        
         .home-container {
             min-height: 100vh;
             display: flex;
@@ -208,8 +207,7 @@
             position: relative;
         }
 
-        /* Frames holding a drawing (film strip, Super 8 reel) show the whole
-           drawing on a light-box cream instead of cropping it on black */
+       
         .film-frame--art { background: #efe6d2; }
 
         .film-slide-image {
@@ -223,7 +221,7 @@
             padding: 6px;
         }
 
-        /* The film strip runs off the bottom edge of its frame, like film spooling through */
+        
         .film-frame--strip .film-slide-image {
             width: 56%;
             height: auto;
@@ -325,8 +323,7 @@
             z-index: 100 !important;
         }
 
-        /* Over the home video: cream text with a hard dark pixel shadow.
-           The shadow keeps it readable over both the light sky and the dark grate. */
+        
         body.on-home .hero h1,
         body.on-home .hero p,
         body.on-home .nav-links > li > a,
@@ -377,7 +374,6 @@
 
         /* -------------------------
         Tab toggle (Photography: Analog / Digital, 2D & 3D: 2D / 3D / Mixed)
-        --tabs = number of tabs, --index = position of the active one (set by JS)
         ------------------------- */
 
         .category-header--tabs { margin-bottom: 2rem; }
@@ -714,9 +710,7 @@
                 width: calc(50% - 0.625rem) !important;
             }
 
-            /* Extra cream border top and bottom, like a real slide mount,
-               so the small corner text and the label sit on the card
-               instead of on top of the picture or the next slide */
+            
             .film-slide {
                 width: 100% !important;
                 max-width: 180px !important;
@@ -778,10 +772,10 @@
         }
 
         /* =====================================
-        WIX-INSPIRED ABOUT PAGE
+        ABOUT PAGE
         ===================================== */
 
-        /* Height of the fixed nav, used to push the banner (and everything else) below it */
+        
         :root {
             --nav-height: 5.5rem;
         }
@@ -905,9 +899,7 @@
             padding-top: clamp(0.5rem, 2vw, 2rem);
         }
 
-        /* A square the size of the disc. The reel image has empty space around
-           the disc, so the image is drawn larger than this square and centered
-           on it; the empty edges spill over invisibly. */
+       
         .wix-reel-link {
             position: relative;
             display: block;
@@ -1592,7 +1584,6 @@
         const homeVideo = document.querySelector('.home-bg-video');
         const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-        // Only play while the home page is showing, so other pages don't waste battery
         function setHomeActive(isHome) {
             document.body.classList.toggle('on-home', isHome);
             if (!homeVideo) return;

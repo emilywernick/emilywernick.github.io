@@ -104,7 +104,7 @@
 
         .dropdown a:hover { color: #666; }
 
-        /* Video has no page yet: not clickable */
+        /* Video has no page yet: greyed out, not clickable */
         .dropdown-soon {
             display: block;
             padding: 0.5rem 0;
@@ -145,15 +145,6 @@
             height: 100%;
             object-fit: cover;
             z-index: 0;
-            pointer-events: none;
-        }
-
-        
-        .home-bg-scrim {
-            position: fixed;
-            inset: 0;
-            z-index: 0;
-            background: rgba(245, 247, 250, 0.25);
             pointer-events: none;
         }
 
@@ -211,7 +202,8 @@
             position: relative;
         }
 
-       
+        /* Frames holding a drawing (film strip, Super 8 reel) show the whole
+           drawing on a light-box cream instead of cropping it on black */
         .film-frame--art { background: #efe6d2; }
 
         .film-slide-image {
@@ -225,7 +217,7 @@
             padding: 6px;
         }
 
-        
+        /* The film strip runs off the bottom edge of its frame, like film spooling through */
         .film-frame--strip .film-slide-image {
             width: 56%;
             height: auto;
@@ -322,7 +314,7 @@
             z-index: 100 !important;
         }
 
-        
+        /* Pixel-style cream drop shadow keeps text readable over the video */
         body.on-home .hero h1,
         body.on-home .hero p,
         body.on-home .nav-links > li > a,
@@ -370,6 +362,7 @@
 
         /* -------------------------
         Tab toggle (Photography: Analog / Digital, 2D & 3D: 2D / 3D / Mixed)
+        --tabs = number of tabs, --index = position of the active one (set by JS)
         ------------------------- */
 
         .category-header--tabs { margin-bottom: 2rem; }
@@ -388,7 +381,7 @@
             box-shadow: 4px 4px 0 #333;
         }
 
-        
+        /* Sliding block behind the active tab */
         .tab-toggle-thumb {
             position: absolute;
             top: 4px;
@@ -422,7 +415,7 @@
 
         .tab-panel[hidden] { display: none; }
 
-        
+        /* Shown in a tab that has no work in it yet */
         .tab-empty {
             grid-column: 1 / -1;
             padding: 3rem 1rem;
@@ -717,10 +710,10 @@
         }
 
         /* =====================================
-        ABOUT PAGE
+        WIX-INSPIRED ABOUT PAGE
         ===================================== */
 
-        
+        /* Height of the fixed nav, used to push the banner (and everything else) below it */
         :root {
             --nav-height: 5.5rem;
         }
@@ -1010,7 +1003,6 @@
         <video class="home-bg-video" autoplay muted loop playsinline preload="auto" aria-hidden="true">
             <source src="media/home/flowers_grate_3d.mp4" type="video/mp4">
         </video>
-        <div class="home-bg-scrim" aria-hidden="true"></div>
 
         <div class="hero">
             <h1>Emily Wernick</h1>
@@ -1138,7 +1130,8 @@
         <a href="#" class="back-button nav-home">← Back</a>
         <div class="category-header category-header--tabs"><h1>2D & 3D Animation</h1></div>
 
-        
+        <!-- Files live in media/3D:2D Animation/ and are listed in the same order as that folder.
+             To add a piece, copy one gallery-3d-item block into the right panel below. -->
         <div class="tab-toggle" role="tablist" aria-label="Animation style" style="--tabs: 3">
             <span class="tab-toggle-thumb" aria-hidden="true"></span>
             <button type="button" role="tab" id="tab-3d" data-tab="3d"
@@ -1517,7 +1510,7 @@
         const homeVideo = document.querySelector('.home-bg-video');
         const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-       
+        // Only play while the home page is showing, so other pages don't waste battery
         function setHomeActive(isHome) {
             document.body.classList.toggle('on-home', isHome);
             if (!homeVideo) return;
@@ -1560,6 +1553,7 @@
             });
         });
 
+        // getElementById, because "#3d-page" isn't a valid CSS selector (IDs can't start with a digit)
         const photoToggle = document.getElementById('photography-page').querySelector('.tab-toggle');
         const animToggle = document.getElementById('3d-page').querySelector('.tab-toggle');
 

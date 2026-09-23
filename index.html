@@ -691,6 +691,13 @@
                 top: 0;
             }
 
+            /* Before it opens, the deck sits in the lower part of the screen
+               so the flowers in the video stay visible. Raise the last number
+               to move it up, lower it to move it further down. */
+            .home-container .slides-container:not(.fanned) {
+                margin: auto 0 8vh;
+            }
+
             /* ---------- Home: slides spread out, 2 + 2 + 1 ---------- */
             .slides-container.fanned {
                 height: auto;
@@ -780,6 +787,7 @@
         }
 
         .wix-about-page {
+            overflow-x: clip;
             display: none;
             min-height: 100vh;
             padding: 0;
@@ -853,7 +861,7 @@
         .wix-about-layout {
             display: grid;
             /* minmax(0, …) keeps the columns from ever pushing past the screen edge */
-            grid-template-columns: minmax(0, 0.9fr) minmax(0, 0.82fr) minmax(0, 0.9fr);
+            grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.3fr) minmax(0, 0.85fr);
             align-items: start;
             gap: clamp(1.5rem, 5vw, 6rem);
             width: min(100% - 3rem, 1480px);
@@ -894,21 +902,32 @@
             flex-direction: column;
             justify-content: flex-start;
             gap: 1.1rem;
-            padding-top: clamp(1rem, 5vw, 5rem);
+            padding-top: clamp(0.5rem, 2vw, 2rem);
         }
 
+        /* A square the size of the disc. The reel image has empty space around
+           the disc, so the image is drawn larger than this square and centered
+           on it; the empty edges spill over invisibly. */
         .wix-reel-link {
+            position: relative;
             display: block;
-            width: min(100%, 22rem);
+            width: min(100%, 32rem);
+            aspect-ratio: 1;
             border-radius: 50%;
             outline: none;
         }
 
         .wix-viewmaster-reel {
-            display: block;
-            width: 100%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 160%;
+            max-width: none;
             height: auto;
-            animation: wix-reel-spin 32s linear infinite;
+            translate: -50% -50%;
+            pointer-events: none;
+            /* Seconds per full turn: lower = faster */
+            animation: wix-reel-spin 22s linear infinite;
             transform-origin: center;
             will-change: transform;
         }
@@ -1012,7 +1031,7 @@
                 flex-direction: column;
                 gap: 2.4rem;
                 width: min(100% - 2rem, 32rem);
-                padding: calc(var(--nav-height) + 3rem) 0 3.5rem;
+                padding: calc(var(--nav-height) + 4.5rem) 0 3.5rem;
             }
 
             .wix-about-intro,
@@ -1024,7 +1043,7 @@
 
             .wix-reel-column {
                 align-self: center;
-                width: min(75vw, 17rem);
+                width: min(88vw, 24rem);
                 padding: 0;
             }
 

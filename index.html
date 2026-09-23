@@ -169,8 +169,7 @@
             position: relative;
         }
 
-        /* Frames holding a drawing (film strip, Super 8 reel) show the whole
-           drawing on a light-box cream instead of cropping it on black */
+       
         .film-frame--art { background: #efe6d2; }
 
         .film-slide-image {
@@ -184,7 +183,7 @@
             padding: 6px;
         }
 
-        /* The film strip runs off the bottom edge of its frame, like film spooling through */
+        
         .film-frame--strip .film-slide-image {
             width: 56%;
             height: auto;
@@ -318,16 +317,18 @@
         .back-button:hover { background: #333; color: white; }
 
         /* -------------------------
-        Photography: Analog / Digital toggle
-        ------------------------- */
+        Tab toggle (Photography: Analog / Digital, 2D & 3D: 2D / 3D / Mixed)
+        ------------- */
 
-        .category-header--photo { margin-bottom: 2rem; }
+        .category-header--tabs { margin-bottom: 2rem; }
 
-        .photo-toggle {
+        .tab-toggle {
+            --tabs: 2;
+            --index: 0;
             position: relative;
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            width: min(100%, 22rem);
+            grid-template-columns: repeat(var(--tabs), 1fr);
+            width: min(100%, calc(var(--tabs) * 11rem));
             margin: 0 auto 3rem;
             padding: 4px;
             background: #f5ead6;
@@ -336,21 +337,18 @@
         }
 
         /* Sliding block behind the active tab */
-        .photo-toggle-thumb {
+        .tab-toggle-thumb {
             position: absolute;
             top: 4px;
             bottom: 4px;
             left: 4px;
-            width: calc(50% - 4px);
+            width: calc((100% - 8px) / var(--tabs));
             background: #333;
+            transform: translateX(calc(var(--index) * 100%));
             transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
-        .photo-toggle[data-active="digital"] .photo-toggle-thumb {
-            transform: translateX(100%);
-        }
-
-        .photo-toggle button {
+        .tab-toggle button {
             position: relative;
             z-index: 1;
             padding: 0.9rem 0.5rem;
@@ -363,14 +361,24 @@
             transition: color 0.25s ease;
         }
 
-        .photo-toggle button[aria-selected="true"] { color: #f5ead6; }
+        .tab-toggle button[aria-selected="true"] { color: #f5ead6; }
 
-        .photo-toggle button:focus-visible {
+        .tab-toggle button:focus-visible {
             outline: 2px solid #ff8f1d;
             outline-offset: 2px;
         }
 
-        .photo-panel[hidden] { display: none; }
+        .tab-panel[hidden] { display: none; }
+
+        /* Shown in a tab that has no work in it yet */
+        .tab-empty {
+            grid-column: 1 / -1;
+            padding: 3rem 1rem;
+            text-align: center;
+            font-size: 0.6rem;
+            line-height: 1.8;
+            color: #666;
+        }
 
         .gallery {
             column-count: 4;
@@ -660,7 +668,7 @@
         WIX-INSPIRED ABOUT PAGE
         ===================================== */
 
-        /* Height of the fixed nav, used to push the banner (and everything else) below it */
+        
         :root {
             --nav-height: 5.5rem;
         }
@@ -920,7 +928,7 @@
         @media (prefers-reduced-motion: reduce) {
             .wix-about-banner-track,
             .wix-viewmaster-reel { animation: none; }
-            .photo-toggle-thumb { transition: none; }
+            .tab-toggle-thumb { transition: none; }
         }
     </style>
 </head>
@@ -996,17 +1004,17 @@
 
     <div class="category-page" id="photography-page">
         <a href="#" class="back-button nav-home">← Back</a>
-        <div class="category-header category-header--photo"><h1>Photography</h1></div>
+        <div class="category-header category-header--tabs"><h1>Photography</h1></div>
 
-        <div class="photo-toggle" role="tablist" aria-label="Photography type" data-active="analog">
-            <span class="photo-toggle-thumb" aria-hidden="true"></span>
-            <button type="button" role="tab" id="tab-analog" data-panel="analog"
+        <div class="tab-toggle" role="tablist" aria-label="Photography type" style="--tabs: 2">
+            <span class="tab-toggle-thumb" aria-hidden="true"></span>
+            <button type="button" role="tab" id="tab-analog" data-tab="analog"
                     aria-selected="true" aria-controls="analog-gallery">Analog</button>
-            <button type="button" role="tab" id="tab-digital" data-panel="digital"
+            <button type="button" role="tab" id="tab-digital" data-tab="digital"
                     aria-selected="false" aria-controls="digital-gallery" tabindex="-1">Digital</button>
         </div>
 
-        <div class="gallery photo-panel" id="analog-gallery" role="tabpanel" aria-labelledby="tab-analog">
+        <div class="gallery tab-panel" id="analog-gallery" role="tabpanel" aria-labelledby="tab-analog">
             <div class="gallery-item"><img src="media/Analog Photography/000006630022.jpg"></div>
             <div class="gallery-item"><img src="media/Analog Photography/000007390009.jpg"></div>
             <div class="gallery-item"><img src="media/Analog Photography/000012750006.jpg"></div>
@@ -1049,7 +1057,7 @@
             <div class="gallery-item"><img src="media/Analog Photography/000028800007.JPG"></div>
         </div>
 
-        <div class="gallery photo-panel" id="digital-gallery" role="tabpanel" aria-labelledby="tab-digital" hidden>
+        <div class="gallery tab-panel" id="digital-gallery" role="tabpanel" aria-labelledby="tab-digital" hidden>
             <div class="gallery-item"><img src="media/Digital Photography/springflowers_edited.jpg"></div>
             <div class="gallery-item"><img src="media/Digital Photography/IMG_3783.JPG"></div>
             <div class="gallery-item"><img src="media/Digital Photography/IMG_3777.JPG"></div>
@@ -1069,66 +1077,171 @@
 
     <div class="category-page" id="3d-page">
         <a href="#" class="back-button nav-home">← Back</a>
-        <div class="category-header"><h1>2D & 3D Animation</h1></div>
-        <div class="gallery-3d">
+        <div class="category-header category-header--tabs"><h1>2D & 3D Animation</h1></div>
+
+  
+        <div class="tab-toggle" role="tablist" aria-label="Animation style" style="--tabs: 3">
+            <span class="tab-toggle-thumb" aria-hidden="true"></span>
+            <button type="button" role="tab" id="tab-3d" data-tab="3d"
+                    aria-selected="true" aria-controls="anim-3d-panel">3D</button>
+            <button type="button" role="tab" id="tab-2d" data-tab="2d"
+                    aria-selected="false" aria-controls="anim-2d-panel" tabindex="-1">2D</button>
+            <button type="button" role="tab" id="tab-25d" data-tab="2.5d"
+                    aria-selected="false" aria-controls="anim-25d-panel" tabindex="-1">2.5D</button>
+        </div>
+
+        <div class="gallery-3d tab-panel" id="anim-3d-panel" role="tabpanel" aria-labelledby="tab-3d">
             <div class="gallery-3d-item">
-                <video controls>
-                    <source src="media/3D:2D Animation/0000-0125.mp4" type="video/mp4">
+                <video controls playsinline preload="metadata">
+                    <source src="media/3D:2D Animation/jungle3d.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
-                <h3>Night Cottage (3D)</h3>
+                <h3>Jungle</h3>
             </div>
             <div class="gallery-3d-item">
-                <img src="media/3D:2D Animation/bugdomination.jpg" alt="Low-Poly Purple Cat">
-                <h3>Bug Domination (3D)</h3>
+                <img src="media/3D:2D Animation/bugdomination3d.jpg" alt="Bug Domination">
+                <h3>Bug Domination</h3>
             </div>
             <div class="gallery-3d-item">
-                <img src="media/final renders/checkmate.jpg" alt="Checkmate">
-                <h3>Checkmate (3D)</h3>
+                <img src="media/3D:2D Animation/bugcity3d.png" alt="Bug City">
+                <h3>Bug City</h3>
             </div>
             <div class="gallery-3d-item">
-                <img src="media/final renders/got'em.jpg" alt="Got'em">
-                <h3>got'em (3D)</h3>
+                <img src="media/3D:2D Animation/sadboy_3d.png" alt="Sad Boy">
+                <h3>Sad Boy</h3>
             </div>
             <div class="gallery-3d-item">
-                <img src="media/final renders/platothecat.jpg" alt="plato the cat">
+                <img src="media/3D:2D Animation/high-res-tree-girl3d.png" alt="Tree Girl">
+                <h3>Tree Girl</h3>
+            </div>
+            <div class="gallery-3d-item">
+                <img src="media/3D:2D Animation/checkmate3d.jpg" alt="Checkmate">
+                <h3>Checkmate</h3>
+            </div>
+            <div class="gallery-3d-item">
+                <img src="media/3D:2D Animation/got'em3d.jpg" alt="got'em">
+                <h3>got'em</h3>
+            </div>
+            <div class="gallery-3d-item">
+                <img src="media/3D:2D Animation/platothecat3d.jpg" alt="Plato the cat">
                 <h3>Plato the cat</h3>
             </div>
             <div class="gallery-3d-item">
-                <video controls>
-                    <source src="media/3D:2D Animation/41 - render01fast.MOV" type="video/mp4">
+                <img src="media/3D:2D Animation/housedinner3d.jpg" alt="House Dinner">
+                <h3>House Dinner</h3>
+            </div>
+            <div class="gallery-3d-item">
+                <video controls playsinline preload="metadata">
+                    <source src="media/3D:2D Animation/pixel3d.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
-                <h3>Wind & Tree (3D)</h3>
+                <h3>Pixel</h3>
             </div>
             <div class="gallery-3d-item">
-                <video controls>
-                    <source src="media/3D:2D Animation/0061-0122.mov" type="video/mp4">
+                <img src="media/3D:2D Animation/mountain_teen3d.png" alt="Mountain Teen">
+                <h3>Mountain Teen</h3>
+            </div>
+            <div class="gallery-3d-item">
+                <video controls playsinline preload="metadata">
+                    <source src="media/3D:2D Animation/cat3d.mov" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
-                <h3>Cig Box (2D)</h3>
+                <h3>Waterfall Cat</h3>
             </div>
             <div class="gallery-3d-item">
-                <img src="media/3D:2D Animation/isoroom1.jpg" alt="Low-Poly Purple Cat">
-                <h3>ISO Computer Room (3D)</h3>
+                <img src="media/3D:2D Animation/snakein3d.png" alt="Snake In">
+                <h3>Snake In</h3>
             </div>
             <div class="gallery-3d-item">
-                <video controls>
-                    <source src="media/3D:2D Animation/0001-0240.mov" type="video/mp4">
+                <video controls playsinline preload="metadata">
+                    <source src="media/3D:2D Animation/0001-0070.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
-                <h3>Quick Trip (3D)</h3>
+                <h3>Untitled</h3>
             </div>
             <div class="gallery-3d-item">
-                <video controls>
-                    <source src="media/3D:2D Animation/0001-0040.mov" type="video/mp4">
+                <video controls playsinline preload="metadata">
+                    <source src="media/3D:2D Animation/firstproject3d.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
-                <h3>Waterfall Cat (3D)</h3>
+                <h3>First Project</h3>
             </div>
             <div class="gallery-3d-item">
-                <img src="media/3D:2D Animation/cattreereinder.png" alt="Cat Tree Render">
-                <h3>Cat Tree Render (3D)</h3>
+                <img src="media/3D:2D Animation/isoroom3d.jpg" alt="ISO Computer Room">
+                <h3>ISO Computer Room</h3>
+            </div>
+            <div class="gallery-3d-item">
+                <video controls playsinline preload="metadata">
+                    <source src="media/3D:2D Animation/trip3d.mov" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <h3>Quick Trip</h3>
+            </div>
+            <div class="gallery-3d-item">
+                <video controls playsinline preload="metadata">
+                    <source src="media/3D:2D Animation/beginnerpath3d.MOV" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <h3>Beginner Path</h3>
+            </div>
+            <div class="gallery-3d-item">
+                <img src="media/3D:2D Animation/cattreereinder3d.png" alt="Cat Tree Render">
+                <h3>Cat Tree Render</h3>
+            </div>
+        </div>
+
+        <div class="gallery-3d tab-panel" id="anim-2d-panel" role="tabpanel" aria-labelledby="tab-2d" hidden>
+            <div class="gallery-3d-item">
+                <video controls playsinline preload="metadata">
+                    <source src="media/3D:2D Animation/cigbox2d.mov" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <h3>Cig Box</h3>
+            </div>
+            <div class="gallery-3d-item">
+                <video controls playsinline preload="metadata">
+                    <source src="media/3D:2D Animation/cat2d.MP4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <h3>Cat</h3>
+            </div>
+            <div class="gallery-3d-item">
+                <video controls playsinline preload="metadata">
+                    <source src="media/3D:2D Animation/noah2d.mov" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <h3>Noah</h3>
+            </div>
+        </div>
+
+        <div class="gallery-3d tab-panel" id="anim-25d-panel" role="tabpanel" aria-labelledby="tab-25d" hidden>
+            <div class="gallery-3d-item">
+                <video controls playsinline preload="metadata">
+                    <source src="media/3D:2D Animation/house2.5d.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <h3>House</h3>
+            </div>
+            <div class="gallery-3d-item">
+                <video controls playsinline preload="metadata">
+                    <source src="media/3D:2D Animation/faces2.5d.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <h3>Faces</h3>
+            </div>
+            <div class="gallery-3d-item">
+                <video controls playsinline preload="metadata">
+                    <source src="media/3D:2D Animation/anime2.5d.mov" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <h3>Anime</h3>
+            </div>
+            <div class="gallery-3d-item">
+                <video controls playsinline preload="metadata">
+                    <source src="media/3D:2D Animation/city2.5d.mov" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <h3>City</h3>
             </div>
         </div>
     </div>
@@ -1334,29 +1447,39 @@
         const categoryPages = document.querySelectorAll('.category-page');
         const navHomeLinks = document.querySelectorAll('.nav-home');
 
-        /* ---------- Photography toggle ---------- */
-        const photoToggle = document.querySelector('.photo-toggle');
-        const photoTabs = photoToggle.querySelectorAll('[role="tab"]');
-
-        function setPhotoTab(name) {
-            photoToggle.dataset.active = name;
-            photoTabs.forEach(tab => {
-                const isActive = tab.dataset.panel === name;
+        /* ---------- Tab toggles (Photography, 2D & 3D) ---------- */
+        function setTab(toggle, name) {
+            const tabs = [...toggle.querySelectorAll('[role="tab"]')];
+            tabs.forEach((tab, i) => {
+                const isActive = tab.dataset.tab === name;
                 tab.setAttribute('aria-selected', isActive);
                 tab.tabIndex = isActive ? 0 : -1;
-                document.getElementById(tab.dataset.panel + '-gallery').hidden = !isActive;
+                document.getElementById(tab.getAttribute('aria-controls')).hidden = !isActive;
+                if (isActive) toggle.style.setProperty('--index', i);
             });
         }
 
-        photoTabs.forEach(tab => {
-            tab.addEventListener('click', () => setPhotoTab(tab.dataset.panel));
-            tab.addEventListener('keydown', e => {
-                if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
-                const next = tab.dataset.panel === 'analog' ? 'digital' : 'analog';
-                setPhotoTab(next);
-                document.getElementById('tab-' + next).focus();
+        document.querySelectorAll('.tab-toggle').forEach(toggle => {
+            const tabs = [...toggle.querySelectorAll('[role="tab"]')];
+            // Put the sliding block under whichever tab starts selected
+            const initial = tabs.find(t => t.getAttribute('aria-selected') === 'true') || tabs[0];
+            setTab(toggle, initial.dataset.tab);
+
+            tabs.forEach((tab, i) => {
+                tab.addEventListener('click', () => setTab(toggle, tab.dataset.tab));
+                tab.addEventListener('keydown', e => {
+                    if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+                    const step = e.key === 'ArrowRight' ? 1 : -1;
+                    const next = tabs[(i + step + tabs.length) % tabs.length];
+                    setTab(toggle, next.dataset.tab);
+                    next.focus();
+                });
             });
         });
+
+        
+        const photoToggle = document.getElementById('photography-page').querySelector('.tab-toggle');
+        const animToggle = document.getElementById('3d-page').querySelector('.tab-toggle');
 
         /* ---------- Page routing ---------- */
         function showPage(pageName) {
@@ -1382,7 +1505,10 @@
                         targetPage.classList.add('active');
                     }
                     if (pageName === 'photography') {
-                        setPhotoTab(photoTab || 'analog');
+                        setTab(photoToggle, photoTab || 'analog');
+                    }
+                    if (pageName === '3d') {
+                        setTab(animToggle, '3d');
                     }
                 }
                 window.scrollTo(0, 0);

@@ -325,15 +325,19 @@
             z-index: 100 !important;
         }
 
-        /* Pixel-style cream drop shadow keeps text readable over the video */
+        /* Over the home video: cream text with a hard dark pixel shadow.
+           The shadow keeps it readable over both the light sky and the dark grate. */
         body.on-home .hero h1,
         body.on-home .hero p,
         body.on-home .nav-links > li > a,
         body.on-home .film-slide-label {
-            text-shadow: 2px 2px 0 rgba(245, 247, 250, 0.9);
+            color: #f5ead6;
+            text-shadow: 2px 2px 0 #2b2b2b;
         }
 
-        body.on-home .hero p { color: #333; }
+        body.on-home .hero h1 { text-shadow: 3px 3px 0 #2b2b2b; }
+
+        body.on-home .nav-links li:hover > a { color: #ffffff; }
 
         .category-page {
             display: none;
@@ -999,7 +1003,7 @@
                 <a href="#" class="nav-home">Portfolio</a>
                 <div class="dropdown">
                     <a href="#" class="dropdown-link" data-category="photography">Photography</a>
-                    <a href="#" class="dropdown-link" data-category="3d">2D & 3D</a>
+                    <a href="#" class="dropdown-link" data-category="animation">2D & 3D</a>
                     <a href="#" class="dropdown-link" data-category="paramnesia">Series: Paramnesia</a>
                     <span class="dropdown-soon" aria-disabled="true">Video <span class="dropdown-soon-tag">coming soon</span></span>
                     <a href="#" class="dropdown-link" data-category="about">Me</a>
@@ -1029,7 +1033,7 @@
                 <div class="film-slide-label">Photography</div>
             </div>
 
-            <div class="film-slide" data-category="3d">
+            <div class="film-slide" data-category="animation">
                 <div class="film-slide-number">2D & 3D</div>
                 <div class="film-frame">
                     <img src="media/home/Picnic scene.jpg" class="film-slide-image" alt="">
@@ -1137,7 +1141,7 @@
         </div>
     </div>
 
-    <div class="category-page" id="3d-page">
+    <div class="category-page" id="animation-page">
         <a href="#" class="back-button nav-home">← Back</a>
         <div class="category-header category-header--tabs"><h1>2D & 3D Animation</h1></div>
 
@@ -1566,11 +1570,33 @@
             });
         });
 
-        // getElementById, because "#3d-page" isn't a valid CSS selector (IDs can't start with a digit)
         const photoToggle = document.getElementById('photography-page').querySelector('.tab-toggle');
-        const animToggle = document.getElementById('3d-page').querySelector('.tab-toggle');
+        const animToggle = document.getElementById('animation-page').querySelector('.tab-toggle');
 
-        /* ---------- Page routing ---------- */
+        /* ---------- Page routing ----------
+           Home is plain emilywernick.nyc; other pages are emilywernick.nyc/#name.
+           Old names redirect so links you've already shared keep working. */
+        const pageAliases = { '3d': 'animation' };
+
+        function currentPage() {
+            const hash = decodeURIComponent(window.location.hash.slice(1));
+            return hash || 'home';
+        }
+
+        function pageUrl(pageName) {
+            // No "#" at all for home
+            const base = window.location.pathname + window.location.search;
+            return pageName === 'home' ? base : base + '#' + pageName;
+        }
+
+        function navigate(pageName) {
+            pageName = pageAliases[pageName] || pageName;
+            if (pageName !== currentPage()) {
+                history.pushState(null, '', pageUrl(pageName));
+            }
+            showPage(pageName);
+        }
+
         function showPage(pageName) {
             // Old #analog / #digital links open Photography on the right tab
             let photoTab = null;
@@ -1598,7 +1624,7 @@
                     if (pageName === 'photography') {
                         setTab(photoToggle, photoTab || 'analog');
                     }
-                    if (pageName === '3d') {
+                    if (pageName === 'animation') {
                         setTab(animToggle, '3d');
                     }
                 }
@@ -1607,17 +1633,26 @@
             }, 500);
         }
 
-        window.addEventListener('hashchange', () => {
-            const hash = decodeURIComponent(window.location.hash.slice(1));
-            showPage(hash || 'home');
+        // Browser back / forward buttons, or a # typed into the address bar
+        window.addEventListener('popstate', () => {
+            const page = currentPage();
+            const target = pageAliases[page] || page;
+            if (target !== page || window.location.href.endsWith('#')) {
+                history.replaceState(null, '', pageUrl(target));
+            }
+            showPage(target);
         });
 
-        window.addEventListener('load', () => {
-            const hash = decodeURIComponent(window.location.hash.slice(1));
-            if (hash) {
-                showPage(hash);
+        // Opening a link directly (e.g. emilywernick.nyc/#animation)
+        (function openInitialPage() {
+            const page = currentPage();
+            const target = pageAliases[page] || page;
+            // Tidy the address: "/#" becomes "/", "#3d" becomes "#animation"
+            if (target !== page || window.location.href.endsWith('#')) {
+                history.replaceState(null, '', pageUrl(target));
             }
-        });
+            if (target !== 'home') showPage(target);
+        })();
 
         slidesContainer.addEventListener('click', (e) => {
             if (!slidesContainer.classList.contains('fanned') && !e.target.closest('.film-slide')) {
@@ -1631,7 +1666,7 @@
                     e.stopPropagation();
                     const category = slide.getAttribute('data-category');
                     if (!category) return; // Video has no page yet
-                    window.location.hash = category;
+                    navigate(category);
                 } else {
                     slidesContainer.classList.add('fanned');
                 }
@@ -1641,7 +1676,7 @@
         navHomeLinks.forEach(link => {
             link.addEventListener('click', e => {
                 e.preventDefault();
-                window.location.hash = '';
+                navigate('home');
             });
         });
 
@@ -1650,7 +1685,7 @@
             link.addEventListener('click', e => {
                 e.preventDefault();
                 const category = link.getAttribute('data-category');
-                window.location.hash = category;
+                navigate(category);
             });
         });
 
@@ -1670,7 +1705,7 @@
         if (navAboutLink) {
             navAboutLink.addEventListener('click', e => {
                 e.preventDefault();
-                window.location.hash = 'about';
+                navigate('about');
             });
         }
 

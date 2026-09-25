@@ -7,6 +7,18 @@
     <!-- Asks AI tools not to train on this site's text and images (see also robots.txt) -->
     <meta name="robots" content="noai, noimageai">
     <script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.90/build/spline-viewer.js"></script>
+    <script>
+        /* Intro plays once per visit, only when someone lands on the home page.
+           Skipped for visitors with "reduce motion" turned on. */
+        (function () {
+            var seen = null;
+            try { seen = sessionStorage.getItem('introSeen'); } catch (e) {}
+            var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (!window.location.hash && !seen && !reduce) {
+                document.documentElement.classList.add('intro-on', 'intro-hold');
+            }
+        })();
+    </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
         @import url(
@@ -34,6 +46,58 @@
         }
 
         a, button, [role="tab"] { cursor: var(--cursor-pointer); }
+
+        /* -------------------------
+        Intro animation (plays once per visit)
+        ------------------------- */
+
+        .intro { display: none; }
+
+        html.intro-on .intro {
+            display: block;
+            position: fixed;
+            inset: 0;
+            z-index: 20000;
+            background: #0c0a0d;
+            transition: opacity 0.9s ease;
+        }
+
+        html.intro-on body { overflow: hidden; }
+
+        .intro.intro--leaving { opacity: 0; pointer-events: none; }
+
+        .intro-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .intro-skip {
+            position: absolute;
+            right: 1.5rem;
+            bottom: 1.5rem;
+            padding: 0.6rem 0.9rem;
+            border: 0;
+            background: transparent;
+            color: #f5ead6;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.55rem;
+            line-height: 1.6;
+            text-shadow: 2px 2px 0 #2b2b2b;
+            opacity: 0.8;
+        }
+
+        .intro-skip:hover,
+        .intro-skip:focus-visible { opacity: 1; }
+
+        /* Name and stars wait under the intro, then appear as it clears */
+        html.intro-hold .hero,
+        html.intro-hold .star,
+        html.intro-hold .star-lines {
+            animation: none;
+            opacity: 0;
+        }
 
         .page-transition {
             position: fixed;
@@ -137,7 +201,6 @@
             padding: clamp(5rem, 11vh, 9rem) 2rem 2rem;
         }
 
-        .home-container .slides-container { margin: auto 0; }
 
         /* -------------------------
         Home background video
@@ -179,155 +242,128 @@
             line-height: 1.6;
         }
 
-        .slides-container {
+        /* =====================================
+        HOME: JITTERING CRAYON STARS
+        ===================================== */
+
+        /* The area under your name where the stars sit */
+        .star-field {
             position: relative;
             z-index: 1;
-            width: 400px;
-            height: 200px;
+            flex: 1 1 auto;
+            width: min(1100px, 100%);
+            min-height: 380px;
         }
 
-        .film-slide {
-            position: absolute;
-            width: 250px;
-            height: 200px;
-            background: linear-gradient(135deg, #f5ead6 0%, #e8dcc4 100%);
-            border: 2px solid #333;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-            cursor: var(--cursor-pointer);
-            padding: 25px;
-        }
-
-        .film-frame {
-            width: 100%;
-            height: 100%;
-            border: 3px solid #333;
-            background: #000;
-            overflow: hidden;
-            position: relative;
-        }
-
-       
-        .film-frame--art { background: #efe6d2; }
-
-        .film-slide-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .film-frame--art .film-slide-image {
-            object-fit: contain;
-            padding: 6px;
-        }
-
-        
-        .film-frame--strip .film-slide-image {
-            width: 56%;
-            height: auto;
-            margin: 8px auto 0;
-            padding: 0;
-            display: block;
-        }
-
-        .film-slide-number {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            font-size: 0.5rem;
-            color: #666;
-            font-family: 'Courier New', monospace;
-        }
-
-        .film-slide-label {
-            position: absolute;
-            bottom: -25px;
-            left: 25px;
-            right: 25px;
-            font-size: 0.6rem;
-            color: #333;
-            line-height: 1.4;
-            text-align: center;
-        }
-
-        /* Video slide: no page yet */
-        .film-slide-soon {
+        /* Faint dotted lines joining the stars like a constellation */
+        .star-lines {
             position: absolute;
             inset: 0;
-            display: grid;
-            place-items: center;
-            background: rgba(51, 51, 51, 0.78);
+            width: 100%;
+            height: 100%;
+            overflow: visible;
+            pointer-events: none;
+        }
+
+        .star-lines { animation: lines-in 1s ease 0.9s both; }
+
+        @keyframes lines-in {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .star-lines polyline {
+            fill: none;
+            stroke: rgba(245, 234, 214, 0.5);
+            stroke-width: 2;
+            stroke-dasharray: 2 9;
+            stroke-linecap: round;
+        }
+
+        /* One star. Position and size come from the style="" on each star:
+           --x / --y   = position on desktop (% across / % down the area)
+           --mx / --my = position on phones
+           --size      = how wide the star is on desktop */
+        .star {
+            position: absolute;
+            left: var(--x);
+            top: var(--y);
+            translate: -50% -50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.6rem;
+            text-decoration: none;
             color: #f5ead6;
-            font-size: 0.55rem;
-            line-height: 1.6;
+            animation: star-pop 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+            animation-delay: calc(0.25s + var(--i) * 0.12s);
+        }
+
+        @keyframes star-pop {
+            from { opacity: 0; transform: scale(0.4) rotate(-20deg); }
+            to { opacity: 1; transform: scale(1) rotate(0deg); }
+        }
+
+        /* The four drawings sit on top of each other; only one shows at a time */
+        .star-art {
+            display: grid;
+            width: var(--size);
+            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .star-art img {
+            grid-area: 1 / 1;
+            width: 100%;
+            height: auto;
+            opacity: 0;
+            /* Speed of the boil: 0.5s = 4 drawings at 8 per second.
+               Raise it for a slower, calmer boil. */
+            animation: star-boil 0.5s step-end infinite;
+        }
+
+        .star-art img:nth-child(1) { animation-delay: calc(var(--phase) + 0s); }
+        .star-art img:nth-child(2) { animation-delay: calc(var(--phase) - 0.375s); }
+        .star-art img:nth-child(3) { animation-delay: calc(var(--phase) - 0.25s); }
+        .star-art img:nth-child(4) { animation-delay: calc(var(--phase) - 0.125s); }
+
+        @keyframes star-boil {
+            0% { opacity: 1; }
+            25% { opacity: 0; }
+            100% { opacity: 0; }
+        }
+
+        .star:hover .star-art,
+        .star:focus-visible .star-art {
+            transform: scale(1.14) rotate(-6deg);
+        }
+
+        .star:focus-visible { outline: none; }
+        .star:focus-visible .star-label { outline: 2px solid #ff8f1d; outline-offset: 4px; }
+
+        .star-label {
+            font-size: 0.6rem;
+            line-height: 1.5;
             text-align: center;
+            white-space: nowrap;
+            text-shadow: 2px 2px 0 #2b2b2b;
+        }
+
+        /* Video: no page yet */
+        .star--soon { cursor: var(--cursor); }
+
+        .star-soon {
+            display: block;
+            margin-top: 0.35rem;
+            font-size: 0.45rem;
             opacity: 0;
             transition: opacity 0.3s ease;
         }
 
-        .slides-container.fanned .film-slide--soon { cursor: var(--cursor); }
+        .star--soon:hover .star-soon { opacity: 0.85; }
 
-        .slides-container.fanned .film-slide--soon:hover .film-slide-soon { opacity: 1; }
-
-        /* Stacked deck (5 slides) */
-        .slides-container:not(.fanned) .film-slide {
-            left: 50px;
-            top: 30px;
-        }
-
-        .slides-container:not(.fanned) .film-slide:nth-child(1) { transform: rotate(-3deg); z-index: 5; }
-        .slides-container:not(.fanned) .film-slide:nth-child(2) { transform: rotate(2deg) translate(12px, 6px); z-index: 4; }
-        .slides-container:not(.fanned) .film-slide:nth-child(3) { transform: rotate(-1deg) translate(24px, 12px); z-index: 3; }
-        .slides-container:not(.fanned) .film-slide:nth-child(4) { transform: rotate(1deg) translate(36px, 18px); z-index: 2; }
-        .slides-container:not(.fanned) .film-slide:nth-child(5) { transform: rotate(-2deg) translate(48px, 24px); z-index: 1; }
-
-        /* While stacked, hide the labels of the slides underneath so they don't pile up */
-        .slides-container:not(.fanned) .film-slide:not(:first-child) .film-slide-label {
-            opacity: 0;
-        }
-
-        .slides-container.fanned .film-slide { z-index: 10; }
-
-        /* Fanned: 3 on top, 2 centered underneath (6-column grid, each slide spans 2) */
-        .slides-container.fanned {
-            width: 100%;
-            max-width: 960px;
-            height: auto;
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            justify-items: center;
-            gap: 3rem;
-            padding: 2rem;
-        }
-
-        .slides-container.fanned .film-slide {
-            position: relative;
-            left: auto;
-            top: auto;
-            grid-column: span 2;
-            transform: rotate(0deg) !important;
-        }
-
-        .slides-container.fanned .film-slide:nth-child(4) { grid-column: 2 / span 2; }
-        .slides-container.fanned .film-slide:nth-child(5) { grid-column: 4 / span 2; }
-
-        .slides-container.fanned .film-slide:nth-child(1) { transform: rotate(-2deg) !important; }
-        .slides-container.fanned .film-slide:nth-child(2) { transform: rotate(1deg) !important; }
-        .slides-container.fanned .film-slide:nth-child(3) { transform: rotate(-1deg) !important; }
-        .slides-container.fanned .film-slide:nth-child(4) { transform: rotate(2deg) !important; }
-        .slides-container.fanned .film-slide:nth-child(5) { transform: rotate(-1deg) !important; }
-
-        .slides-container.fanned .film-slide:hover {
-            transform: translateY(-20px) scale(1.05) !important;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
-            z-index: 100 !important;
-        }
-
-        
         body.on-home .hero h1,
         body.on-home .hero p,
-        body.on-home .nav-links > li > a,
-        body.on-home .film-slide-label {
+        body.on-home .nav-links > li > a {
             color: #f5ead6;
             text-shadow: 2px 2px 0 #2b2b2b;
         }
@@ -675,67 +711,20 @@
             .hero p { font-size: 0.5rem; }
             .hero { margin-bottom: 1.5rem; }
 
-            /* ---------- Home: stacked deck, centered ---------- */
-            .slides-container {
-                width: 100%;
-                max-width: 100%;
-                height: 230px;
+            /* ---------- Home: stars on phones ---------- */
+            .star-field { min-height: 520px; }
+
+            .star {
+                left: var(--mx);
+                top: var(--my);
             }
 
-            .slides-container:not(.fanned) .film-slide {
-                left: calc(50% - 114px);
-                top: 0;
-            }
+            .star-art { width: calc(var(--size) * 0.68); }
 
-            /* Before it opens, the deck sits in the lower part of the screen
-               so the flowers in the video stay visible. Raise the last number
-               to move it up, lower it to move it further down. */
-            .home-container .slides-container:not(.fanned) {
-                margin: auto 0 8vh;
-            }
+            .star-label { font-size: 0.5rem; }
 
-            /* ---------- Home: slides spread out, 2 + 2 + 1 ---------- */
-            .slides-container.fanned {
-                height: auto;
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-                gap: 1.5rem 1.25rem;
-                padding: 0.5rem 0.25rem 1rem;
-                max-width: 100%;
-            }
-
-            .slides-container.fanned .film-slide,
-            .slides-container.fanned .film-slide:nth-child(4) { grid-column: auto; }
-            .slides-container.fanned .film-slide:nth-child(5) {
-                grid-column: 1 / -1;
-                width: calc(50% - 0.625rem) !important;
-            }
-
-            
-            .film-slide {
-                width: 100% !important;
-                max-width: 180px !important;
-                height: auto !important;
-                padding: 20px 10px 32px !important;
-            }
-
-            .film-frame { height: 110px; }
-
-            .film-slide-number {
-                top: 5px;
-                right: 8px;
-                font-size: 0.45rem;
-            }
-
-            .film-slide-label,
-            body.on-home .film-slide-label {
-                bottom: 9px;
-                left: 6px;
-                right: 6px;
-                font-size: 0.45rem;
-                line-height: 1.3;
-                color: #333;
-                text-shadow: none;
-            }
+            /* No hover on phones, so "coming soon" always shows */
+            .star-soon { opacity: 0.85; }
 
             /* ---------- Photography: photos nearly edge to edge ---------- */
             #photography-page { padding-left: 4px; padding-right: 4px; }
@@ -1046,10 +1035,20 @@
             .wix-about-banner-track,
             .wix-viewmaster-reel { animation: none; }
             .tab-toggle-thumb { transition: none; }
+            .star-art img { animation: none; }
+            .star-art img:first-child { opacity: 1; }
         }
     </style>
 </head>
 <body class="on-home">
+    <!-- Intro: stars and planets that burst into the grate video's colour -->
+    <div class="intro" id="intro">
+        <video class="intro-video" muted playsinline preload="auto" poster="media/home/intro_poster.jpg">
+            <source src="media/home/intro.mp4" type="video/mp4">
+        </video>
+        <button class="intro-skip" type="button">skip &rsaquo;</button>
+    </div>
+
     <div class="page-transition"></div>
     <div class="parallax-bg"></div>
 
@@ -1081,47 +1080,55 @@
             <p>Animation, Design, Research, etc...</p>
         </div>
 
-        <div class="slides-container" id="slidesContainer">
-            <div class="film-slide" data-category="photography">
-                <div class="film-slide-number">35mm & Digital</div>
-                <div class="film-frame film-frame--art film-frame--strip">
-                    <img src="media/home/film-strip.png" class="film-slide-image" alt="">
-                </div>
-                <div class="film-slide-label">Photography</div>
+        <!-- Stars: each links to a page. To move one, change --x / --y (desktop)
+             or --mx / --my (phones). --size sets how big it is on desktop. -->
+        <div class="star-field" id="starField" role="navigation" aria-label="Portfolio sections">
+            <svg class="star-lines" aria-hidden="true"><polyline points=""></polyline></svg>
+            <a class="star" href="#photography" data-category="photography" style="--i: 0; --x: 12%; --y: 30%; --mx: 27%; --my: 9%; --size: 150px; --phase: 0s;">
+                <span class="star-art" aria-hidden="true">
+                    <img src="media/home/stars/star-photography-1.png" alt="">
+                    <img src="media/home/stars/star-photography-2.png" alt="">
+                    <img src="media/home/stars/star-photography-3.png" alt="">
+                    <img src="media/home/stars/star-photography-4.png" alt="">
+                </span>
+                <span class="star-label">Photography</span>
+            </a>
+            <a class="star" href="#animation" data-category="animation" style="--i: 1; --x: 31%; --y: 70%; --mx: 70%; --my: 28%; --size: 140px; --phase: -0.2s;">
+                <span class="star-art" aria-hidden="true">
+                    <img src="media/home/stars/star-animation-1.png" alt="">
+                    <img src="media/home/stars/star-animation-2.png" alt="">
+                    <img src="media/home/stars/star-animation-3.png" alt="">
+                    <img src="media/home/stars/star-animation-4.png" alt="">
+                </span>
+                <span class="star-label">2D &amp; 3D Animation</span>
+            </a>
+            <a class="star" href="#about" data-category="about" style="--i: 2; --x: 50%; --y: 26%; --mx: 30%; --my: 48%; --size: 130px; --phase: -0.1s;">
+                <span class="star-art" aria-hidden="true">
+                    <img src="media/home/stars/star-me-1.png" alt="">
+                    <img src="media/home/stars/star-me-2.png" alt="">
+                    <img src="media/home/stars/star-me-3.png" alt="">
+                    <img src="media/home/stars/star-me-4.png" alt="">
+                </span>
+                <span class="star-label">Me</span>
+            </a>
+            <div class="star star--soon" style="--i: 3; --x: 69%; --y: 70%; --mx: 70%; --my: 66%; --size: 130px; --phase: -0.35s;" aria-disabled="true">
+                <span class="star-art" aria-hidden="true">
+                    <img src="media/home/stars/star-video-1.png" alt="">
+                    <img src="media/home/stars/star-video-2.png" alt="">
+                    <img src="media/home/stars/star-video-3.png" alt="">
+                    <img src="media/home/stars/star-video-4.png" alt="">
+                </span>
+                <span class="star-label">Video<span class="star-soon">coming soon</span></span>
             </div>
-
-            <div class="film-slide" data-category="animation">
-                <div class="film-slide-number">2D & 3D</div>
-                <div class="film-frame">
-                    <img src="media/home/Picnic scene.jpg" class="film-slide-image" alt="">
-                </div>
-                <div class="film-slide-label">2D & 3D Animation</div>
-            </div>
-
-            <div class="film-slide" data-category="about">
-                <div class="film-slide-number">About</div>
-                <div class="film-frame">
-                    <img src="media/Analog Photography/0138848_0138848-R2-042-19A.jpg" class="film-slide-image" alt="">
-                </div>
-                <div class="film-slide-label">Me</div>
-            </div>
-
-            <div class="film-slide film-slide--soon">
-                <div class="film-slide-number">Super 8</div>
-                <div class="film-frame film-frame--art">
-                    <img src="media/home/super8-reel.png" class="film-slide-image" alt="">
-                    <span class="film-slide-soon">Coming soon</span>
-                </div>
-                <div class="film-slide-label">Video</div>
-            </div>
-
-            <div class="film-slide" data-category="paramnesia">
-                <div class="film-slide-number">Paint</div>
-                <div class="film-frame">
-                    <img src="media/hasan-almasi-nKNm_75lH4g-unsplash Copy_edited_edited.jpg" class="film-slide-image" alt="">
-                </div>
-                <div class="film-slide-label">Series: Paramnesia</div>
-            </div>
+            <a class="star" href="#paramnesia" data-category="paramnesia" style="--i: 4; --x: 88%; --y: 32%; --mx: 36%; --my: 87%; --size: 145px; --phase: -0.05s;">
+                <span class="star-art" aria-hidden="true">
+                    <img src="media/home/stars/star-paramnesia-1.png" alt="">
+                    <img src="media/home/stars/star-paramnesia-2.png" alt="">
+                    <img src="media/home/stars/star-paramnesia-3.png" alt="">
+                    <img src="media/home/stars/star-paramnesia-4.png" alt="">
+                </span>
+                <span class="star-label">Series: Paramnesia</span>
+            </a>
         </div>
     </div>
 
@@ -1573,8 +1580,7 @@
                 `translate(${moveX}px, ${moveY}px)`;
         });
 
-        const slidesContainer = document.getElementById('slidesContainer');
-        const filmSlides = document.querySelectorAll('.film-slide');
+        const starField = document.getElementById('starField');
         const pageTransition = document.querySelector('.page-transition');
         const homeContainer = document.getElementById('home');
         const categoryPages = document.querySelectorAll('.category-page');
@@ -1615,6 +1621,52 @@
                     document.addEventListener('click', startOnTap, { once: true });
                 });
             }
+        }
+
+        /* ---------- Intro ---------- */
+        const intro = document.getElementById('intro');
+        const rootEl = document.documentElement;
+
+        if (intro && rootEl.classList.contains('intro-on')) {
+            const introVideo = intro.querySelector('video');
+            let introDone = false;
+
+            // Hold the flower video until the intro hands over to it
+            if (homeVideo) homeVideo.pause();
+
+            const finishIntro = () => {
+                if (introDone) return;
+                introDone = true;
+                try { sessionStorage.setItem('introSeen', '1'); } catch (e) {}
+
+                if (homeVideo) homeVideo.currentTime = 0;
+                setHomeActive(currentPage() === 'home');
+                rootEl.classList.remove('intro-hold');   // name + stars appear
+                intro.classList.add('intro--leaving');   // intro fades out
+
+                setTimeout(() => {
+                    rootEl.classList.remove('intro-on');
+                    intro.remove();
+                }, 950);
+            };
+
+            introVideo.muted = true;
+            introVideo.addEventListener('ended', finishIntro);
+            introVideo.addEventListener('error', finishIntro);
+            intro.addEventListener('click', finishIntro);   // tap anywhere (or "skip") to skip
+            document.addEventListener('keydown', e => {
+                if (e.key === 'Escape') finishIntro();
+            });
+
+            // If the video can't autoplay (e.g. iPhone Low Power Mode), go straight to the site
+            const playing = introVideo.play();
+            if (playing) playing.catch(finishIntro);
+
+            // On a very slow connection, don't leave people staring at a dark screen
+            const stallTimer = setTimeout(() => {
+                if (introVideo.currentTime === 0) finishIntro();
+            }, 4000);
+            introVideo.addEventListener('playing', () => clearTimeout(stallTimer), { once: true });
         }
 
         /* ---------- Tab toggles (Photography, 2D & 3D) ---------- */
@@ -1690,7 +1742,7 @@
                 if (pageName === 'home') {
                     homeContainer.style.display = 'flex';
                     categoryPages.forEach(page => page.classList.remove('active'));
-                    slidesContainer.classList.remove('fanned');
+                    requestAnimationFrame(drawStarLines);
                 } else {
                     homeContainer.style.display = 'none';
                     categoryPages.forEach(page => page.classList.remove('active'));
@@ -1731,24 +1783,33 @@
             if (target !== 'home') showPage(target);
         })();
 
-        slidesContainer.addEventListener('click', (e) => {
-            if (!slidesContainer.classList.contains('fanned') && !e.target.closest('.film-slide')) {
-                slidesContainer.classList.add('fanned');
-            }
-        });
-
-        filmSlides.forEach(slide => {
-            slide.addEventListener('click', (e) => {
-                if (slidesContainer.classList.contains('fanned')) {
-                    e.stopPropagation();
-                    const category = slide.getAttribute('data-category');
-                    if (!category) return; // Video has no page yet
-                    navigate(category);
-                } else {
-                    slidesContainer.classList.add('fanned');
-                }
+        /* ---------- Stars ---------- */
+        document.querySelectorAll('.star[data-category]').forEach(star => {
+            star.addEventListener('click', e => {
+                e.preventDefault();
+                navigate(star.dataset.category);
             });
         });
+
+        // Dotted constellation lines, joining the stars in order
+        function drawStarLines() {
+            if (!starField || homeContainer.style.display === 'none') return;
+            // Uses layout sizes (not on-screen boxes) so the pop-in and hover
+            // animations don't bend the lines
+            const points = [...starField.querySelectorAll('.star')].map(star => {
+                const art = star.querySelector('.star-art');
+                const x = star.offsetLeft - star.offsetWidth / 2 + art.offsetLeft + art.offsetWidth / 2;
+                const y = star.offsetTop - star.offsetHeight / 2 + art.offsetTop + art.offsetHeight / 2;
+                return `${Math.round(x)},${Math.round(y)}`;
+            });
+            starField.querySelector('.star-lines polyline').setAttribute('points', points.join(' '));
+        }
+
+        window.addEventListener('resize', drawStarLines);
+        window.addEventListener('load', drawStarLines);
+        drawStarLines();
+        // Redraw once the pixel font has loaded (it changes the label sizes)
+        if (document.fonts) document.fonts.ready.then(drawStarLines);
 
         navHomeLinks.forEach(link => {
             link.addEventListener('click', e => {

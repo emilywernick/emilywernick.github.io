@@ -6,7 +6,10 @@
     <title>Emily Wernick - Portfolio</title>
     <!-- Asks AI tools not to train on this site's text and images (see also robots.txt) -->
     <meta name="robots" content="noai, noimageai">
-    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.90/build/spline-viewer.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&display=swap">
     <script>
         /* Intro plays whenever the home page is opened or reloaded.
            Links straight to a page (like #animation) skip it, and so do
@@ -19,11 +22,6 @@
         })();
     </script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-        @import url(
-            "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&display=swap"
-            );
-
         /* Pixel-art cursors: white arrow by default, orange arrow over anything clickable */
         :root {
             --cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='28' shape-rendering='crispEdges'%3E%3Crect x='0' y='0' width='2' height='2' fill='%23222'/%3E%3Crect x='0' y='2' width='4' height='2' fill='%23222'/%3E%3Crect x='0' y='4' width='2' height='2' fill='%23222'/%3E%3Crect x='2' y='4' width='2' height='2' fill='%23ffffff'/%3E%3Crect x='4' y='4' width='2' height='2' fill='%23222'/%3E%3Crect x='0' y='6' width='2' height='2' fill='%23222'/%3E%3Crect x='2' y='6' width='4' height='2' fill='%23ffffff'/%3E%3Crect x='6' y='6' width='2' height='2' fill='%23222'/%3E%3Crect x='0' y='8' width='2' height='2' fill='%23222'/%3E%3Crect x='2' y='8' width='6' height='2' fill='%23ffffff'/%3E%3Crect x='8' y='8' width='2' height='2' fill='%23222'/%3E%3Crect x='0' y='10' width='2' height='2' fill='%23222'/%3E%3Crect x='2' y='10' width='8' height='2' fill='%23ffffff'/%3E%3Crect x='10' y='10' width='2' height='2' fill='%23222'/%3E%3Crect x='0' y='12' width='2' height='2' fill='%23222'/%3E%3Crect x='2' y='12' width='10' height='2' fill='%23ffffff'/%3E%3Crect x='12' y='12' width='2' height='2' fill='%23222'/%3E%3Crect x='0' y='14' width='2' height='2' fill='%23222'/%3E%3Crect x='2' y='14' width='12' height='2' fill='%23ffffff'/%3E%3Crect x='14' y='14' width='2' height='2' fill='%23222'/%3E%3Crect x='0' y='16' width='2' height='2' fill='%23222'/%3E%3Crect x='2' y='16' width='14' height='2' fill='%23ffffff'/%3E%3Crect x='16' y='16' width='2' height='2' fill='%23222'/%3E%3Crect x='0' y='18' width='2' height='2' fill='%23222'/%3E%3Crect x='2' y='18' width='8' height='2' fill='%23ffffff'/%3E%3Crect x='10' y='18' width='10' height='2' fill='%23222'/%3E%3Crect x='0' y='20' width='2' height='2' fill='%23222'/%3E%3Crect x='2' y='20' width='4' height='2' fill='%23ffffff'/%3E%3Crect x='6' y='20' width='2' height='2' fill='%23222'/%3E%3Crect x='8' y='20' width='4' height='2' fill='%23ffffff'/%3E%3Crect x='12' y='20' width='2' height='2' fill='%23222'/%3E%3Crect x='0' y='22' width='2' height='2' fill='%23222'/%3E%3Crect x='2' y='22' width='2' height='2' fill='%23ffffff'/%3E%3Crect x='4' y='22' width='2' height='2' fill='%23222'/%3E%3Crect x='8' y='22' width='2' height='2' fill='%23222'/%3E%3Crect x='10' y='22' width='4' height='2' fill='%23ffffff'/%3E%3Crect x='14' y='22' width='2' height='2' fill='%23222'/%3E%3Crect x='0' y='24' width='4' height='2' fill='%23222'/%3E%3Crect x='8' y='24' width='2' height='2' fill='%23222'/%3E%3Crect x='10' y='24' width='4' height='2' fill='%23ffffff'/%3E%3Crect x='14' y='24' width='2' height='2' fill='%23222'/%3E%3Crect x='0' y='26' width='2' height='2' fill='%23222'/%3E%3Crect x='10' y='26' width='4' height='2' fill='%23222'/%3E%3C/svg%3E") 0 0, auto;
@@ -1059,9 +1057,8 @@
 <body class="on-home">
     <!-- Intro: stars and planets that burst into the grate video's colour -->
     <div class="intro" id="intro">
-        <video class="intro-video" muted playsinline preload="auto" poster="media/home/intro_poster.jpg">
-            <source src="media/home/intro.mp4" type="video/mp4">
-        </video>
+        <video class="intro-video" muted playsinline preload="auto" poster="media/home/intro_poster.jpg"
+               data-src="media/home/intro.mp4" data-src-mobile="media/home/intro-mobile.mp4"></video>
         <button class="intro-skip" type="button">skip &rsaquo;</button>
     </div>
 
@@ -1086,7 +1083,7 @@
 
     <div class="home-container" id="home">
         <!-- Looping background video (home page only) -->
-        <video class="home-bg-video" autoplay muted loop playsinline preload="auto" aria-hidden="true"
+        <video class="home-bg-video" muted loop playsinline preload="none" aria-hidden="true"
                poster="media/home/flowers_grate_poster.jpg">
             <source src="media/home/flowers_grate_3d.mp4" type="video/mp4">
         </video>
@@ -1161,63 +1158,63 @@
         </div>
 
         <div class="gallery tab-panel" id="analog-gallery" role="tabpanel" aria-labelledby="tab-analog">
-            <div class="gallery-item"><img src="media/Analog Photography/000006630022.jpg"></div>
-            <div class="gallery-item"><img src="media/Analog Photography/000007390009.jpg"></div>
-            <div class="gallery-item"><img src="media/Analog Photography/000012750006.jpg"></div>
-            <div class="gallery-item"><img src="media/Analog Photography/000012750035.jpg"></div>
-            <div class="gallery-item"><img src="media/Analog Photography/dylan_central_2.jpg"></div>
-            <div class="gallery-item"><img src="media/Analog Photography/pefkposej.jpg"></div>
-            <div class="gallery-item"><img src="media/Analog Photography/000015490022.jpg"></div>
-            <div class="gallery-item"><img src="media/Analog Photography/ooooioijojljjppp.jpg"></div>
-            <div class="gallery-item"><img src="media/Analog Photography/NOAHFIREUPSTATE2025.jpg"></div>
-            <div class="gallery-item"><img src="media/Analog Photography/S906433-R1-013-5.jpg"></div>
-            <div class="gallery-item"><img src="media/Analog Photography/000012760002.jpg"></div>
-            <div class="gallery-item"><img src="media/Analog Photography/liq_store_1.jpg"></div>
-            <div class="gallery-item"><img src="media/Analog Photography/000012760010.jpg"></div>
-            <div class="gallery-item"><img src="media/Analog Photography/000013560023.jpg"></div>
-            <div class="gallery-item"><img src="media/Analog Photography/000025410020.jpg"></div>
-            <div class="gallery-item"><img src="media/Analog Photography/S238031-R1-0omgggg.jpg"></div>
-            <div class="gallery-item"><img src="media/Analog Photography/000025410008.jpg"></div>
-            <div class="gallery-item"><img src="media/Analog Photography/000025410013.jpg"></div>
-            <div class="gallery-item"><img src="media/Analog Photography/S907211-R2-010-3A.jpg"></div>
-            <div class="gallery-item"><img src="media/Analog Photography/000025410021.jpg"></div>
-            <div class="gallery-item"><img src="media/Analog Photography/000025420027.jpg"></div>
-            <div class="gallery-item"><img src="media/Analog Photography/0138848_0138848-R2-018-7A.jpg"></div>
-            <div class="gallery-item"><img src="media/Analog Photography/0138848_0138848-R2-030-13A.jpg"></div>
-            <div class="gallery-item"><img src="media/Analog Photography/Suffocated-2.jpg"></div>
-            <div class="gallery-item"><img src="media/Analog Photography/0138848_0138848-R2-042-19A.jpg"></div>
-            <div class="gallery-item"><img src="media/Analog Photography/0138848_0138848-R5-071-34.jpg"></div>
-            <div class="gallery-item"><img src="media/Analog Photography/S906433-R1-017-7.jpg"></div>
-            <div class="gallery-item"><img src="media/Analog Photography/1147885_1147885-R1-037-17.JPG"></div>
-            <div class="gallery-item"><img src="media/Analog Photography/1147885_1147885-R1-043-20.JPG"></div>
-            <div class="gallery-item"><img src="media/Analog Photography/1147885_1147885-R2-039-18.JPG"></div>
-            <div class="gallery-item"><img src="media/Analog Photography/1147885_1147885-R2-029-13.JPG"></div>
-            <div class="gallery-item"><img src="media/Analog Photography/1147885_1147885-R2-015-6.JPG"></div>
-            <div class="gallery-item"><img src="media/Analog Photography/drea_1.jpg"></div>
-            <div class="gallery-item"><img src="media/Analog Photography/dylan_central_1.jpg"></div>
-            <div class="gallery-item"><img src="media/Analog Photography/DYLANBOTTLECOUCH.jpg"></div>
-            <div class="gallery-item"><img src="media/Analog Photography/NEWORELEACHURH.jpg"></div>
-            <div class="gallery-item"><img src="media/Analog Photography/000011100005.JPG"></div>
-            <div class="gallery-item"><img src="media/Analog Photography/beep.JPEG"></div>
-            <div class="gallery-item"><img src="media/Analog Photography/000028800027.JPG"></div>
-            <div class="gallery-item"><img src="media/Analog Photography/000028800007.JPG"></div>
+            <div class="gallery-item"><img loading="lazy" decoding="async" src="media/Analog Photography/000006630022.jpg"></div>
+            <div class="gallery-item"><img loading="lazy" decoding="async" src="media/Analog Photography/000007390009.jpg"></div>
+            <div class="gallery-item"><img loading="lazy" decoding="async" src="media/Analog Photography/000012750006.jpg"></div>
+            <div class="gallery-item"><img loading="lazy" decoding="async" src="media/Analog Photography/000012750035.jpg"></div>
+            <div class="gallery-item"><img loading="lazy" decoding="async" src="media/Analog Photography/dylan_central_2.jpg"></div>
+            <div class="gallery-item"><img loading="lazy" decoding="async" src="media/Analog Photography/pefkposej.jpg"></div>
+            <div class="gallery-item"><img loading="lazy" decoding="async" src="media/Analog Photography/000015490022.jpg"></div>
+            <div class="gallery-item"><img loading="lazy" decoding="async" src="media/Analog Photography/ooooioijojljjppp.jpg"></div>
+            <div class="gallery-item"><img loading="lazy" decoding="async" src="media/Analog Photography/NOAHFIREUPSTATE2025.jpg"></div>
+            <div class="gallery-item"><img loading="lazy" decoding="async" src="media/Analog Photography/S906433-R1-013-5.jpg"></div>
+            <div class="gallery-item"><img loading="lazy" decoding="async" src="media/Analog Photography/000012760002.jpg"></div>
+            <div class="gallery-item"><img loading="lazy" decoding="async" src="media/Analog Photography/liq_store_1.jpg"></div>
+            <div class="gallery-item"><img loading="lazy" decoding="async" src="media/Analog Photography/000012760010.jpg"></div>
+            <div class="gallery-item"><img loading="lazy" decoding="async" src="media/Analog Photography/000013560023.jpg"></div>
+            <div class="gallery-item"><img loading="lazy" decoding="async" src="media/Analog Photography/000025410020.jpg"></div>
+            <div class="gallery-item"><img loading="lazy" decoding="async" src="media/Analog Photography/S238031-R1-0omgggg.jpg"></div>
+            <div class="gallery-item"><img loading="lazy" decoding="async" src="media/Analog Photography/000025410008.jpg"></div>
+            <div class="gallery-item"><img loading="lazy" decoding="async" src="media/Analog Photography/000025410013.jpg"></div>
+            <div class="gallery-item"><img loading="lazy" decoding="async" src="media/Analog Photography/S907211-R2-010-3A.jpg"></div>
+            <div class="gallery-item"><img loading="lazy" decoding="async" src="media/Analog Photography/000025410021.jpg"></div>
+            <div class="gallery-item"><img loading="lazy" decoding="async" src="media/Analog Photography/000025420027.jpg"></div>
+            <div class="gallery-item"><img loading="lazy" decoding="async" src="media/Analog Photography/0138848_0138848-R2-018-7A.jpg"></div>
+            <div class="gallery-item"><img loading="lazy" decoding="async" src="media/Analog Photography/0138848_0138848-R2-030-13A.jpg"></div>
+            <div class="gallery-item"><img loading="lazy" decoding="async" src="media/Analog Photography/Suffocated-2.jpg"></div>
+            <div class="gallery-item"><img loading="lazy" decoding="async" src="media/Analog Photography/0138848_0138848-R2-042-19A.jpg"></div>
+            <div class="gallery-item"><img loading="lazy" decoding="async" src="media/Analog Photography/0138848_0138848-R5-071-34.jpg"></div>
+            <div class="gallery-item"><img loading="lazy" decoding="async" src="media/Analog Photography/S906433-R1-017-7.jpg"></div>
+            <div class="gallery-item"><img loading="lazy" decoding="async" src="media/Analog Photography/1147885_1147885-R1-037-17.JPG"></div>
+            <div class="gallery-item"><img loading="lazy" decoding="async" src="media/Analog Photography/1147885_1147885-R1-043-20.JPG"></div>
+            <div class="gallery-item"><img loading="lazy" decoding="async" src="media/Analog Photography/1147885_1147885-R2-039-18.JPG"></div>
+            <div class="gallery-item"><img loading="lazy" decoding="async" src="media/Analog Photography/1147885_1147885-R2-029-13.JPG"></div>
+            <div class="gallery-item"><img loading="lazy" decoding="async" src="media/Analog Photography/1147885_1147885-R2-015-6.JPG"></div>
+            <div class="gallery-item"><img loading="lazy" decoding="async" src="media/Analog Photography/drea_1.jpg"></div>
+            <div class="gallery-item"><img loading="lazy" decoding="async" src="media/Analog Photography/dylan_central_1.jpg"></div>
+            <div class="gallery-item"><img loading="lazy" decoding="async" src="media/Analog Photography/DYLANBOTTLECOUCH.jpg"></div>
+            <div class="gallery-item"><img loading="lazy" decoding="async" src="media/Analog Photography/NEWORELEACHURH.jpg"></div>
+            <div class="gallery-item"><img loading="lazy" decoding="async" src="media/Analog Photography/000011100005.JPG"></div>
+            <div class="gallery-item"><img loading="lazy" decoding="async" src="media/Analog Photography/beep.JPEG"></div>
+            <div class="gallery-item"><img loading="lazy" decoding="async" src="media/Analog Photography/000028800027.JPG"></div>
+            <div class="gallery-item"><img loading="lazy" decoding="async" src="media/Analog Photography/000028800007.JPG"></div>
         </div>
 
         <div class="gallery tab-panel" id="digital-gallery" role="tabpanel" aria-labelledby="tab-digital" hidden>
-            <div class="gallery-item"><img src="media/Digital Photography/springflowers_edited.jpg"></div>
-            <div class="gallery-item"><img src="media/Digital Photography/IMG_3783.JPG"></div>
-            <div class="gallery-item"><img src="media/Digital Photography/IMG_3777.JPG"></div>
-            <div class="gallery-item"><img src="media/Digital Photography/IMG_3741.JPG"></div>
-            <div class="gallery-item"><img src="media/Digital Photography/IMG_3723.JPG"></div>
-            <div class="gallery-item"><img src="media/Digital Photography/IMG_3691.JPG"></div>
-            <div class="gallery-item"><img src="media/Digital Photography/IMG_3587 copy.jpg"></div>
-            <div class="gallery-item"><img src="media/Digital Photography/IMG_3356.jpg"></div>
-            <div class="gallery-item"><img src="media/Digital Photography/IMG_3348.jpg"></div>
-            <div class="gallery-item"><img src="media/Digital Photography/100_0425.jpg"></div>
-            <div class="gallery-item"><img src="media/Digital Photography/100_0424.jpg"></div>
-            <div class="gallery-item"><img src="media/Digital Photography/100_0386.jpg"></div>
-            <div class="gallery-item"><img src="media/Digital Photography/100_0353.jpg"></div>
-            <div class="gallery-item"><img src="media/Digital Photography/100_0343.jpg"></div>
+            <div class="gallery-item"><img loading="lazy" decoding="async" src="media/Digital Photography/springflowers_edited.jpg"></div>
+            <div class="gallery-item"><img loading="lazy" decoding="async" src="media/Digital Photography/IMG_3783.JPG"></div>
+            <div class="gallery-item"><img loading="lazy" decoding="async" src="media/Digital Photography/IMG_3777.JPG"></div>
+            <div class="gallery-item"><img loading="lazy" decoding="async" src="media/Digital Photography/IMG_3741.JPG"></div>
+            <div class="gallery-item"><img loading="lazy" decoding="async" src="media/Digital Photography/IMG_3723.JPG"></div>
+            <div class="gallery-item"><img loading="lazy" decoding="async" src="media/Digital Photography/IMG_3691.JPG"></div>
+            <div class="gallery-item"><img loading="lazy" decoding="async" src="media/Digital Photography/IMG_3587 copy.jpg"></div>
+            <div class="gallery-item"><img loading="lazy" decoding="async" src="media/Digital Photography/IMG_3356.jpg"></div>
+            <div class="gallery-item"><img loading="lazy" decoding="async" src="media/Digital Photography/IMG_3348.jpg"></div>
+            <div class="gallery-item"><img loading="lazy" decoding="async" src="media/Digital Photography/100_0425.jpg"></div>
+            <div class="gallery-item"><img loading="lazy" decoding="async" src="media/Digital Photography/100_0424.jpg"></div>
+            <div class="gallery-item"><img loading="lazy" decoding="async" src="media/Digital Photography/100_0386.jpg"></div>
+            <div class="gallery-item"><img loading="lazy" decoding="async" src="media/Digital Photography/100_0353.jpg"></div>
+            <div class="gallery-item"><img loading="lazy" decoding="async" src="media/Digital Photography/100_0343.jpg"></div>
         </div>
     </div>
 
@@ -1240,128 +1237,128 @@
 
         <div class="gallery-3d tab-panel" id="anim-3d-panel" role="tabpanel" aria-labelledby="tab-3d">
             <div class="gallery-3d-item">
-                <video controls playsinline preload="metadata">
+                <video controls playsinline preload="none">
                     <source src="media/3D:2D Animation/jungle3d.mov#t=0.1" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
                 <h3>Jungle Dance</h3>
             </div>
             <div class="gallery-3d-item">
-                <img src="media/3D:2D Animation/bugdomination3d.jpg" alt="Bug Domination">
+                <img loading="lazy" decoding="async" src="media/3D:2D Animation/bugdomination3d.jpg" alt="Bug Domination">
                 <h3>Bug Domination</h3>
             </div>
             <div class="gallery-3d-item">
-                <img src="media/3D:2D Animation/bugcity3d.png" alt="Bug City">
+                <img loading="lazy" decoding="async" src="media/3D:2D Animation/bugcity3d.png" alt="Bug City">
                 <h3>Bug City</h3>
             </div>
             <div class="gallery-3d-item">
-                <img src="media/3D:2D Animation/sadboy_3d.png" alt="Sad Boy">
+                <img loading="lazy" decoding="async" src="media/3D:2D Animation/sadboy_3d.png" alt="Sad Boy">
                 <h3>Sad Boy</h3>
             </div>
             <div class="gallery-3d-item">
-                <img src="media/3D:2D Animation/high-res-tree-girl3d.png" alt="Tree Girl">
+                <img loading="lazy" decoding="async" src="media/3D:2D Animation/high-res-tree-girl3d.png" alt="Tree Girl">
                 <h3>Tree Girl and Friends</h3>
             </div>
             <div class="gallery-3d-item">
-                <img src="media/3D:2D Animation/checkmate3d.jpg" alt="Checkmate">
+                <img loading="lazy" decoding="async" src="media/3D:2D Animation/checkmate3d.jpg" alt="Checkmate">
                 <h3>Checkmate</h3>
             </div>
             <div class="gallery-3d-item">
-                <img src="media/3D:2D Animation/got'em3d.jpg" alt="got'em">
+                <img loading="lazy" decoding="async" src="media/3D:2D Animation/got'em3d.jpg" alt="got'em">
                 <h3>got'em</h3>
             </div>
             <div class="gallery-3d-item">
-                <img src="media/3D:2D Animation/platothecat3d.jpg" alt="Plato the cat">
+                <img loading="lazy" decoding="async" src="media/3D:2D Animation/platothecat3d.jpg" alt="Plato the cat">
                 <h3>Plato the cat</h3>
             </div>
             <div class="gallery-3d-item">
-                <img src="media/3D:2D Animation/housedinner3d.jpg" alt="House Dinner">
+                <img loading="lazy" decoding="async" src="media/3D:2D Animation/housedinner3d.jpg" alt="House Dinner">
                 <h3>House Dinner</h3>
             </div>
             <div class="gallery-3d-item">
-                <video controls playsinline preload="metadata">
+                <video controls playsinline preload="none">
                     <source src="media/3D:2D Animation/pixel3d.mp4#t=0.1" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
                 <h3>Pixel Cat</h3>
             </div>
             <div class="gallery-3d-item">
-                <video controls playsinline preload="metadata">
+                <video controls playsinline preload="none">
                     <source src="media/3D:2D Animation/store3d.MP4#t=0.1" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
                 <h3>That floating store in Canada</h3>
             </div>
             <div class="gallery-3d-item">
-                <img src="media/3D:2D Animation/mountain_teen3d.png" alt="Mountain Teen">
+                <img loading="lazy" decoding="async" src="media/3D:2D Animation/mountain_teen3d.png" alt="Mountain Teen">
                 <h3>Mountain Reflection</h3>
             </div>
             <div class="gallery-3d-item">
-                <video controls playsinline preload="metadata">
+                <video controls playsinline preload="none">
                     <source src="media/3D:2D Animation/cat3d.mov#t=0.1" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
                 <h3>Waterfall Cat</h3>
             </div>
             <div class="gallery-3d-item">
-                <img src="media/3D:2D Animation/snakein3d.png" alt="Snake In">
+                <img loading="lazy" decoding="async" src="media/3D:2D Animation/snakein3d.png" alt="Snake In">
                 <h3>Snake in the Coconut</h3>
             </div>
             <div class="gallery-3d-item">
-                <video controls playsinline preload="metadata">
+                <video controls playsinline preload="none">
                     <source src="media/3D:2D Animation/0001-0070.mp4#t=0.1" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
                 <h3>Untitled</h3>
             </div>
             <div class="gallery-3d-item">
-                <video controls playsinline preload="metadata">
+                <video controls playsinline preload="none">
                     <source src="media/3D:2D Animation/firstproject3d.mp4#t=0.1" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
                 <h3>First Project</h3>
             </div>
             <div class="gallery-3d-item">
-                <img src="media/3D:2D Animation/isoroom3d.jpg" alt="ISO Computer Room">
+                <img loading="lazy" decoding="async" src="media/3D:2D Animation/isoroom3d.jpg" alt="ISO Computer Room">
                 <h3>ISO Computer Room</h3>
             </div>
             <div class="gallery-3d-item">
-                <video controls playsinline preload="metadata">
+                <video controls playsinline preload="none">
                     <source src="media/3D:2D Animation/trip3d.mov#t=0.1" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
                 <h3>Quick Trip</h3>
             </div>
             <div class="gallery-3d-item">
-                <video controls playsinline preload="metadata">
+                <video controls playsinline preload="none">
                     <source src="media/3D:2D Animation/beginnerpath3d.MOV#t=0.1" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
                 <h3>Beginner Path</h3>
             </div>
             <div class="gallery-3d-item">
-                <img src="media/3D:2D Animation/cattreereinder3d.png" alt="Cat Tree Render">
+                <img loading="lazy" decoding="async" src="media/3D:2D Animation/cattreereinder3d.png" alt="Cat Tree Render">
                 <h3>Cat Tree Render</h3>
             </div>
         </div>
 
         <div class="gallery-3d tab-panel" id="anim-2d-panel" role="tabpanel" aria-labelledby="tab-2d" hidden>
             <div class="gallery-3d-item">
-                <video controls playsinline preload="metadata">
+                <video controls playsinline preload="none">
                     <source src="media/3D:2D Animation/cigbox2d.mov#t=0.1" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
                 <h3>Cig Box</h3>
             </div>
             <div class="gallery-3d-item">
-                <video controls playsinline preload="metadata">
+                <video controls playsinline preload="none">
                     <source src="media/3D:2D Animation/cat2d.MP4#t=0.1" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
                 <h3>Cat</h3>
             </div>
             <div class="gallery-3d-item">
-                <video controls playsinline preload="metadata">
+                <video controls playsinline preload="none">
                     <source src="media/3D:2D Animation/noah2d.mov#t=0.1" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
@@ -1371,28 +1368,28 @@
 
         <div class="gallery-3d tab-panel" id="anim-25d-panel" role="tabpanel" aria-labelledby="tab-25d" hidden>
             <div class="gallery-3d-item">
-                <video controls playsinline preload="metadata">
+                <video controls playsinline preload="none">
                     <source src="media/3D:2D Animation/house2.5d.mov#t=0.1" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
                 <h3>Ominous Sway of the home down the fork</h3>
             </div>
             <div class="gallery-3d-item">
-                <video controls playsinline preload="metadata">
+                <video controls playsinline preload="none">
                     <source src="media/3D:2D Animation/faces2.5d.mov#t=0.1" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
                 <h3>Making friends with the faces I see</h3>
             </div>
             <div class="gallery-3d-item">
-                <video controls playsinline preload="metadata">
+                <video controls playsinline preload="none">
                     <source src="media/3D:2D Animation/anime2.5d.mov#t=0.1" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
                 <h3>tester Anime sequence</h3>
             </div>
             <div class="gallery-3d-item">
-                <video controls playsinline preload="metadata">
+                <video controls playsinline preload="none">
                     <source src="media/3D:2D Animation/city2.5d.mov#t=0.1" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
@@ -1423,7 +1420,7 @@
         <div class="category-header"><h1>Series: Paramnesia</h1></div>
 
         <div class="paramnesia-video-wrapper">
-            <video class="paramnesia-video" autoplay muted loop playsinline>
+            <video class="paramnesia-video" muted loop playsinline preload="none" data-autoplay>
                 <source src="media/Series Paramnesia/paramnesia-loop.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
@@ -1432,7 +1429,7 @@
         <p class="paramnesia-statement">Paramnesia: a series exploring memory and nostalgia through 2D and 3D reconstructions. An experiment in the distance between experience and recollection.</p>
 
         <div class="gallery">
-            <div class="gallery-item"><img src="media/hasan-almasi-nKNm_75lH4g-unsplash Copy_edited_edited.jpg"></div>
+            <div class="gallery-item"><img loading="lazy" decoding="async" src="media/hasan-almasi-nKNm_75lH4g-unsplash Copy_edited_edited.jpg"></div>
         </div>
     </div>
 
@@ -1447,14 +1444,14 @@
                 <div class="gallery-arrow left" onclick="scrollGallery('seaport', -1)">‹</div>
                 <div class="gallery-arrow right" onclick="scrollGallery('seaport', 1)">›</div>
                 <div class="commission-gallery" id="seaport-gallery">
-                    <img src="media/Commissions, Seaport Pups NYC/noahwdog2.jpg" alt="Seaport Pups 1">
-                    <img src="media/Commissions, Seaport Pups NYC/camy1.jpg" alt="Seaport Pups 2">
-                    <img src="media/Commissions, Seaport Pups NYC/cooper1.jpg" alt="Seaport Pups 3">
-                    <img src="media/Commissions, Seaport Pups NYC/noahwalking1.jpg" alt="Seaport Pups 4">
-                    <img src="media/Commissions, Seaport Pups NYC/harper1.jpg" alt="Seaport Pups 5">
-                    <img src="media/Commissions, Seaport Pups NYC/noahwalking2.jpg" alt="Seaport Pups 6">
-                    <img src="media/Commissions, Seaport Pups NYC/noahwdogs1.jpg" alt="Seaport Pups 7">
-                    <img src="media/Commissions, Seaport Pups NYC/tucker1.jpg" alt="Seaport Pups 8">
+                    <img loading="lazy" decoding="async" src="media/Commissions, Seaport Pups NYC/noahwdog2.jpg" alt="Seaport Pups 1">
+                    <img loading="lazy" decoding="async" src="media/Commissions, Seaport Pups NYC/camy1.jpg" alt="Seaport Pups 2">
+                    <img loading="lazy" decoding="async" src="media/Commissions, Seaport Pups NYC/cooper1.jpg" alt="Seaport Pups 3">
+                    <img loading="lazy" decoding="async" src="media/Commissions, Seaport Pups NYC/noahwalking1.jpg" alt="Seaport Pups 4">
+                    <img loading="lazy" decoding="async" src="media/Commissions, Seaport Pups NYC/harper1.jpg" alt="Seaport Pups 5">
+                    <img loading="lazy" decoding="async" src="media/Commissions, Seaport Pups NYC/noahwalking2.jpg" alt="Seaport Pups 6">
+                    <img loading="lazy" decoding="async" src="media/Commissions, Seaport Pups NYC/noahwdogs1.jpg" alt="Seaport Pups 7">
+                    <img loading="lazy" decoding="async" src="media/Commissions, Seaport Pups NYC/tucker1.jpg" alt="Seaport Pups 8">
                 </div>
             </div>
         </div>
@@ -1466,15 +1463,15 @@
                 <div class="gallery-arrow left" onclick="scrollGallery('events', -1)">‹</div>
                 <div class="gallery-arrow right" onclick="scrollGallery('events', 1)">›</div>
                 <div class="commission-gallery" id="events-gallery">
-                    <img src="media/Commissions, Life Event Shoots/S906433-R1-075-36.jpg" alt="Event 1">
-                    <img src="media/Commissions, Life Event Shoots/IMG_3698.JPG" alt="Event 2">
-                    <img src="media/Commissions, Life Event Shoots/S906733-R1-E019.JPG" alt="Event 3">
-                    <img src="media/Commissions, Life Event Shoots/S906733-R1-E008 2.JPG" alt="Event 4">
-                    <img src="media/Commissions, Life Event Shoots/S906733-R1-E002.JPG" alt="Event 5">
-                    <img src="media/Commissions, Life Event Shoots/Screen Shot 2025-04-23 at 7.56_edited.jpg" alt="Event 6">
-                    <img src="media/Commissions, Life Event Shoots/IMG_3741 copy.JPG" alt="Event 7">
-                    <img src="media/Commissions, Life Event Shoots/S906733-R1-E018 3.JPG" alt="Event 8">
-                    <img src="media/Commissions, Life Event Shoots/S906433-R1-007-2.jpg" alt="Event 9">
+                    <img loading="lazy" decoding="async" src="media/Commissions, Life Event Shoots/S906433-R1-075-36.jpg" alt="Event 1">
+                    <img loading="lazy" decoding="async" src="media/Commissions, Life Event Shoots/IMG_3698.JPG" alt="Event 2">
+                    <img loading="lazy" decoding="async" src="media/Commissions, Life Event Shoots/S906733-R1-E019.JPG" alt="Event 3">
+                    <img loading="lazy" decoding="async" src="media/Commissions, Life Event Shoots/S906733-R1-E008 2.JPG" alt="Event 4">
+                    <img loading="lazy" decoding="async" src="media/Commissions, Life Event Shoots/S906733-R1-E002.JPG" alt="Event 5">
+                    <img loading="lazy" decoding="async" src="media/Commissions, Life Event Shoots/Screen Shot 2025-04-23 at 7.56_edited.jpg" alt="Event 6">
+                    <img loading="lazy" decoding="async" src="media/Commissions, Life Event Shoots/IMG_3741 copy.JPG" alt="Event 7">
+                    <img loading="lazy" decoding="async" src="media/Commissions, Life Event Shoots/S906733-R1-E018 3.JPG" alt="Event 8">
+                    <img loading="lazy" decoding="async" src="media/Commissions, Life Event Shoots/S906433-R1-007-2.jpg" alt="Event 9">
                 </div>
             </div>
         </div>
@@ -1486,14 +1483,14 @@
                 <div class="gallery-arrow left" onclick="scrollGallery('zine', -1)">‹</div>
                 <div class="gallery-arrow right" onclick="scrollGallery('zine', 1)">›</div>
                 <div class="commission-gallery" id="zine-gallery">
-                    <img src="media/Zine Samples/Screen Shot 2025-04-23 at 7.56.45 PM.png" alt="Zine 1">
-                    <img src="media/Zine Samples/Screen Shot 2023-11-17 at 3.15.59 PM.png" alt="Zine 2">
-                    <img src="media/Zine Samples/Screen Shot 2023-11-17 at 3.15.50 PM.png" alt="Zine 3">
-                    <img src="media/Zine Samples/Screen Shot 2023-11-17 at 3.16.17 PM.png" alt="Zine 4">
-                    <img src="media/Zine Samples/Screen Shot 2023-11-17 at 3.16.07 PM.png" alt="Zine 5">
-                    <img src="media/Zine Samples/Screen Shot 2025-04-23 at 7.56.00 PM.png" alt="Zine 6">
-                    <img src="media/Zine Samples/Screen Shot 2025-04-23 at 7.56.11 PM.png" alt="Zine 7">
-                    <img src="media/Zine Samples/Screen Shot 2025-04-23 at 7.56.26 PM.png" alt="Zine 8">
+                    <img loading="lazy" decoding="async" src="media/Zine Samples/Screen Shot 2025-04-23 at 7.56.45 PM.png" alt="Zine 1">
+                    <img loading="lazy" decoding="async" src="media/Zine Samples/Screen Shot 2023-11-17 at 3.15.59 PM.png" alt="Zine 2">
+                    <img loading="lazy" decoding="async" src="media/Zine Samples/Screen Shot 2023-11-17 at 3.15.50 PM.png" alt="Zine 3">
+                    <img loading="lazy" decoding="async" src="media/Zine Samples/Screen Shot 2023-11-17 at 3.16.17 PM.png" alt="Zine 4">
+                    <img loading="lazy" decoding="async" src="media/Zine Samples/Screen Shot 2023-11-17 at 3.16.07 PM.png" alt="Zine 5">
+                    <img loading="lazy" decoding="async" src="media/Zine Samples/Screen Shot 2025-04-23 at 7.56.00 PM.png" alt="Zine 6">
+                    <img loading="lazy" decoding="async" src="media/Zine Samples/Screen Shot 2025-04-23 at 7.56.11 PM.png" alt="Zine 7">
+                    <img loading="lazy" decoding="async" src="media/Zine Samples/Screen Shot 2025-04-23 at 7.56.26 PM.png" alt="Zine 8">
                 </div>
             </div>
         </div>
@@ -1540,7 +1537,7 @@
                     rel="noopener noreferrer"
                     aria-label="Visit Emily Wernick on Instagram"
                 >
-                    <img
+                    <img loading="lazy" decoding="async"
                         class="wix-viewmaster-reel"
                         src="https://static.wixstatic.com/media/d4b85a_d599841a91124c6ba84d177b3879aab9~mv2.png/v1/fill/w_1620,h_2160,al_c,q_95,enc_auto/d4b85a_d599841a91124c6ba84d177b3879aab9~mv2.png"
                         alt="Decorative spinning View-Master reel"
@@ -1624,7 +1621,10 @@
 
             if (reduceMotion.matches) {
                 // "Reduce motion" is on: show a still frame instead of playing
-                homeVideo.pause();
+                homeVideo.preload = 'metadata';
+                homeVideo.load();
+            } else if (document.documentElement.classList.contains('intro-on')) {
+                // The intro is playing: the flower video starts loading once the intro is running
             } else {
                 homeVideo.play().catch(() => {
                     // Autoplay was blocked (e.g. iPhone Low Power Mode):
@@ -1648,8 +1648,17 @@
             const introVideo = intro.querySelector('video');
             let introDone = false;
 
-            // Hold the flower video until the intro hands over to it
-            if (homeVideo) homeVideo.pause();
+            // Phones get the smaller 720p version
+            const isSmallScreen = window.matchMedia('(max-width: 900px)').matches;
+            introVideo.src = isSmallScreen ? introVideo.dataset.srcMobile : introVideo.dataset.src;
+
+            // Once the intro is running, quietly load the flower video behind it
+            introVideo.addEventListener('playing', () => {
+                if (homeVideo) {
+                    homeVideo.preload = 'auto';
+                    homeVideo.load();
+                }
+            }, { once: true });
 
             const finishIntro = () => {
                 if (introDone) return;
@@ -1681,8 +1690,34 @@
             // On a very slow connection, don't leave people staring at a dark screen
             const stallTimer = setTimeout(() => {
                 if (introVideo.currentTime === 0) finishIntro();
-            }, 4000);
+            }, 8000);
             introVideo.addEventListener('playing', () => clearTimeout(stallTimer), { once: true });
+        }
+
+        /* ---------- Videos load only when they come into view ----------
+           Keeps pages fast: nothing downloads for pages or tabs nobody opens.
+           Videos marked data-autoplay (Paramnesia) play while on screen. */
+        const lazyVideos = document.querySelectorAll('.gallery-3d video, video[data-autoplay]');
+        if ('IntersectionObserver' in window) {
+            const videoWatcher = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    const video = entry.target;
+                    if (entry.isIntersecting) {
+                        if (video.hasAttribute('data-autoplay')) {
+                            video.muted = true;
+                            video.play().catch(() => {});
+                        } else if (video.preload === 'none') {
+                            video.preload = 'metadata';
+                            video.load();   // fetches just enough to show the first frame
+                        }
+                    } else if (video.hasAttribute('data-autoplay')) {
+                        video.pause();
+                    }
+                });
+            }, { rootMargin: '400px 0px' });
+            lazyVideos.forEach(v => videoWatcher.observe(v));
+        } else {
+            lazyVideos.forEach(v => { v.preload = 'metadata'; });
         }
 
         /* ---------- Tab toggles (Photography, 2D & 3D) ---------- */

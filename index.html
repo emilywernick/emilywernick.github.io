@@ -70,6 +70,14 @@
             display: block;
         }
 
+        /* Upright phones: show the whole video instead of cropping its sides.
+           The space above and below is coloured to match the video's own
+           top and bottom edges (set live by the script), so it looks like
+           the scene simply continues. */
+        @media (orientation: portrait) {
+            .intro-video { object-fit: contain; }
+        }
+
         .intro-skip {
             position: absolute;
             right: 1.5rem;
@@ -1042,6 +1050,16 @@
                 padding: 0;
             }
 
+            /* The reel image has empty space around the disc; on phones the
+               whole image takes up room in the layout, so nothing overlaps */
+            .wix-reel-link { aspect-ratio: auto; }
+
+            .wix-viewmaster-reel {
+                position: static;
+                width: 100%;
+                translate: none;
+            }
+
             .wix-about-details { padding: 0; text-align: left; }
         }
 
@@ -1721,6 +1739,34 @@
             document.addEventListener('keydown', e => {
                 if (e.key === 'Escape') finishIntro();
             });
+
+            // Upright phones: colour the space above/below the video to match its edges
+            const portrait = window.matchMedia('(orientation: portrait)');
+            const edgeCanvas = document.createElement('canvas');
+            edgeCanvas.width = 16;
+            edgeCanvas.height = 9;
+            const edgeCtx = edgeCanvas.getContext('2d', { willReadFrequently: true });
+            const rowColour = (y) => {
+                const d = edgeCtx.getImageData(0, y, 16, 1).data;
+                let r = 0, g = 0, b = 0;
+                for (let i = 0; i < d.length; i += 4) { r += d[i]; g += d[i + 1]; b += d[i + 2]; }
+                const n = d.length / 4;
+                return `rgb(${Math.round(r / n)}, ${Math.round(g / n)}, ${Math.round(b / n)})`;
+            };
+            let lastEdgeUpdate = 0;
+            const matchEdges = (now) => {
+                if (introDone) return;
+                if (portrait.matches && introVideo.readyState >= 2 && now - lastEdgeUpdate > 80) {
+                    lastEdgeUpdate = now;
+                    try {
+                        edgeCtx.drawImage(introVideo, 0, 0, 16, 9);
+                        intro.style.background =
+                            `linear-gradient(to bottom, ${rowColour(0)} 50%, ${rowColour(8)} 50%)`;
+                    } catch (e) { /* keep the plain dark background */ }
+                }
+                requestAnimationFrame(matchEdges);
+            };
+            requestAnimationFrame(matchEdges);
 
             // If the video can't autoplay (e.g. iPhone Low Power Mode), go straight to the site
             const playing = introVideo.play();

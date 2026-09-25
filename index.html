@@ -70,10 +70,7 @@
             display: block;
         }
 
-        /* Upright phones: show the whole video instead of cropping its sides.
-           The space above and below is coloured to match the video's own
-           top and bottom edges (set live by the script), so it looks like
-           the scene simply continues. */
+      
         @media (orientation: portrait) {
             .intro-video { object-fit: contain; }
         }
@@ -96,7 +93,7 @@
         .intro-skip:hover,
         .intro-skip:focus-visible { opacity: 1; }
 
-        /* Name and stars wait under the intro, then appear as it clears */
+        
         html.intro-hold .hero,
         html.intro-hold .star,
         html.intro-hold .star-lines {
@@ -251,7 +248,7 @@
         HOME: JITTERING CRAYON STARS
         ===================================== */
 
-        /* The area under your name where the stars sit */
+       
         .star-field {
             position: relative;
             z-index: 1;
@@ -260,7 +257,7 @@
             min-height: 380px;
         }
 
-        /* Faint dotted lines joining the stars like a constellation */
+       
         .star-lines {
             position: absolute;
             inset: 0;
@@ -285,10 +282,7 @@
             stroke-linecap: round;
         }
 
-        /* One star. Position and size come from the style="" on each star:
-           --x / --y   = position on desktop (% across / % down the area)
-           --mx / --my = position on phones
-           --size      = how wide the star is on desktop */
+     
         .star {
             position: absolute;
             left: var(--x);
@@ -309,7 +303,7 @@
             to { opacity: 1; transform: scale(1) rotate(0deg); }
         }
 
-        /* The four drawings sit on top of each other; only one shows at a time */
+        
         .star-art {
             display: grid;
             width: var(--size);
@@ -321,8 +315,7 @@
             width: 100%;
             height: auto;
             opacity: 0;
-            /* Speed of the boil: 0.5s = 4 drawings at 8 per second.
-               Raise it for a slower, calmer boil. */
+        
             animation: star-boil 0.5s step-end infinite;
         }
 
@@ -417,7 +410,7 @@
         Animation page: textured background
         ------------------------- */
 
-        /* Fixed behind the page (works on iPhones too, unlike background-attachment: fixed) */
+       
         .page-texture {
             position: fixed;
             inset: 0;
@@ -426,7 +419,7 @@
             pointer-events: none;
         }
 
-        /* Back button: solid enough to stand out from the pattern */
+        
         #animation-page .back-button { background: rgba(245, 234, 214, 0.7); }
         #animation-page .back-button:hover { background: #333; }
 
@@ -450,7 +443,7 @@
             box-shadow: 4px 4px 0 #333;
         }
 
-        /* Sliding block behind the active tab */
+       
         .tab-toggle-thumb {
             position: absolute;
             top: 4px;
@@ -484,7 +477,7 @@
 
         .tab-panel[hidden] { display: none; }
 
-        /* Shown in a tab that has no work in it yet */
+        
         .tab-empty {
             grid-column: 1 / -1;
             padding: 3rem 1rem;
@@ -724,7 +717,7 @@
         @media (max-width: 968px) {
             nav { padding: 1.25rem; }
 
-            /* Less side padding so the work can use the full screen width */
+            
             .category-page { padding: 5.5rem 0.75rem 3rem; }
             .home-container { padding-left: 0.75rem; padding-right: 0.75rem; }
 
@@ -745,7 +738,7 @@
 
             .star-label { font-size: 0.5rem; }
 
-            /* No hover on phones, so "coming soon" always shows */
+            /* No hover on phones */
             .star-soon { opacity: 0.85; }
 
             /* ---------- Photography: photos nearly edge to edge ---------- */
@@ -803,7 +796,7 @@
         .wix-about-page.active { display: block; }
 
         /* -------------------------------------
-        Top scrolling artist-statement banner
+        Top scrolling statement banner
         ------------------------------------- */
 
         .wix-about-banner {
@@ -1050,8 +1043,7 @@
                 padding: 0;
             }
 
-            /* The reel image has empty space around the disc; on phones the
-               whole image takes up room in the layout, so nothing overlaps */
+            /* The reel image has empty space around the disc*/
             .wix-reel-link { aspect-ratio: auto; }
 
             .wix-viewmaster-reel {
@@ -1073,7 +1065,7 @@
     </style>
 </head>
 <body class="on-home">
-    <!-- Intro: stars and planets that burst into the grate video's colour -->
+    <!-- Intro: stars and planets that burst into the grate video's color -->
     <div class="intro" id="intro">
         <video class="intro-video" muted playsinline preload="auto" poster="media/home/intro_poster.jpg"
                data-src="media/home/intro.mp4" data-src-mobile="media/home/intro-mobile.mp4"></video>
@@ -1241,8 +1233,7 @@
         <a href="#" class="back-button nav-home">← Back</a>
         <div class="category-header category-header--tabs"><h1>2D & 3D Animation</h1></div>
 
-        <!-- Files live in media/3D:2D Animation/ and are listed in the same order as that folder.
-             To add a piece, copy one gallery-3d-item block into the right panel below. -->
+       
         <div class="tab-toggle" role="tablist" aria-label="Animation style" style="--tabs: 3">
             <span class="tab-toggle-thumb" aria-hidden="true"></span>
             <button type="button" role="tab" id="tab-3d" data-tab="3d"
@@ -1542,7 +1533,7 @@
                 <p><span class="wix-highlight">Emily is a digital artist and sociologist</span>
                     from Cupertino and a master's student at the CUNY Graduate Center.
                     Finding joy in technical challenges and stylistic experimentation,
-                    their work reflects a dreamy blend of childhood wonder and the obscure.
+                    their work reflects childhood wonder and the obscure.
                     They spend their time between animation, designing, dreaming, and
                     freaking out over technofeudalism.</p>
             </div>
@@ -1569,7 +1560,7 @@
                         target="_blank"
                         rel="noopener noreferrer"
                     >
-                        instagram ↗
+                        instagram
                     </a>
                     <a
                         class="wix-email-link"
@@ -1577,7 +1568,7 @@
                         data-user="emily.wernick"
                         data-domain="gmail.com"
                     >
-                        email me ↗
+                        email me
                     </a>
                 </div>
             </div>
@@ -1619,8 +1610,7 @@
         const navHomeLinks = document.querySelectorAll('.nav-home');
 
         /* ---------- Video check-up panel ----------
-           Open emilywernick.nyc/?debug on a phone to see, on screen, what the
-           intro and flower videos are doing. Invisible to normal visitors. */
+         */
         const debugOn = /[?&]debug/.test(window.location.search);
         const debugPanel = debugOn ? document.createElement('pre') : null;
         if (debugPanel) {
@@ -1780,7 +1770,6 @@
         }
 
         /* ---------- Videos load only when they come into view ----------
-           Keeps pages fast: nothing downloads for pages or tabs nobody opens.
            Videos marked data-autoplay (Paramnesia) play while on screen. */
         const lazyVideos = document.querySelectorAll('.gallery-3d video, video[data-autoplay]');
         if ('IntersectionObserver' in window) {
@@ -1838,9 +1827,7 @@
         const photoToggle = document.getElementById('photography-page').querySelector('.tab-toggle');
         const animToggle = document.getElementById('animation-page').querySelector('.tab-toggle');
 
-        /* ---------- Page routing ----------
-           Home is plain emilywernick.nyc; other pages are emilywernick.nyc/#name.
-           Old names redirect so links you've already shared keep working. */
+        /* ---------- Page routing ---------- */
         const pageAliases = { '3d': 'animation' };
 
         function currentPage() {
@@ -1908,11 +1895,11 @@
             showPage(target);
         });
 
-        // Opening a link directly (e.g. emilywernick.nyc/#animation)
+        
         (function openInitialPage() {
             const page = currentPage();
             const target = pageAliases[page] || page;
-            // Tidy the address: "/#" becomes "/", "#3d" becomes "#animation"
+            
             if (target !== page || window.location.href.endsWith('#')) {
                 history.replaceState(null, '', pageUrl(target));
             }
@@ -1930,8 +1917,7 @@
         // Dotted constellation lines, joining the stars in order
         function drawStarLines() {
             if (!starField || homeContainer.style.display === 'none') return;
-            // Uses layout sizes (not on-screen boxes) so the pop-in and hover
-            // animations don't bend the lines
+         
             const points = [...starField.querySelectorAll('.star')].map(star => {
                 const art = star.querySelector('.star-art');
                 const x = star.offsetLeft - star.offsetWidth / 2 + art.offsetLeft + art.offsetWidth / 2;
@@ -1944,7 +1930,7 @@
         window.addEventListener('resize', drawStarLines);
         window.addEventListener('load', drawStarLines);
         drawStarLines();
-        // Redraw once the pixel font has loaded (it changes the label sizes)
+        
         if (document.fonts) document.fonts.ready.then(drawStarLines);
 
         navHomeLinks.forEach(link => {
@@ -1963,9 +1949,7 @@
             });
         });
 
-        /* ---------- Email link, assembled only when a person uses it ----------
-           The address never appears whole in the HTML, so bots that scrape
-           pages for "mailto:" addresses don't find it. */
+        /* ---------- Email link, assembled only when a person uses it ----------*/
         document.querySelectorAll('[data-user][data-domain]').forEach(link => {
             const fill = () => {
                 link.href = 'mailto:' + link.dataset.user + '@' + link.dataset.domain;

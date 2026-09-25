@@ -1600,15 +1600,61 @@
         const categoryPages = document.querySelectorAll('.category-page');
         const navHomeLinks = document.querySelectorAll('.nav-home');
 
+        /* ---------- Video check-up panel ----------
+           Open emilywernick.nyc/?debug on a phone to see, on screen, what the
+           intro and flower videos are doing. Invisible to normal visitors. */
+        const debugOn = /[?&]debug/.test(window.location.search);
+        const debugPanel = debugOn ? document.createElement('pre') : null;
+        if (debugPanel) {
+            debugPanel.style.cssText = 'position:fixed;left:0;right:0;bottom:0;z-index:30000;margin:0;' +
+                'max-height:45vh;overflow:auto;padding:10px;background:rgba(0,0,0,.85);color:#9f9;' +
+                'font:11px/1.4 monospace;white-space:pre-wrap;';
+            document.body.appendChild(debugPanel);
+        }
+        function debugLog(msg) {
+            if (!debugPanel) return;
+            const t = (performance.now() / 1000).toFixed(1);
+            debugPanel.textContent += t + 's  ' + msg + '\n';
+            debugPanel.scrollTop = debugPanel.scrollHeight;
+        }
+        const errorNames = { 1: 'aborted', 2: 'network error', 3: 'could not decode', 4: 'file missing or format not supported' };
+        function watchVideo(video, name) {
+            if (!video || !debugOn) return;
+            ['loadedmetadata', 'canplay', 'playing', 'waiting', 'stalled', 'ended'].forEach(evt =>
+                video.addEventListener(evt, () => debugLog(name + ': ' + evt)));
+            video.addEventListener('error', () => {
+                const code = video.error ? video.error.code : '?';
+                debugLog(name + ': ERROR ' + code + ' (' + (errorNames[code] || 'unknown') + ') ' + video.currentSrc);
+            });
+        }
+        debugLog('screen ' + window.innerWidth + 'x' + window.innerHeight +
+                 ' | reduce motion: ' + window.matchMedia('(prefers-reduced-motion: reduce)').matches +
+                 ' | intro: ' + document.documentElement.classList.contains('intro-on'));
+
         /* ---------- Home background video ---------- */
         const homeVideo = document.querySelector('.home-bg-video');
+        watchVideo(homeVideo, 'flowers');
         const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+        function playHomeVideo() {
+            homeVideo.play().catch(err => {
+                debugLog('flowers: play blocked (' + err.name + ')');
+                // Blocked (e.g. iPhone Low Power Mode): start on the visitor's next tap
+                const startOnTap = () => {
+                    if (document.body.classList.contains('on-home')) {
+                        homeVideo.play().catch(() => {});
+                    }
+                };
+                document.addEventListener('touchend', startOnTap, { once: true });
+                document.addEventListener('click', startOnTap, { once: true });
+            });
+        }
 
         function setHomeActive(isHome) {
             document.body.classList.toggle('on-home', isHome);
             if (!homeVideo) return;
             if (isHome && !reduceMotion.matches) {
-                homeVideo.play().catch(() => {});
+                playHomeVideo();
             } else {
                 homeVideo.pause();
             }
@@ -1626,17 +1672,7 @@
             } else if (document.documentElement.classList.contains('intro-on')) {
                 // The intro is playing: the flower video starts loading once the intro is running
             } else {
-                homeVideo.play().catch(() => {
-                    // Autoplay was blocked (e.g. iPhone Low Power Mode):
-                    // start the video on the visitor's first tap instead
-                    const startOnTap = () => {
-                        if (document.body.classList.contains('on-home')) {
-                            homeVideo.play().catch(() => {});
-                        }
-                    };
-                    document.addEventListener('touchstart', startOnTap, { once: true, passive: true });
-                    document.addEventListener('click', startOnTap, { once: true });
-                });
+                playHomeVideo();
             }
         }
 
@@ -1651,6 +1687,8 @@
             // Phones get the smaller 720p version
             const isSmallScreen = window.matchMedia('(max-width: 900px)').matches;
             introVideo.src = isSmallScreen ? introVideo.dataset.srcMobile : introVideo.dataset.src;
+            watchVideo(introVideo, 'intro');
+            debugLog('intro: loading ' + introVideo.src);
 
             // Once the intro is running, quietly load the flower video behind it
             introVideo.addEventListener('playing', () => {
@@ -1660,9 +1698,10 @@
                 }
             }, { once: true });
 
-            const finishIntro = () => {
+            const finishIntro = (reason) => {
                 if (introDone) return;
                 introDone = true;
+                debugLog('intro: finished (' + (typeof reason === 'string' ? reason : (reason && reason.type) || 'done') + ')');
 
                 if (homeVideo) homeVideo.currentTime = 0;
                 setHomeActive(currentPage() === 'home');
@@ -1685,11 +1724,11 @@
 
             // If the video can't autoplay (e.g. iPhone Low Power Mode), go straight to the site
             const playing = introVideo.play();
-            if (playing) playing.catch(finishIntro);
+            if (playing) playing.catch(err => finishIntro('play blocked: ' + err.name));
 
             // On a very slow connection, don't leave people staring at a dark screen
             const stallTimer = setTimeout(() => {
-                if (introVideo.currentTime === 0) finishIntro();
+                if (introVideo.currentTime === 0) finishIntro('took too long to start');
             }, 8000);
             introVideo.addEventListener('playing', () => clearTimeout(stallTimer), { once: true });
         }

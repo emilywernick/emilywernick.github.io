@@ -8,13 +8,12 @@
     <meta name="robots" content="noai, noimageai">
     <script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.90/build/spline-viewer.js"></script>
     <script>
-        /* Intro plays once per visit, only when someone lands on the home page.
-           Skipped for visitors with "reduce motion" turned on. */
+        /* Intro plays whenever the home page is opened or reloaded.
+           Links straight to a page (like #animation) skip it, and so do
+           visitors with "reduce motion" turned on. */
         (function () {
-            var seen = null;
-            try { seen = sessionStorage.getItem('introSeen'); } catch (e) {}
             var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            if (!window.location.hash && !seen && !reduce) {
+            if (!window.location.hash && !reduce) {
                 document.documentElement.classList.add('intro-on', 'intro-hold');
             }
         })();
@@ -407,6 +406,23 @@
         }
 
         .back-button:hover { background: #333; color: white; }
+
+        /* -------------------------
+        Animation page: textured background
+        ------------------------- */
+
+        /* Fixed behind the page (works on iPhones too, unlike background-attachment: fixed) */
+        .page-texture {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background: #a86a40 url("media/animation-background.jpg") center / cover no-repeat;
+            pointer-events: none;
+        }
+
+        /* Back button: solid enough to stand out from the pattern */
+        #animation-page .back-button { background: rgba(245, 234, 214, 0.7); }
+        #animation-page .back-button:hover { background: #333; }
 
         /* -------------------------
         Tab toggle (Photography: Analog / Digital, 2D & 3D: 2D / 3D / Mixed)
@@ -1206,6 +1222,7 @@
     </div>
 
     <div class="category-page" id="animation-page">
+        <div class="page-texture" aria-hidden="true"></div>
         <a href="#" class="back-button nav-home">← Back</a>
         <div class="category-header category-header--tabs"><h1>2D & 3D Animation</h1></div>
 
@@ -1637,7 +1654,6 @@
             const finishIntro = () => {
                 if (introDone) return;
                 introDone = true;
-                try { sessionStorage.setItem('introSeen', '1'); } catch (e) {}
 
                 if (homeVideo) homeVideo.currentTime = 0;
                 setHomeActive(currentPage() === 'home');
